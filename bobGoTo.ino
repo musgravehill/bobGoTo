@@ -29,12 +29,6 @@ void setup() {
 void loop() {
   STATEMACHINE_loop();
 
-  motor_RA.runSpeed();
-
-  if (currentMillis - previousMillis >= 1000) {
-    previousMillis = currentMillis;
-    long currPos = motor_RA.currentPosition();
-    Serial.println(currPos);
-  }
+  motor_RA.runSpeed(); // TODO add SYSTEM_STATE: goto | star-speed | buttons_moveTo 
 
 }
