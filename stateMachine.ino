@@ -9,5 +9,5 @@ void STATEMACHINE_loop() {
 }
 
 void STATEMACHINE_1s() {
-  
+  SERIAL_listen();
 }
