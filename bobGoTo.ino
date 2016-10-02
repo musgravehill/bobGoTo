@@ -26,6 +26,7 @@ const unsigned long DEC_step_per_motor_step = DEC_max_hex_value / DEC_ticks_per_
 const float RA_starSpeed_ticks_per_second = 53.47935487417839; //= RA_ticks_for_revolution \ (starDay_ms\1000) ;
 
 //STATEMACHINE
+uint32_t STATEMACHINE_prevMillis_250ms = 1L;
 uint32_t STATEMACHINE_prevMillis_1s = 1L;
 
 AccelStepper MOTOR_RA(AccelStepper::DRIVER, DRIVER_RA_STEP, DRIVER_RA_DIR);
