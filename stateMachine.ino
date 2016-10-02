@@ -9,8 +9,5 @@ void STATEMACHINE_loop() {
 }
 
 void STATEMACHINE_1s() {
-  //TEST
-  long currPos = motor_RA.currentPosition();
-  Serial.println(currPos);
-  //END TEST
+  
 }

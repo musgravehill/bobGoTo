@@ -1,4 +1,7 @@
 void MOTOR_init() {
-  motor_RA.setMaxSpeed(300);
-  motor_RA.setAcceleration(10); //tick per ticks (ticks on driver_step_pin)
+  MOTOR_RA.setMaxSpeed(MOTOR_maxAllowed_ticks_per_second);
+  MOTOR_RA.setAcceleration(MOTOR_acceleration); //tick per ticks (ticks on driver_step_pin)
+
+  MOTOR_DEC.setMaxSpeed(MOTOR_maxAllowed_ticks_per_second);
+  MOTOR_DEC.setAcceleration(MOTOR_acceleration); //tick per ticks (ticks on driver_step_pin)
 }
