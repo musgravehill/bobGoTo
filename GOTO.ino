@@ -5,7 +5,7 @@ void GOTO_processSerialCommand(String str_from_stellarium) {
       GOTO_currPos_return();
       break;
     case 'r':
-      String command_goto_RA_hex = str_from_stellarium.substring(1, 8);
+      String command_goto_RA_hex = str_from_stellarium.substring(1, 9);
       String command_goto_DEC_hex = str_from_stellarium.substring(9);
 
       //DBG
