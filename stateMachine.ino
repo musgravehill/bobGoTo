@@ -34,4 +34,5 @@ void STATEMACHINE_591000us() {
     return; // => SERIAL_listen in next times
   }
   SERIAL_listen();
+  GOTO_nextstar_position_curr_send_to_stellarium();
 }
