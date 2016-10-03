@@ -16,9 +16,14 @@ void STATEMACHINE_loop() {
     STATEMACHINE_prevMicros_331000us = STATEMACHINE_currMicros;
     return;
   }
-  if ((STATEMACHINE_currMicros - STATEMACHINE_prevMicros_591000us) > 591000L) {
-    STATEMACHINE_591000us();
-    STATEMACHINE_prevMicros_591000us = STATEMACHINE_currMicros;
+  if ((STATEMACHINE_currMicros - STATEMACHINE_prevMicros_1013000us) > 1013000L) {
+    STATEMACHINE_1013000us();
+    STATEMACHINE_prevMicros_1013000us = STATEMACHINE_currMicros;
+    return;
+  }
+  if ((STATEMACHINE_currMicros - STATEMACHINE_prevMicros_3313000us) > 3313000L) {
+    STATEMACHINE_3313000us();
+    STATEMACHINE_prevMicros_3313000us = STATEMACHINE_currMicros;
     return;
   }
 }
@@ -27,12 +32,11 @@ void STATEMACHINE_331000us() {
   //button
 }
 
-void STATEMACHINE_591000us() {
-  if (SYS_isset_new_command_from_stellarium) {
-    GOTO_processSerialCommand();
-    SYS_isset_new_command_from_stellarium = false;
-    return; // => SERIAL_listen in next times
-  }
+void STATEMACHINE_1013000us() {
   SERIAL_listen();
   GOTO_nextstar_position_curr_send_to_stellarium();
 }
+void STATEMACHINE_3313000us() {
+  GOTO_processSerialCommand();
+}
+
