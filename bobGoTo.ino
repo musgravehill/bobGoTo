@@ -28,6 +28,15 @@
 //это наведение быстрее зведной скорости в 3 · 23 = ровно(!) 69 раз
 #define gotoSpeed_us_for_microtick  271 //69 * RA_starSpeed_us_for_microtick 
 
+//прирост RA позиции при большой скорости ГОТО. 
+//Если бы скоростьГОТО==скоростьЗвезд, то прирост = 0, система "застыла" на месте и ведет точку.
+#define dRA_pos_by_goto 68  // (starSpeed_us_for_microtick / gotoSpeed_us_for_microtick)  - 1
+
+//прирост RA при ГОТО
+// RA_pos = RA_pos + k_direction* RA_MAX_VALUE * dRA_pos_by_goto * k_time,
+// where k_time = time_goto_process_us \ STARDAY_us 
+//  k_direction = 1 OR -1 
+
 // тиков двигателя на полный оборот монти (зависит от редукции)
 // 144(червь)*2.5(ремень)*400(шагов на 1 оборот ШД)* 32(микрошаг DRIVER_MICROSTEP_X=32)
 #define RA_microticks_per_revolution  4608000L; //ось прямого восхождения
