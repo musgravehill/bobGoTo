@@ -14,8 +14,8 @@ void GOTO_processSerialCommand() {
       SYS_str_from_stellarium.substring(1, 9).toCharArray(command_goto_RA_hex, 8);
       SYS_str_from_stellarium.substring(9).toCharArray(command_goto_DEC_hex, 9);
 
-      RA_nextstar_position_goto =  strtol(command_goto_RA_hex, NULL, 16);
-      DEC_nextstar_position_goto =  strtol(command_goto_DEC_hex, NULL, 16);
+      RA_nextstar_position_goto =  strtoul(command_goto_RA_hex, NULL, 16);
+      DEC_nextstar_position_goto =  strtoul(command_goto_DEC_hex, NULL, 16);
 
       Serial.print("rr");
       Serial.print(RA_nextstar_position_goto, HEX);
