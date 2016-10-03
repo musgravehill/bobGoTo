@@ -9,10 +9,15 @@ void GOTO_processSerialCommand() {
       break;
     case 'r':
       
-      char* command_goto_RA_hex;
-      char* command_goto_DEC_hex;
+      char command_goto_RA_hex[8];
+      char command_goto_DEC_hex[8];
       SYS_str_from_stellarium.substring(1, 9).toCharArray(command_goto_RA_hex, 8);
-      SYS_str_from_stellarium.substring(9).toCharArray(command_goto_DEC_hex, 9);
+      SYS_str_from_stellarium.substring(9,17).toCharArray(command_goto_DEC_hex, 8);
+
+//r12345678,ABCDEF78
+      Serial.print(command_goto_RA_hex);
+      Serial.print('_');
+      Serial.println(command_goto_DEC_hex);
 
       RA_nextstar_position_goto =  strtoul(command_goto_RA_hex, NULL, 16);
       DEC_nextstar_position_goto =  strtoul(command_goto_DEC_hex, NULL, 16);
