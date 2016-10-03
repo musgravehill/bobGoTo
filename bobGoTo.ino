@@ -21,7 +21,7 @@
 #define DEC_step_per_motor_microstep   932.0675553385417
 
 //ошибка наведения, когда уже можно успокоиться и прекратить наведение
-#define GOTO_position_error 4000 // > 4*DEC_step_per_motor_microstep, > 4*RA_step_per_motor_microstep 
+#define GOTO_position_error_allow 4000 // > 4*DEC_step_per_motor_microstep, > 4*RA_step_per_motor_microstep 
 
 //= STARDAY_us/RA_microticks_for_revolution
 #define starSpeed_us_for_microtick  18699
@@ -37,7 +37,7 @@
 
 //прирост RA при ГОТО
 // RA_pos = RA_pos + k_direction* RA_MAX_VALUE * dRA_pos_by_goto * k_time,
-// where k_time = time_goto_process_us \ STARDAY_us 
+// where k_time = time_goto_process_us \ STARDAY_us
 //  k_direction = 1 OR -1
 
 // тиков двигателя на полный оборот монти (зависит от редукции)
@@ -48,8 +48,10 @@
 #define RA_max_hex_value 0xFFFFFFFFL  //Максимальное значение величины прямого восхождения
 #define DEC_max_hex_value 0xFFFFFFFFL  //Максимальное значение величины склонения
 
-#define SYS_STATE_STARSPEED 0
-#define SYS_STATE_GOTO 1
+//телескоп ВСЕГДА вращается за небом
+#define SYS_STATE_INIT_GOTO 0 //в Стеллариуме ГОТО на ВЕГУ, телескоп навести Вегу и нажать кнопку пульта STELLARIUM_LINK
+#define SYS_STATE_GOTO_READY 1 //телескоп привязал координаты к Стеллариуму, можно делать ГОТО в Стеллариуме
+#define SYS_STATE_GOTO_PROCESS 2  //телескоп исполнил приказ GOTO
 
 //STATEMACHINE
 uint32_t STATEMACHINE_prevMicros_starSpeed = 1L;
@@ -65,10 +67,7 @@ unsigned long DEC_nextstar_position_curr = 0L;
 unsigned long RA_nextstar_position_goto = 0L;
 unsigned long DEC_nextstar_position_goto = 0L;
 
-uint8_t SYS_STATE = SYS_STATE_STARSPEED;
-
-unsigned long GOTO_start_micros = 0L;
-unsigned long GOTO_stop_micros = 0L;
+uint8_t SYS_STATE = SYS_STATE_INIT_GOTO;
 
 void setup() {
   Serial.begin(9600);

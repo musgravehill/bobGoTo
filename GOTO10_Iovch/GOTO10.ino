@@ -29,7 +29,7 @@ const unsigned long DEC_STEPS_in_1_RA_MOTOR_STEP=DEC_max_hex_value/DEC_ticks_in_
 
 const int RA_rotate_starspeed__ms_period_of_tick=int(ms_in_star1Day/RA_ticks_in_1_revolution); //Периодичность шага ДПВ для компенсации вращения Земли
 
-const unsigned long compensateEarth_dRA_STEPS_in_1_RA_MOTOR_STEP=RA_max_hex_value/ms_in_star1Day*1000/maxAllowed_RA_steps_in_1second; //Поправка вращения Земли на 1 шаг ДПВ
+const unsigned long compensateEarth_dRA_STEPS_in_1_RA_MOTOR_STEP = RA_max_hex_value/ms_in_star1Day*1000/maxAllowed_RA_steps_in_1second; //Поправка вращения Земли на 1 шаг ДПВ
  
 const unsigned long compensateEarth_dDEC_STEPS_in_1_RA_MOTOR_STEP=7; //Поправка (доворот) ДСК в единицах СК на 1 шаг ДСК
 

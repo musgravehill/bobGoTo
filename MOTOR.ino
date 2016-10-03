@@ -16,7 +16,8 @@ void MOTOR_DEC_TICK() {
 }
 
 void MOTOR_STARSPEED_process() {
-  if (SYS_STATE == SYS_STATE_STARSPEED) {
+  //goto ready => only RA rotate star speed
+  if (SYS_STATE == SYS_STATE_GOTO_READY) {
     //set RA_DIR
     MOTOR_RA_TICK();
   }
