@@ -1,10 +1,8 @@
 void MOTOR_RA_TICK() {
-  //DIR
-  // state: GOTO OR starSpeed
-
   digitalWrite(DRIVER_RA_STEP,  1);
   delayMicroseconds(3); //DRV8825 needs 1.9 us
   digitalWrite(DRIVER_RA_STEP,  0);
+  delayMicroseconds(3); //DRV8825 needs 1.9 us
 }
 
 void MOTOR_DEC_TICK() {
@@ -14,4 +12,12 @@ void MOTOR_DEC_TICK() {
   digitalWrite(DRIVER_DEC_STEP,  1);
   delayMicroseconds(3); //DRV8825 needs 1.9 us
   digitalWrite(DRIVER_DEC_STEP,  0);
+  delayMicroseconds(3); //DRV8825 needs 1.9 us
+}
+
+void MOTOR_STARSPEED_process() {
+  if (SYS_STATE == SYS_STATE_STARSPEED) {
+    //set RA_DIR
+    MOTOR_RA_TICK();
+  }
 }

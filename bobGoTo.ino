@@ -34,6 +34,9 @@
 #define RA_max_hex_value 0xFFFFFFFFL  //Максимальное значение величины прямого восхождения
 #define DEC_max_hex_value 0xFFFFFFFFL  //Максимальное значение величины склонения
 
+#define SYS_STATE_STARSPEED 0
+#define SYS_STATE_GOTO 1
+
 
 //STATEMACHINE
 uint32_t STATEMACHINE_prevMicros_starSpeed = 1L;
@@ -43,6 +46,15 @@ uint32_t STATEMACHINE_prevMicros_591000us = 1L;
 
 bool SYS_isset_new_command_from_stellarium = false;
 String SYS_str_from_stellarium = "";
+
+unsigned long RA_nextstar_position_curr = 0L;
+unsigned long DEC_nextstar_position_curr = 0L;
+unsigned long RA_nextstar_position_goto = 0L;
+unsigned long DEC_nextstar_position_goto = 0L;
+
+uint8_t SYS_STATE = SYS_STATE_STARSPEED;
+
+long
 
 void setup() {
   Serial.begin(9600);
