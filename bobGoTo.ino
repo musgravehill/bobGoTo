@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 //Floats have only 6-7 decimal digits of precision
 //you can get more precision by using a double (e.g. up to 15 digits), on the Arduino, double is the same size as float!
 
@@ -54,14 +56,9 @@ unsigned long DEC_nextstar_position_goto = 0L;
 
 uint8_t SYS_STATE = SYS_STATE_STARSPEED;
 
-long
-
 void setup() {
   Serial.begin(9600);
   delay(10);
-  Serial.flush();
-  delay(10);
-
 }
 
 void loop() {
