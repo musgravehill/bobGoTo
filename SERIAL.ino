@@ -1,7 +1,6 @@
 void SERIAL_listen() {
   while (Serial.available()) {
-    char inChar = (char)Serial.read();
-    SYS_str_from_stellarium += inChar;
+    char inChar = (char)Serial.read();    
     //if (inChar == '\n' || inChar == '\r' ) // STELLARIUM DOESNOT SEND any \r \n! Only solid eeeeeeerFFFFFFFF,FFFFFFFeeeeeee
     if (inChar == 'r') {
       SYS_str_from_stellarium = "r";
