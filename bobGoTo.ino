@@ -39,7 +39,6 @@
 #define SYS_STATE_STARSPEED 0
 #define SYS_STATE_GOTO 1
 
-
 //STATEMACHINE
 uint32_t STATEMACHINE_prevMicros_starSpeed = 1L;
 uint32_t STATEMACHINE_prevMicros_gotoSpeed = 1L;
@@ -55,6 +54,9 @@ unsigned long RA_nextstar_position_goto = 0L;
 unsigned long DEC_nextstar_position_goto = 0L;
 
 uint8_t SYS_STATE = SYS_STATE_STARSPEED;
+
+unsigned long GOTO_start_micros = 0L;
+unsigned long GOTO_stop_micros = 0L;
 
 void setup() {
   Serial.begin(9600);

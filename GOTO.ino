@@ -8,13 +8,16 @@ void GOTO_processSerialCommand() {
       GOTO_nextstar_position_curr_send_to_stellarium();
       break;
     case 'r':
-      
-      char command_goto_RA_hex[8];
-      char command_goto_DEC_hex[8];
-      SYS_str_from_stellarium.substring(1, 9).toCharArray(command_goto_RA_hex, 8);
-      SYS_str_from_stellarium.substring(9,17).toCharArray(command_goto_DEC_hex, 8);
 
-//r12345678,ABCDEF78
+      char command_goto_RA_hex[9]; //one more element than your initialization is required, to hold the required null character.
+      char command_goto_DEC_hex[9];  //one more element than your initialization is required, to hold the required null character.
+
+      uint8_t i;
+      i = SYS_str_from_stellarium.indexOf(',');
+      (SYS_str_from_stellarium.substring(1, i)).toCharArray(command_goto_RA_hex, 9);   
+      (SYS_str_from_stellarium.substring(i + 1)).toCharArray(command_goto_DEC_hex, 9);    
+      
+      //r12345678,ABCDEF78
       Serial.print(command_goto_RA_hex);
       Serial.print('_');
       Serial.println(command_goto_DEC_hex);
@@ -30,7 +33,7 @@ void GOTO_processSerialCommand() {
       // TODO нажали кнопку синхры, выставили телескоп на Вегу, в Стеллариуме сказали goto на Вегу, то
       RA_nextstar_position_curr =  RA_nextstar_position_goto;
       DEC_nextstar_position_curr = DEC_nextstar_position_goto;
-      
+
 
       Serial.println("#");
       break;
