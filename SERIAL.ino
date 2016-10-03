@@ -3,7 +3,7 @@ void SERIAL_listen() {
   while (Serial.available()) {
     char inChar = (char)Serial.read();
     str_from_stellarium += inChar;
-    if (inChar == '\n') {
+    if (inChar == '\n' || inChar == '\r' || inChar == 'e'  ) {
       GOTO_processSerialCommand(str_from_stellarium);
     }
   }

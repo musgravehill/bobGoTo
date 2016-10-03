@@ -1,19 +1,19 @@
 void STATEMACHINE_loop() {
-  uint32_t  STATEMACHINE_currMillis = millis();
-  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_250ms) > 250L) {
-    STATEMACHINE_250ms();
-    STATEMACHINE_prevMillis_250ms = STATEMACHINE_currMillis;
+  uint32_t  STATEMACHINE_currMicros = micros();
+  if ((STATEMACHINE_currMicros - STATEMACHINE_prevMillis_331ms) > 331L) {
+    STATEMACHINE_331ms();
+    STATEMACHINE_prevMillis_331ms = STATEMACHINE_currMicros;
   }
-  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_1s) > 1000L) {
-    STATEMACHINE_1s();
-    STATEMACHINE_prevMillis_1s = STATEMACHINE_currMillis;
+  if ((STATEMACHINE_currMicros - STATEMACHINE_prevMillis_1013ms) > 1013L) {
+    STATEMACHINE_1013ms();
+    STATEMACHINE_prevMillis_103ms = STATEMACHINE_currMicros;
   }
 
 }
 
-void STATEMACHINE_250ms() {
+void STATEMACHINE_331ms() {
   SERIAL_listen();
 }
-void STATEMACHINE_1s() {
+void STATEMACHINE_1013ms() {
 
 }
