@@ -67,8 +67,8 @@ void GOTO_process() {
     RA_GOTO_count_ticks_made = 0L;
     DEC_GOTO_count_ticks_made = 0L;
 
-    RA_GOTO_count_ticks_need = 0.51 + abs(RA_difference) \ RA_step_per_motor_microstep; // 0.51 + 99.5 = 100
-    DEC_GOTO_count_ticks_need = 0.51 + abs(DEC_difference) \ DEC_step_per_motor_microstep;
+    RA_GOTO_count_ticks_need = 0.51 + (abs(RA_difference)/RA_step_per_motor_microstep); // 0.51 + 99.5 = 100
+    DEC_GOTO_count_ticks_need = 0.51 + (abs(DEC_difference)/DEC_step_per_motor_microstep);
 
   }
   else if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
