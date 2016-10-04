@@ -1,0 +1,21 @@
+(function() {
+	var BF_DATA = {
+   "wid" : "1",
+   "loaded" : "true",
+   "track" : "701977",
+   "no_shell" : null
+}
+;//end data
+	try {
+		BF_PARTNER.invisible=true;
+		window['BF_SID'] = BF_DATA.track;
+		BF_PARTNER.track_page( BF_DATA.track );
+
+	} catch(e) {
+		console.log(e);
+	} 
+
+})();
+
+/* s 08:30:56 10/04/2016 */
+/* g 11:17:54 10/04/2016 - sl=19382 */ 

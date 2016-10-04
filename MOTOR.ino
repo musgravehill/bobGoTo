@@ -1,14 +1,14 @@
 void MOTOR_RA_TICK() {
-  digitalWrite(DRIVER_RA_STEP,  1);
+  PORTB |= _BV(PB0); //high
   delayMicroseconds(3); //DRV8825 needs 1.9 us
-  digitalWrite(DRIVER_RA_STEP,  0);
+  PORTB &= ~_BV(PB0); //low
   delayMicroseconds(3); //DRV8825 needs 1.9 us
 }
 
 void MOTOR_DEC_TICK() {
-  digitalWrite(DRIVER_DEC_STEP,  1);
+  PORTD |= _BV(PD4); //high
   delayMicroseconds(3); //DRV8825 needs 1.9 us
-  digitalWrite(DRIVER_DEC_STEP,  0);
+  PORTD &= ~_BV(PD4); //low
   delayMicroseconds(3); //DRV8825 needs 1.9 us
 }
 
@@ -20,11 +20,19 @@ void MOTOR_STARSPEED_tick() {
   }
 }
 
-void MOTOR_set_RA_dir(int8_t dir_0_1) {
-  digitalWrite(DRIVER_RA_DIR, dir_0_1);
+void MOTOR_set_RA_dir(bool dir_forward) {
+  if (dir_forward) {
+    PORTD |= _BV(PD7); //high
+  } else {
+    PORTD &= ~_BV(PD7); //low
+  }
 }
-void MOTOR_set_DEC_dir(int8_t dir_0_1) {
-  digitalWrite(DRIVER_DEC_DIR, dir_0_1);
+void MOTOR_set_DEC_dir(bool dir_forward) {
+  if (dir_forward) {
+    PORTD |= _BV(PD2); //high
+  } else {
+    PORTD &= ~_BV(PD2); //low
+  }
 }
 
 void MOTOR_init() {

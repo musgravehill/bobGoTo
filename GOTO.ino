@@ -59,21 +59,21 @@ void GOTO_process() {
     //calc direction for motor spinning
     if (RA_hex_position_goto > RA_hex_position_curr) {
       RA_difference_abs = RA_hex_position_goto - RA_hex_position_curr;
-      MOTOR_set_RA_dir(1);
+      MOTOR_set_RA_dir(true);
       RA_dRA_sign = 1; //TODO CHECK IT
     } else {
       RA_difference_abs = - RA_hex_position_goto + RA_hex_position_curr;
-      MOTOR_set_RA_dir(0);
+      MOTOR_set_RA_dir(false);
       RA_dRA_sign = -1; //TODO CHECK IT
     }
 
     if (DEC_hex_position_goto > DEC_hex_position_curr) {
       DEC_difference_abs = DEC_hex_position_goto - DEC_hex_position_curr;
-      MOTOR_set_DEC_dir(1);
+      MOTOR_set_DEC_dir(true);
       DEC_dDEC_sign = 1; //TODO CHECK IT
     } else {
       DEC_difference_abs = - DEC_hex_position_goto + DEC_hex_position_curr;
-      MOTOR_set_DEC_dir(0);
+      MOTOR_set_DEC_dir(false);
       DEC_dDEC_sign = -1; //TODO CHECK IT
     }
 
