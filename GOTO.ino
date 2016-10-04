@@ -137,30 +137,30 @@ void GOTO_process() {
         DEC_dDEC_sign = 1; //TODO CHECK IT
       }
     }
-  } 
 
-  //calc count ticks for ra, dec
-  RA_GOTO_count_ticks_made = 0L;
-  DEC_GOTO_count_ticks_made = 0L;
 
-  //пока мы крутим, небо сползет на GOTO_plusminus_dRA_per_1_tick * RA_GOTO_count_ticks_need
-  // значит, надо RA перекрутить или недокрутить
-  RA_GOTO_count_ticks_need = 0.51 + RA_difference_abs / (RA_step_per_motor_microstep + RA_dRA_star_compensation_sign * GOTO_plusminus_dRA_per_1_tick);
+    //calc count ticks for ra, dec
+    RA_GOTO_count_ticks_made = 0L;
+    DEC_GOTO_count_ticks_made = 0L;
 
-  DEC_GOTO_count_ticks_need = 0.51 + DEC_difference_abs / DEC_step_per_motor_microstep; // 0.51 + 99.5 = 100
+    //пока мы крутим, небо сползет на GOTO_plusminus_dRA_per_1_tick * RA_GOTO_count_ticks_need
+    // значит, надо RA перекрутить или недокрутить
+    RA_GOTO_count_ticks_need = 0.51 + RA_difference_abs / (RA_step_per_motor_microstep + RA_dRA_star_compensation_sign * GOTO_plusminus_dRA_per_1_tick);
 
-  /*Serial.print("RA_ticks=");
-    Serial.print(RA_GOTO_count_ticks_need, DEC);
-    Serial.print(" DEC_ticks=");
-    Serial.println(DEC_GOTO_count_ticks_need, DEC);*/
+    DEC_GOTO_count_ticks_need = 0.51 + DEC_difference_abs / DEC_step_per_motor_microstep; // 0.51 + 99.5 = 100
 
-  return;
+    /*Serial.print("RA_ticks=");
+      Serial.print(RA_GOTO_count_ticks_need, DEC);
+      Serial.print(" DEC_ticks=");
+      Serial.println(DEC_GOTO_count_ticks_need, DEC);*/
 
-}
-else if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
-  //не обрабатываем новые гото-приказы, сейчас идет процесс наведения телескопа
-  return;
-}
+    return;
+
+  }
+  else if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
+    //не обрабатываем новые гото-приказы, сейчас идет процесс наведения телескопа
+    return;
+  }
 }
 
 void GOTO_tick() {
