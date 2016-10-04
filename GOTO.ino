@@ -53,32 +53,28 @@ void GOTO_process() {
     Serial.print(" DEC_goto=");
     Serial.println(DEC_hex_position_goto, HEX);
 
-    //calc difference between curr-pos and goto-pos
-    long RA_difference = RA_hex_position_goto - RA_hex_position_curr;
-    long DEC_difference = DEC_hex_position_goto - DEC_hex_position_curr;
-
-    Serial.print("RA_diff=");
-    Serial.print(RA_difference, DEC);
-    Serial.print(" DEC_diff=");
-    Serial.println(DEC_difference, DEC);
-
-
+    unsigned long RA_difference_abs;
+    unsigned long DEC_difference_abs;
 
     //calc direction for motor spinning
-    if (RA_difference > 0) {
+    if (RA_hex_position_goto > RA_hex_position_curr) {
+      RA_difference_abs = RA_hex_position_goto - RA_hex_position_curr;
       MOTOR_set_RA_dir(1);
-      RA_dRA_sign = -1; //TODO CHECK IT
+      RA_dRA_sign = 1; //TODO CHECK IT
     } else {
+      RA_difference_abs = - RA_hex_position_goto + RA_hex_position_curr;
       MOTOR_set_RA_dir(0);
-      RA_dRA_sign = +1; //TODO CHECK IT
+      RA_dRA_sign = -1; //TODO CHECK IT
     }
 
-    if (DEC_difference > 0) {
+    if (DEC_hex_position_goto > DEC_hex_position_curr) {
+      DEC_difference_abs = DEC_hex_position_goto - DEC_hex_position_curr;
       MOTOR_set_DEC_dir(1);
-      DEC_dDEC_sign = -1; //TODO CHECK IT
-    } else {
-      MOTOR_set_DEC_dir(0);
       DEC_dDEC_sign = 1; //TODO CHECK IT
+    } else {
+      DEC_difference_abs = - DEC_hex_position_goto + DEC_hex_position_curr;
+      MOTOR_set_DEC_dir(0);
+      DEC_dDEC_sign = -1; //TODO CHECK IT
     }
 
     //calc count ticks for ra, dec
@@ -87,9 +83,9 @@ void GOTO_process() {
 
     //пока мы крутим, небо сползет на GOTO_plusminus_dRA_per_1_tick * RA_GOTO_count_ticks_need
     // значит, надо RA перекрутить или недокрутить
-    RA_GOTO_count_ticks_need = 0.51 + abs(RA_difference) / (RA_step_per_motor_microstep + RA_dRA_sign * GOTO_plusminus_dRA_per_1_tick);
+    RA_GOTO_count_ticks_need = 0.51 + RA_difference_abs / (RA_step_per_motor_microstep - RA_dRA_sign * GOTO_plusminus_dRA_per_1_tick);
 
-    DEC_GOTO_count_ticks_need = 0.51 + (abs(DEC_difference) / DEC_step_per_motor_microstep); // 0.51 + 99.5 = 100
+    DEC_GOTO_count_ticks_need = 0.51 + DEC_difference_abs / DEC_step_per_motor_microstep; // 0.51 + 99.5 = 100
 
     Serial.print("RA_ticks=");
     Serial.print(RA_GOTO_count_ticks_need, DEC);
@@ -120,25 +116,36 @@ void GOTO_calc_positions() {
     SYS_STATE = SYS_STATE_GOTO_READY;
   }
 
-  //стеллариум ГОТО шлет приказ, а мы выставили телескоп туда и сразу пишем гото-координаты в текущие
+  //-------стеллариум ГОТО шлет приказ, а мы выставили телескоп туда и сразу пишем гото-координаты в текущие------
   if (SYS_STATE == SYS_STATE_GOTO_INIT) {
     RA_hex_position_curr =  RA_hex_position_goto;
     DEC_hex_position_curr = DEC_hex_position_goto;
   }
-  //гото завершен, координаты совпали
+  //--------гото завершен, координаты совпали----------------------------------------------------------------------
   else if (SYS_STATE == SYS_STATE_GOTO_READY) {
     RA_hex_position_curr =  RA_hex_position_goto;
     DEC_hex_position_curr = DEC_hex_position_goto;
   }
-  //гото в процессе наведения, будем считать позицию по сделанным шагам
+  //------------гото в процессе наведения, будем считать позицию по сделанным шагам---------------------------------
   else if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
     //TODO CHECK IT sign +-
-    long tmp = -1 * RA_dRA_sign * (RA_GOTO_count_ticks_made - GOTO_RA_count_ticks_made_prev) * (RA_step_per_motor_microstep + RA_dRA_sign * GOTO_plusminus_dRA_per_1_tick);
-    RA_hex_position_curr += tmp;
-
+    unsigned long tmp = (RA_GOTO_count_ticks_made - GOTO_RA_count_ticks_made_prev) * (RA_step_per_motor_microstep - RA_dRA_sign * GOTO_plusminus_dRA_per_1_tick);
+    if (RA_dRA_sign > 0) {
+      RA_hex_position_curr += tmp;
+    } else {
+      RA_hex_position_curr -= tmp;
+    }
+    Serial.print(" tmp =");
+    Serial.print(tmp, DEC);
     //TODO CHECK IT sign +-
-    tmp =  -1 * DEC_dDEC_sign * (DEC_GOTO_count_ticks_made - GOTO_DEC_count_ticks_made_prev) * DEC_step_per_motor_microstep;
-    DEC_hex_position_curr +=  tmp;
+    tmp = (DEC_GOTO_count_ticks_made - GOTO_DEC_count_ticks_made_prev) * DEC_step_per_motor_microstep;
+    if (DEC_dDEC_sign > 0) {
+      DEC_hex_position_curr +=  tmp;
+    } else {
+      DEC_hex_position_curr -=  tmp;
+    }
+    Serial.print(" tmp =");
+    Serial.println(tmp, DEC);
 
     GOTO_RA_count_ticks_made_prev = RA_GOTO_count_ticks_made;
     GOTO_DEC_count_ticks_made_prev = DEC_GOTO_count_ticks_made;
