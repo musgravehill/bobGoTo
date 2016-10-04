@@ -11,7 +11,8 @@ void SERIAL_listen() {
   }
 }
 
-String prependZeroTo8Digits(unsigned long value_hex) {
+//выдаст нули для дополнения строки до 8 символов: 4FA -> 00000
+String SERIAL_prependZeroTo8Digits(unsigned long value_hex) {
   String result_str_8 = "";
   char c = '0';
   if (value_hex < 0x10000000) result_str_8 += c;

@@ -2,12 +2,12 @@ void STATEMACHINE_loop() {
   uint32_t  STATEMACHINE_currMicros = micros();
 
   if ((STATEMACHINE_currMicros - STATEMACHINE_prevMicros_gotoSpeed) > gotoSpeed_us_for_microtick) {
-    GOTO_process();
+    GOTO_tick();
     STATEMACHINE_prevMicros_gotoSpeed = STATEMACHINE_currMicros;
     return;
   }
   if ((STATEMACHINE_currMicros - STATEMACHINE_prevMicros_starSpeed) > starSpeed_us_for_microtick) {
-    MOTOR_STARSPEED_process();
+    MOTOR_STARSPEED_tick();
     STATEMACHINE_prevMicros_starSpeed = STATEMACHINE_currMicros;
     return;
   }

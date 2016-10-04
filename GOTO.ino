@@ -20,7 +20,7 @@ void GOTO_processSerialCommand() {
     */
 
     //стеллариум ГОТО шлет приказ, а мы выставили телескоп туда и сразу пишем гото-координаты в текущие
-    if (SYS_STATE == SYS_STATE_INIT_GOTO) {
+    if (SYS_STATE == SYS_STATE_GOTO_INIT) {
       RA_nextstar_position_curr =  RA_nextstar_position_goto;
       DEC_nextstar_position_curr = DEC_nextstar_position_goto;
     }
@@ -33,16 +33,21 @@ void GOTO_processSerialCommand() {
   SYS_str_from_stellarium = "";
 }
 
+
+
 void GOTO_nextstar_position_curr_send_to_stellarium() {
-  Serial.print(prependZeroTo8Digits(RA_nextstar_position_curr)); //допишем 000 спереди
+  Serial.print(SERIAL_prependZeroTo8Digits(RA_nextstar_position_curr)); //допишем нули спереди
   Serial.print(RA_nextstar_position_curr, HEX); //позиция в HEX, а перед ней дописали нули, чтобы общая длина стала 8 символов
   Serial.print(',');
-  Serial.print(prependZeroTo8Digits(DEC_nextstar_position_curr));
+  Serial.print(SERIAL_prependZeroTo8Digits(DEC_nextstar_position_curr));
   Serial.print(DEC_nextstar_position_curr, HEX);
   Serial.println('#');
 }
 
-void GOTO_process() {
+void GOTO_process(){
+  }
+
+void GOTO_tick() {
   if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
     long RA_pos_error = RA_nextstar_position_curr - RA_nextstar_position_goto;
     long DEC_pos_error = DEC_nextstar_position_curr - DEC_nextstar_position_goto;

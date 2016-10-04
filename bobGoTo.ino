@@ -32,12 +32,13 @@
 #define gotoSpeed_us_for_microtick  271 //69 * RA_starSpeed_us_for_microtick 
 
 //прирост RA позиции при большой скорости ГОТО.
-//Если бы скоростьГОТО==скоростьЗвезд, то прирост = 0, система "застыла" на месте и ведет точку.
-#define dRA_pos_by_goto 68  // (starSpeed_us_for_microtick / gotoSpeed_us_for_microtick)  - 1
+//Если бы скоростьГОТО==скоростьЗвезд, то в догонку прирост = 0, система "застыла" на месте и ведет точку.
+//А против звезд получится сложение 2х скоростей: goto+звздная
+#define dRA_pos_by_goto_proStar 68  // (starSpeed_us_for_microtick / gotoSpeed_us_for_microtick)  - 1
+#define dRA_pos_by_goto_contraStar 70  // (starSpeed_us_for_microtick / gotoSpeed_us_for_microtick)  + 1
 
 //прирост RA при ГОТО
-// RA_pos = RA_pos + k_direction* RA_MAX_VALUE * dRA_pos_by_goto * k_time,
-// where k_time = time_goto_process_us \ STARDAY_us
+// RA_pos = RA_pos + k_direction* RA_MAX_VALUE * dRA_pos_by_goto * count_goto_microsteps,
 //  k_direction = 1 OR -1
 
 // тиков двигателя на полный оборот монти (зависит от редукции)
@@ -49,9 +50,9 @@
 #define DEC_max_hex_value 0xFFFFFFFFL  //Максимальное значение величины склонения
 
 //телескоп ВСЕГДА вращается за небом
-#define SYS_STATE_INIT_GOTO 0 //в Стеллариуме ГОТО на ВЕГУ, телескоп навести Вегу и нажать кнопку пульта STELLARIUM_LINK
-#define SYS_STATE_GOTO_READY 1 //телескоп привязал координаты к Стеллариуму, можно делать ГОТО в Стеллариуме
-#define SYS_STATE_GOTO_PROCESS 2  //телескоп исполнил приказ GOTO
+#define SYS_STATE_GOTO_INIT 0 //в Стеллариуме ГОТО на ВЕГУ, телескоп навести Вегу и нажать кнопку пульта STELLARIUM_LINK
+#define SYS_STATE_GOTO_READY 1 //телескоп привязался к Стеллариуму, можно ГОТО в Стеллариуме, телескоп исполнил приказ GOTO
+#define SYS_STATE_GOTO_PROCESS 2  //телескоп исполняет приказ GOTO в процессе наведения
 
 //STATEMACHINE
 uint32_t STATEMACHINE_prevMicros_starSpeed = 1L;
@@ -67,9 +68,10 @@ unsigned long DEC_nextstar_position_curr = 0L;
 unsigned long RA_nextstar_position_goto = 0L;
 unsigned long DEC_nextstar_position_goto = 0L;
 
-uint8_t SYS_STATE = SYS_STATE_INIT_GOTO;
+uint8_t SYS_STATE = SYS_STATE_GOTO_INIT;
 
 void setup() {
+  MOTOR_init();
   Serial.begin(9600);
   delay(10);
 }
