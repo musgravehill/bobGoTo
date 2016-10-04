@@ -45,30 +45,53 @@ void GOTO_process() {
     RA_hex_position_goto =  strtoul(command_goto_RA_hex, NULL, 16);
     DEC_hex_position_goto =  strtoul(command_goto_DEC_hex, NULL, 16);
 
+    Serial.print("RA_goto=");
+    Serial.print(RA_hex_position_goto, HEX);
+    Serial.print(" DEC_goto=");
+    Serial.println(DEC_hex_position_goto, HEX);
+
     //calc difference between curr-pos and goto-pos
     long RA_difference = RA_hex_position_goto - RA_hex_position_curr;
-    long DEC_difference = DEC_hex_position_goto = DEC_hex_position_curr;
+    long DEC_difference = DEC_hex_position_goto - DEC_hex_position_curr;
+
+    Serial.print("RA_diff=");
+    Serial.print(RA_difference, DEC);
+    Serial.print(" DEC_diff=");
+    Serial.println(DEC_difference, DEC);
+
+
 
     //calc direction for motor spinning
     if (RA_difference > 0) {
       MOTOR_set_RA_dir(1);
+      RA_dRA_sign = -1; //TODO CHECK IT
     } else {
       MOTOR_set_RA_dir(0);
+      RA_dRA_sign = +1; //TODO CHECK IT
     }
 
     if (DEC_difference > 0) {
       MOTOR_set_DEC_dir(1);
+      DEC_dDEC_sign = -1; //TODO CHECK IT
     } else {
       MOTOR_set_DEC_dir(0);
+      DEC_dDEC_sign = 1; //TODO CHECK IT
     }
 
     //calc count ticks for ra, dec
-
     RA_GOTO_count_ticks_made = 0L;
     DEC_GOTO_count_ticks_made = 0L;
 
-    RA_GOTO_count_ticks_need = 0.51 + (abs(RA_difference)/RA_step_per_motor_microstep); // 0.51 + 99.5 = 100
-    DEC_GOTO_count_ticks_need = 0.51 + (abs(DEC_difference)/DEC_step_per_motor_microstep);
+    //пока мы крутим, небо сползет на GOTO_plusminus_dRA_per_1_tick * RA_GOTO_count_ticks_need
+    // значит, надо RA перекрутить или недокрутить
+    RA_GOTO_count_ticks_need = 0.51 + abs(RA_difference) / (RA_step_per_motor_microstep + RA_dRA_sign * GOTO_plusminus_dRA_per_1_tick);
+
+    DEC_GOTO_count_ticks_need = 0.51 + (abs(DEC_difference) / DEC_step_per_motor_microstep); // 0.51 + 99.5 = 100
+
+    Serial.print("RA_ticks=");
+    Serial.print(RA_GOTO_count_ticks_need, DEC);
+    Serial.print(" DEC_ticks=");
+    Serial.println(DEC_GOTO_count_ticks_need, DEC);
 
   }
   else if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
@@ -105,7 +128,10 @@ void GOTO_calc_positions() {
   }
   //гото в процессе наведения, будем считать позицию по сделанным шагам
   else if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
-
+    //TODO CHECK IT sign +-
+    RA_hex_position_curr += RA_dRA_sign * RA_GOTO_count_ticks_made * (RA_step_per_motor_microstep + RA_dRA_sign * GOTO_plusminus_dRA_per_1_tick);
+    //TODO CHECK IT sign +-
+    DEC_hex_position_curr += DEC_dDEC_sign * DEC_GOTO_count_ticks_made * DEC_step_per_motor_microstep;
   }
 }
 

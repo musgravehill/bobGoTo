@@ -20,9 +20,6 @@
 // DEC_max_hex_value / DEC_microticks_per_revolution
 #define DEC_step_per_motor_microstep   932.0675553385417
 
-//ошибка наведения, когда уже можно успокоиться и прекратить наведение
-#define GOTO_position_error_allow 4000 // > 4*DEC_step_per_motor_microstep, > 4*RA_step_per_motor_microstep 
-
 //= STARDAY_us/RA_microticks_for_revolution
 #define starSpeed_us_for_microtick  18699
 
@@ -34,8 +31,11 @@
 //прирост RA позиции при большой скорости ГОТО.
 //Если бы скоростьГОТО==скоростьЗвезд, то в догонку прирост = 0, система "застыла" на месте и ведет точку.
 //А против звезд получится сложение 2х скоростей: goto+звздная
-#define dRA_pos_by_goto_proStar 68  // (starSpeed_us_for_microtick / gotoSpeed_us_for_microtick)  - 1
-#define dRA_pos_by_goto_contraStar 70  // (starSpeed_us_for_microtick / gotoSpeed_us_for_microtick)  + 1
+// = (gotoSpeed_us_for_microtick/starSpeed_us_for_microtick) * RA_step_per_motor_microstep = 1/69 * 932.0675553385417
+#define GOTO_plusminus_dRA_per_1_tick 13.50822543968901 
+
+int8_t RA_dRA_sign = 1;
+int8_t DEC_dDEC_sign = 1;
 
 //прирост RA при ГОТО
 // RA_pos = RA_pos + k_direction* RA_MAX_VALUE * dRA_pos_by_goto * count_goto_microsteps,
@@ -68,7 +68,7 @@ unsigned long DEC_hex_position_curr = 0L;
 unsigned long RA_hex_position_goto = 0L;
 unsigned long DEC_hex_position_goto = 0L;
 
-uint8_t SYS_STATE = SYS_STATE_GOTO_INIT;
+uint8_t SYS_STATE = SYS_STATE_GOTO_READY; //SYS_STATE_GOTO_INIT
 
 unsigned long RA_GOTO_count_ticks_made = 0L;
 unsigned long DEC_GOTO_count_ticks_made = 0L;
