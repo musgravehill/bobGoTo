@@ -30,11 +30,13 @@ void STATEMACHINE_loop() {
 
 void STATEMACHINE_331000us() {
   //button
+  //рассчет тек.позиции, если работает ГОТО, то надо знать кол-во пройденных шагов и направление. Отсюда считаем позиции.
 }
 
 void STATEMACHINE_1013000us() {
+  GOTO_calc_positions();
   SERIAL_listen();
-  GOTO_nextstar_position_curr_send_to_stellarium();
+  GOTO_current_positions_send_to_stellarium();
 }
 void STATEMACHINE_3313000us() {
   GOTO_processSerialCommand();
