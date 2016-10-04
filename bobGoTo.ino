@@ -41,6 +41,7 @@
 // = (gotoSpeed_us_for_microtick/starSpeed_us_for_microtick) * RA_step_per_motor_microstep = (64/18699) * 932.0675553385417
 #define GOTO_plusminus_dRA_per_1_tick 3.190134421181168
 
+int8_t RA_dRA_star_compensation_sign = 1; // 1==counter star; -1 = chase the star
 int8_t RA_dRA_sign = 1;
 int8_t DEC_dDEC_sign = 1;
 
