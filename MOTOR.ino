@@ -19,6 +19,7 @@ void MOTOR_STARSPEED_tick() {
   }
 }
 
+//RA true== star_speed; false == counter star rotation
 void MOTOR_set_RA_dir(bool dir_forward) {
   if (dir_forward) {
     PORTD |= _BV(PD7); //high

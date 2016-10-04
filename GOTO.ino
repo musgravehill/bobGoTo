@@ -55,20 +55,54 @@ void GOTO_process() {
       Serial.print(" DEC_goto=");
       Serial.println(DEC_hex_position_goto, HEX);*/
 
+    /*
+      MAX <--------------- 0   RA
+      ----------------------> star goto here
+      <---- +dRA             -dRA  ---->
+
+    */
+
     unsigned long RA_difference_abs;
     unsigned long DEC_difference_abs;
 
-    //calc direction for motor spinning
+
+    //если тупо наращивать или уменьшать до нужной точки
+    unsigned long RA_difference_inc_or_dec_straight;
+    // если перескочить через 0, выгодно если от края до края через 0, а не через весь диапазон
+    unsigned long RA_difference_through_zero;
+
     if (RA_hex_position_goto > RA_hex_position_curr) {
-      RA_difference_abs = RA_hex_position_goto - RA_hex_position_curr;
-      MOTOR_set_RA_dir(true);
-      RA_dRA_sign = 1; //TODO CHECK IT
+      RA_difference_inc_or_dec_straight = RA_hex_position_goto - RA_hex_position_curr; //  0__curr>>>>>goto___MAX
+      RA_difference_through_zero = RA_hex_position_curr + (RA_max_hex_value - RA_hex_position_goto); // 0<<<<curr_____goto<<<<MAX
+      if (RA_difference_inc_or_dec_straight < RA_difference_through_zero) {
+        //select shorter RA_difference_inc_or_dec_straight
+        RA_difference_abs = RA_difference_inc_or_dec_straight;
+        MOTOR_set_RA_dir(false); //TODO CHECK IT
+        RA_dRA_sign = 1; //TODO CHECK IT
+      } else {
+        //select shorter RA_difference_through_zero
+        RA_difference_abs = RA_difference_through_zero;
+        MOTOR_set_RA_dir(true); //TODO CHECK IT
+        RA_dRA_sign = -1; //TODO CHECK IT
+      }
     } else {
-      RA_difference_abs = - RA_hex_position_goto + RA_hex_position_curr;
-      MOTOR_set_RA_dir(false);
-      RA_dRA_sign = -1; //TODO CHECK IT
+      RA_difference_inc_or_dec_straight =  RA_hex_position_curr - RA_hex_position_goto ; //  0__goto<<<<<<curr___MAX
+      RA_difference_through_zero = RA_hex_position_goto + (RA_max_hex_value - RA_hex_position_curr); // 0>>>>goto_____curr>>>>>MAX
+      if (RA_difference_inc_or_dec_straight < RA_difference_through_zero) {
+        //select shorter RA_difference_inc_or_dec_straight
+        RA_difference_abs = RA_difference_inc_or_dec_straight;
+        MOTOR_set_RA_dir(true); //TODO CHECK IT
+        RA_dRA_sign = -1; //TODO CHECK IT
+      } else {
+        //select shorter RA_difference_through_zero
+        RA_difference_abs = RA_difference_through_zero;
+        MOTOR_set_RA_dir(false); //TODO CHECK IT
+        RA_dRA_sign = 1; //TODO CHECK IT
+      }
     }
 
+    //calc direction for motor spinning
+    //TODO DO DEC AS RA throught_zero VS straight_increment_decrement
     if (DEC_hex_position_goto > DEC_hex_position_curr) {
       DEC_difference_abs = DEC_hex_position_goto - DEC_hex_position_curr;
       MOTOR_set_DEC_dir(true);
@@ -118,8 +152,8 @@ void GOTO_tick() {
 
 void GOTO_calc_positions() {
   if  ((RA_GOTO_count_ticks_made >= RA_GOTO_count_ticks_need) && (DEC_GOTO_count_ticks_made >= DEC_GOTO_count_ticks_need)) {
-    SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed     
-    MOTOR_set_RA_dir(true); //run star-speed 
+    SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed
+    MOTOR_set_RA_dir(true); //run star-speed
   }
 
   //-------стеллариум ГОТО шлет приказ, а мы выставили телескоп туда и сразу пишем гото-координаты в текущие------
