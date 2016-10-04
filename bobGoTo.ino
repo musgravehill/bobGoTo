@@ -26,7 +26,7 @@
 //Разложим RA_starSpeed_us_for_microtick на простые множители 18699 = 3 · 23 · 271
 //Берем 271us для быстрого движения, min=250us for AVR 16MH
 //это наведение быстрее зведной скорости в 3 · 23 = ровно(!) 69 раз
-#define gotoSpeed_us_for_microtick  271 //69 * RA_starSpeed_us_for_microtick 
+#define gotoSpeed_us_for_microtick  271 // !!!! 69 //271 //69 * RA_starSpeed_us_for_microtick   TODO => пересчитаь тогда  GOTO_plusminus_dRA_per_1_tick !!!
 
 //прирост RA позиции при большой скорости ГОТО.
 //Если бы скоростьГОТО==скоростьЗвезд, то в догонку прирост = 0, система "застыла" на месте и ведет точку.

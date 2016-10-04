@@ -114,6 +114,7 @@ void GOTO_tick() {
 void GOTO_calc_positions() {
   if  ((RA_GOTO_count_ticks_made >= RA_GOTO_count_ticks_need) && (DEC_GOTO_count_ticks_made >= DEC_GOTO_count_ticks_need)) {
     SYS_STATE = SYS_STATE_GOTO_READY;
+    MOTOR_set_RA_dir(true);
   }
 
   //-------стеллариум ГОТО шлет приказ, а мы выставили телескоп туда и сразу пишем гото-координаты в текущие------

@@ -1,21 +1,20 @@
 void MOTOR_RA_TICK() {
   PORTB |= _BV(PB0); //high
-  delayMicroseconds(3); //DRV8825 needs 1.9 us
+  delayMicroseconds(9); //DRV8825 needs 1.9 us
   PORTB &= ~_BV(PB0); //low
-  delayMicroseconds(3); //DRV8825 needs 1.9 us
+  delayMicroseconds(9); //DRV8825 needs 1.9 us
 }
 
 void MOTOR_DEC_TICK() {
   PORTD |= _BV(PD4); //high
-  delayMicroseconds(3); //DRV8825 needs 1.9 us
+  delayMicroseconds(9); //8us by OWON. DRV8825 needs 1.9 us
   PORTD &= ~_BV(PD4); //low
-  delayMicroseconds(3); //DRV8825 needs 1.9 us
+  delayMicroseconds(9); //DRV8825 needs 1.9 us
 }
 
 void MOTOR_STARSPEED_tick() {
   //goto ready => only RA rotate star speed
-  if (SYS_STATE != SYS_STATE_GOTO_PROCESS ) {
-    //set RA_DIR
+  if (SYS_STATE != SYS_STATE_GOTO_PROCESS ) {    
     MOTOR_RA_TICK();
   }
 }
