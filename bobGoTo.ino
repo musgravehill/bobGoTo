@@ -63,10 +63,10 @@ uint32_t STATEMACHINE_prevMicros_3313000us = 1L;
 
 String SYS_str_from_stellarium = "";
 
-unsigned long RA_nextstar_position_curr = 0L;
-unsigned long DEC_nextstar_position_curr = 0L;
-unsigned long RA_nextstar_position_goto = 0L;
-unsigned long DEC_nextstar_position_goto = 0L;
+unsigned long RA_hex_position_curr = 0L;
+unsigned long DEC_hex_position_curr = 0L;
+unsigned long RA_hex_position_goto = 0L;
+unsigned long DEC_hex_position_goto = 0L;
 
 uint8_t SYS_STATE = SYS_STATE_GOTO_INIT;
 
@@ -74,8 +74,7 @@ unsigned long RA_GOTO_count_ticks_made = 0L;
 unsigned long DEC_GOTO_count_ticks_made = 0L;
 unsigned long RA_GOTO_count_ticks_need = 0L;
 unsigned long DEC_GOTO_count_ticks_need = 0L;
-bool RA_GOTO_dir = true; //true, false
-bool DEC_GOTO_dir = true; //true, false
+
 
 void setup() {
   MOTOR_init();

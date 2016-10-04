@@ -23,7 +23,11 @@ void MOTOR_STARSPEED_tick() {
   }
 }
 
-void MOTOR_set_RA_dir() {
+void MOTOR_set_RA_dir(int8_t dir_0_1) {
+  digitalWrite(DRIVER_RA_DIR, dir_0_1);
+}
+void MOTOR_set_DEC_dir(int8_t dir_0_1) {
+  digitalWrite(DRIVER_DEC_DIR, dir_0_1);
 }
 
 void MOTOR_init() {
