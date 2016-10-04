@@ -75,6 +75,9 @@ unsigned long DEC_GOTO_count_ticks_made = 0L;
 unsigned long RA_GOTO_count_ticks_need = 0L;
 unsigned long DEC_GOTO_count_ticks_need = 0L;
 
+unsigned long GOTO_RA_count_ticks_made_prev = 0L;
+unsigned long GOTO_DEC_count_ticks_made_prev = 0L;
+
 
 void setup() {
   MOTOR_init();
