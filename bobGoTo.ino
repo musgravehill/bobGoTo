@@ -7,10 +7,10 @@
 
 #define STARDAY_us = 86164090531L //micro second in star-day
 
-#define DRIVER_RA_STEP 12
-#define DRIVER_RA_DIR 13
-#define DRIVER_DEC_STEP 7
-#define DRIVER_DEC_DIR 8
+#define DRIVER_RA_STEP 13
+#define DRIVER_RA_DIR 12
+#define DRIVER_DEC_STEP 8
+#define DRIVER_DEC_DIR 7
 
 //Единиц прямого восхождения за 1 микротик двигателя
 // RA_max_hex_value / RA_microticks_per_revolution
