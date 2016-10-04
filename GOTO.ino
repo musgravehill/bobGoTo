@@ -28,6 +28,8 @@ void GOTO_process() {
 
     RA_hex_position_goto =  strtoul(command_goto_RA_hex, NULL, 16);
     DEC_hex_position_goto =  strtoul(command_goto_DEC_hex, NULL, 16);
+
+    return;
   }
   else if (SYS_STATE == SYS_STATE_GOTO_READY) {
     //начали ГОТО-наведение
@@ -49,9 +51,9 @@ void GOTO_process() {
     DEC_hex_position_goto =  strtoul(command_goto_DEC_hex, NULL, 16);
 
     /*Serial.print("RA_goto=");
-    Serial.print(RA_hex_position_goto, HEX);
-    Serial.print(" DEC_goto=");
-    Serial.println(DEC_hex_position_goto, HEX);*/
+      Serial.print(RA_hex_position_goto, HEX);
+      Serial.print(" DEC_goto=");
+      Serial.println(DEC_hex_position_goto, HEX);*/
 
     unsigned long RA_difference_abs;
     unsigned long DEC_difference_abs;
@@ -88,13 +90,16 @@ void GOTO_process() {
     DEC_GOTO_count_ticks_need = 0.51 + DEC_difference_abs / DEC_step_per_motor_microstep; // 0.51 + 99.5 = 100
 
     /*Serial.print("RA_ticks=");
-    Serial.print(RA_GOTO_count_ticks_need, DEC);
-    Serial.print(" DEC_ticks=");
-    Serial.println(DEC_GOTO_count_ticks_need, DEC);*/
+      Serial.print(RA_GOTO_count_ticks_need, DEC);
+      Serial.print(" DEC_ticks=");
+      Serial.println(DEC_GOTO_count_ticks_need, DEC);*/
+
+    return;
 
   }
   else if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
     //не обрабатываем новые гото-приказы, сейчас идет процесс наведения телескопа
+    return;
   }
 }
 
@@ -113,8 +118,8 @@ void GOTO_tick() {
 
 void GOTO_calc_positions() {
   if  ((RA_GOTO_count_ticks_made >= RA_GOTO_count_ticks_need) && (DEC_GOTO_count_ticks_made >= DEC_GOTO_count_ticks_need)) {
-    SYS_STATE = SYS_STATE_GOTO_READY;
-    MOTOR_set_RA_dir(true);
+    SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed     
+    MOTOR_set_RA_dir(true); //run star-speed 
   }
 
   //-------стеллариум ГОТО шлет приказ, а мы выставили телескоп туда и сразу пишем гото-координаты в текущие------
@@ -136,14 +141,14 @@ void GOTO_calc_positions() {
     } else {
       RA_hex_position_curr -= tmp;
     }
-    
+
     //TODO CHECK IT sign +-
     tmp = (DEC_GOTO_count_ticks_made - GOTO_DEC_count_ticks_made_prev) * DEC_step_per_motor_microstep;
     if (DEC_dDEC_sign > 0) {
       DEC_hex_position_curr +=  tmp;
     } else {
       DEC_hex_position_curr -=  tmp;
-    }    
+    }
 
     GOTO_RA_count_ticks_made_prev = RA_GOTO_count_ticks_made;
     GOTO_DEC_count_ticks_made_prev = DEC_GOTO_count_ticks_made;
