@@ -12,13 +12,6 @@ void MOTOR_DEC_TICK() {
   delayMicroseconds(8); //DRV8825 needs 1.9 us
 }
 
-void MOTOR_STARSPEED_tick() {
-  //goto ready => only RA rotate star speed
-  if (SYS_STATE != SYS_STATE_GOTO_PROCESS ) {    
-    MOTOR_RA_TICK();
-  }
-}
-
 //RA true== star_speed; false == counter star rotation
 void MOTOR_set_RA_dir(bool dir_forward) {
   if (dir_forward) {
@@ -48,6 +41,7 @@ void MOTOR_init() {
   pinMode(DRIVER_DEC_DIR,  OUTPUT);
   digitalWrite(DRIVER_DEC_DIR, LOW);
 
-  MOTOR_set_RA_dir(true); //for star-speed
+  MOTOR_set_RA_dir(true); //run star-speed
+  TIMER_STAR_config(); //run star-speed
 }
 

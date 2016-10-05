@@ -29,17 +29,18 @@
 #define DEC_step_per_motor_microstep   932.0675553385417
 
 //= STARDAY_us/RA_microticks_for_revolution
-#define starSpeed_us_for_microtick  18699
+//starSpeed_us_for_microtick  18699.***? // 53.464499572284 Hz by Timer1
 
 //это наведение быстрее зведной скорости в
 //NOTE DRV8825 max step frequency is 250kHz ~ 4us
-#define gotoSpeed_us_for_microtick  64 // 15.625kHz; recalc GOTO_plusminus_dRA_per_1_tick
+//gotoSpeed_us_for_microtick  62.5? // 16 000 Hz by Timer1; recalc GOTO_plusminus_dRA_per_1_tick
 
 //прирост RA позиции при большой скорости ГОТО.
 //Если бы скоростьГОТО==скоростьЗвезд, то в догонку прирост = 0, система "застыла" на месте и ведет точку.
 //А против звезд получится сложение 2х скоростей: goto+звздная
 // = (gotoSpeed_us_for_microtick/starSpeed_us_for_microtick) * RA_step_per_motor_microstep = (64/18699) * 932.0675553385417
-#define GOTO_plusminus_dRA_per_1_tick 3.190134421181168
+//or  (star_moto_freq/goto_motor-freq)   * 932.0675553385417
+#define GOTO_plusminus_dRA_per_1_tick 3.114532838358579 
 
 int8_t RA_dRA_star_compensation_sign = 1; // 1==counter star; -1 = chase the star
 int8_t RA_dRA_sign = 1;
@@ -50,12 +51,12 @@ int8_t DEC_dDEC_sign = 1;
 #define SYS_STATE_GOTO_READY 1 //телескоп привязался к Стеллариуму, можно ГОТО в Стеллариуме, телескоп исполнил приказ GOTO
 #define SYS_STATE_GOTO_PROCESS 2  //телескоп исполняет приказ GOTO в процессе наведения
 
-//STATEMACHINE
-uint32_t STATEMACHINE_prevMicros_starSpeed = 1L;
-uint32_t STATEMACHINE_prevMicros_gotoSpeed = 1L;
-uint32_t STATEMACHINE_prevMicros_331000us = 1L;
-uint32_t STATEMACHINE_prevMicros_1013000us = 1L;
-uint32_t STATEMACHINE_prevMicros_3313000us = 1L;
+//TIMEMACHINE
+uint32_t TIMEMACHINE_prevMicros_starSpeed = 1L;
+uint32_t TIMEMACHINE_prevMicros_gotoSpeed = 1L;
+uint32_t TIMEMACHINE_prevMicros_331ms = 1L;
+uint32_t TIMEMACHINE_prevMicros_1013ms = 1L;
+uint32_t TIMEMACHINE_prevMicros_3313ms = 1L;
 
 String SYS_str_from_stellarium = "";
 
@@ -82,5 +83,5 @@ void setup() {
 }
 
 void loop() {
-  STATEMACHINE_loop();
+  TIMEMACHINE_loop();
 }
