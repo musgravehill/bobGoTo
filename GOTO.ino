@@ -1,12 +1,12 @@
 void GOTO_processSerialCommand() {
   if ('r' == SYS_str_from_stellarium.charAt(0)) {
+    Serial.println("#");
     
     digitalWrite(13,1);
     delay(50);
     digitalWrite(13,0);
         
-    GOTO_process();
-    Serial.println("#");
+    GOTO_process();    
   }
   SYS_str_from_stellarium = "";
 }
@@ -18,6 +18,7 @@ void GOTO_current_positions_send_to_stellarium() {
   Serial.print(SERIAL_prependZeroTo8Digits(DEC_hex_position_curr));
   Serial.print(DEC_hex_position_curr, HEX);
   Serial.println('#');
+  delay(1);
 }
 
 void GOTO_process() {

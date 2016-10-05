@@ -19,9 +19,9 @@ void TIMEMACHINE_331ms() {
   BUTTON_check();
   GOTO_check_goto_is_completed();  
 }
-void TIMEMACHINE_1013ms() {
-  SERIAL_listen();
-  GOTO_processSerialCommand();      
+void TIMEMACHINE_1013ms() {  
+  GOTO_processSerialCommand();   //from prev serial
+  SERIAL_listen();   //listen string, but process in next step => for serial-sync-period like delay
 }
 void TIMEMACHINE_1979ms() {
   GOTO_calc_positions();  
