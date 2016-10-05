@@ -33,14 +33,14 @@
 
 //это наведение быстрее зведной скорости в
 //NOTE DRV8825 max step frequency is 250kHz ~ 4us
-//gotoSpeed_us_for_microtick  62.5? // 16 000 Hz by Timer1; recalc GOTO_plusminus_dRA_per_1_tick
+//gotoSpeed_us_for_microtick  13998.25021872266 Hz by Timer1; recalc GOTO_plusminus_dRA_per_1_tick
 
 //прирост RA позиции при большой скорости ГОТО.
 //Если бы скоростьГОТО==скоростьЗвезд, то в догонку прирост = 0, система "застыла" на месте и ведет точку.
 //А против звезд получится сложение 2х скоростей: goto+звздная
 // = (gotoSpeed_us_for_microtick/starSpeed_us_for_microtick) * RA_step_per_motor_microstep = (64/18699) * 932.0675553385417
-//or  (star_moto_freq/goto_motor-freq)   * 932.0675553385417
-#define GOTO_plusminus_dRA_per_1_tick 3.114532838358579 
+//or  (star_moto_freq/goto_motor-freq)   * 932.0675553385417 
+#define GOTO_plusminus_dRA_per_1_tick 3.559911034243855  
 
 int8_t RA_dRA_star_compensation_sign = 1; // 1==counter star; -1 = chase the star
 int8_t RA_dRA_sign = 1;
@@ -52,11 +52,9 @@ int8_t DEC_dDEC_sign = 1;
 #define SYS_STATE_GOTO_PROCESS 2  //телескоп исполняет приказ GOTO в процессе наведения
 
 //TIMEMACHINE
-uint32_t TIMEMACHINE_prevMicros_starSpeed = 1L;
-uint32_t TIMEMACHINE_prevMicros_gotoSpeed = 1L;
 uint32_t TIMEMACHINE_prevMicros_331ms = 1L;
 uint32_t TIMEMACHINE_prevMicros_1013ms = 1L;
-uint32_t TIMEMACHINE_prevMicros_3313ms = 1L;
+uint32_t TIMEMACHINE_prevMicros_1979ms = 1L;
 
 String SYS_str_from_stellarium = "";
 

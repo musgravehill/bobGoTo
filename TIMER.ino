@@ -13,6 +13,7 @@ void TIMER_STAR_config() {
   /////  starSpeed_us_for_microtick  18698.8043687066 us = 53.479355165272 Hz
   //OCR1A =  [ 16,000,000Hz/ (prescaler * desired interrupt frequency) ] - 1
   //OCR1A = 16000000/(256*53.479355165272)    -1 = 1167.675273044163
+  //f = 16000000(256*(1168+1)) = 53.464499572284 Hz by Timer1
 
   cli(); //запретить все прерывания
 
@@ -42,6 +43,7 @@ void TIMER_GOTO_config() {
   /////  gotoSpeed_us_for_microtick    Hz
   //OCR1A =  [ 16,000,000Hz/ (prescaler * desired interrupt frequency) ] - 1
   //OCR1A = 16000000/(1*14000)  -1 = 1141.857142857143
+  //f = 16000000(1*(1142+1)) = 13998.25021872266 Hz by Timer1
 
   cli(); //запретить все прерывания
 
