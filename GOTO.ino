@@ -178,18 +178,8 @@ void GOTO_tick() {
 }
 
 void GOTO_calc_positions() {
-  //-------стеллариум ГОТО шлет приказ, а мы выставили телескоп туда и сразу пишем гото-координаты в текущие------
-  if (SYS_STATE == SYS_STATE_GOTO_INIT) {
-    RA_hex_position_curr =  RA_hex_position_goto;
-    DEC_hex_position_curr = DEC_hex_position_goto;
-  }
-  //--------гото завершен, координаты совпали----------------------------------------------------------------------
-  else if (SYS_STATE == SYS_STATE_GOTO_READY) {
-    RA_hex_position_curr =  RA_hex_position_goto;
-    DEC_hex_position_curr = DEC_hex_position_goto;
-  }
   //------------гото в процессе наведения, будем считать позицию по сделанным шагам---------------------------------
-  else if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
+  if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
     //TODO CHECK IT sign +-
     unsigned long tmp = (RA_GOTO_count_ticks_made - GOTO_RA_count_ticks_made_prev) * (RA_step_per_motor_microstep - RA_dRA_sign * GOTO_plusminus_dRA_per_1_tick);
     if (RA_dRA_sign > 0) {
@@ -208,38 +198,31 @@ void GOTO_calc_positions() {
 
     GOTO_RA_count_ticks_made_prev = RA_GOTO_count_ticks_made;
     GOTO_DEC_count_ticks_made_prev = DEC_GOTO_count_ticks_made;
-
-    /*Serial.print(" RA_dRA_sign=");
-      Serial.print(RA_dRA_sign, DEC);
-      Serial.print(" DEC_dDEC_sign=");
-      Serial.println(DEC_dDEC_sign, DEC);*/
-
-    /*Serial.print(" RA_GOTO_count_ticks_made=");
-      Serial.print(RA_GOTO_count_ticks_made, DEC);
-      Serial.print(" DEC_GOTO_count_ticks_made=");
-      Serial.println(DEC_GOTO_count_ticks_made, DEC);*/
-
   }
+  //else координаты достигнуты, всё устаканилось
 }
 
 void GOTO_check_goto_is_completed() {
   if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
     if  ((RA_GOTO_count_ticks_made >= RA_GOTO_count_ticks_need) && (DEC_GOTO_count_ticks_made >= DEC_GOTO_count_ticks_need)) {
-      MOTOR_set_RA_dir(true); //run star-speed
-      TIMER_STAR_config();
-      SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed
+      GOTO_set_normal_mode();
     }
   }
 }
 
 //press btn GOTO_SYNC => coordinates set synced
-void GOTO_BUTTON_coordinates_sync_ok() {    
-  TIMER_STAR_config();
-  SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed
-  MOTOR_set_RA_dir(true); //run star-speed  
-  RA_hex_position_curr =  RA_hex_position_goto;
-  DEC_hex_position_curr = DEC_hex_position_goto;  
+void GOTO_BUTTON_coordinates_sync_ok() {
+  GOTO_set_normal_mode();
 }
 
+//пусть вращается за звездами, наводка окончена
+void GOTO_set_normal_mode() {
+  TIMER_STAR_config();
+  SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed  
+  MOTOR_set_RA_dir(true); //run star-speed
+
+  RA_hex_position_curr =  RA_hex_position_goto;
+  DEC_hex_position_curr = DEC_hex_position_goto;
+}
 
 
