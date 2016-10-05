@@ -21,10 +21,10 @@ void TIMEMACHINE_331ms() {
 }
 void TIMEMACHINE_1013ms() {
   SERIAL_listen();
-  GOTO_processSerialCommand();    
-  GOTO_current_positions_send_to_stellarium();
+  GOTO_processSerialCommand();      
 }
 void TIMEMACHINE_1979ms() {
   GOTO_calc_positions();  
+  GOTO_current_positions_send_to_stellarium();
 }
 

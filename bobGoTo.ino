@@ -83,6 +83,8 @@ void setup() {
   delay(10);
   Serial.begin(9600);
   delay(10);
+
+  pinMode(13,  OUTPUT);
 }
 
 void loop() {

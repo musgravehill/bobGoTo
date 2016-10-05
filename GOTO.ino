@@ -1,5 +1,10 @@
 void GOTO_processSerialCommand() {
   if ('r' == SYS_str_from_stellarium.charAt(0)) {
+    
+    digitalWrite(13,1);
+    delay(50);
+    digitalWrite(13,0);
+        
     GOTO_process();
     Serial.println("#");
   }
