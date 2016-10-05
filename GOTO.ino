@@ -232,13 +232,13 @@ void GOTO_check_goto_is_completed() {
   }
 }
 
-void GOTO_BUTTON_coordinates_sync_ok() {
-  SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed
-  MOTOR_set_RA_dir(true); //run star-speed    
+//press btn GOTO_SYNC => coordinates set synced
+void GOTO_BUTTON_coordinates_sync_ok() {    
   TIMER_STAR_config();
+  SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed
+  MOTOR_set_RA_dir(true); //run star-speed  
   RA_hex_position_curr =  RA_hex_position_goto;
-  DEC_hex_position_curr = DEC_hex_position_goto;
-  
+  DEC_hex_position_curr = DEC_hex_position_goto;  
 }
 
 
