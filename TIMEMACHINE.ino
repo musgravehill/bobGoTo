@@ -16,8 +16,8 @@ void TIMEMACHINE_loop() {
 }
 
 void TIMEMACHINE_331ms() {
-  GOTO_check_goto_is_completed();
-  //button
+  BUTTON_check();
+  GOTO_check_goto_is_completed();  
 }
 void TIMEMACHINE_1013ms() {
   SERIAL_listen();
