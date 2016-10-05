@@ -223,10 +223,12 @@ void GOTO_calc_positions() {
 }
 
 void GOTO_check_goto_is_completed() {
-  if  ((RA_GOTO_count_ticks_made >= RA_GOTO_count_ticks_need) && (DEC_GOTO_count_ticks_made >= DEC_GOTO_count_ticks_need)) {
-    MOTOR_set_RA_dir(true); //run star-speed
-    TIMER_STAR_config();
-    SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed
+  if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
+    if  ((RA_GOTO_count_ticks_made >= RA_GOTO_count_ticks_need) && (DEC_GOTO_count_ticks_made >= DEC_GOTO_count_ticks_need)) {
+      MOTOR_set_RA_dir(true); //run star-speed
+      TIMER_STAR_config();
+      SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed
+    }
   }
 }
 

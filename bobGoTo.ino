@@ -76,6 +76,7 @@ unsigned long GOTO_DEC_count_ticks_made_prev = 0L;
 
 void setup() {
   MOTOR_init();
+  delay(10);
   Serial.begin(9600);
   delay(10);
 }
