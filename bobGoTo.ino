@@ -12,6 +12,8 @@
 #define DRIVER_DEC_STEP 4 //PD4
 #define DRIVER_DEC_DIR 2 //PD2
 
+#define BUTTON_GOTO_SYNC 9 //PB1
+
 // тиков двигателя на полный оборот монти (зависит от редукции)
 // 144(червь)*2.5(ремень)*400(шагов на 1 оборот ШД)* 32(микрошаг DRIVER_MICROSTEP_X=32)
 #define RA_microticks_per_revolution  4608000L; //ось прямого восхождения
@@ -75,6 +77,7 @@ unsigned long GOTO_DEC_count_ticks_made_prev = 0L;
 
 
 void setup() {
+  BUTTON_init();
   MOTOR_init();
   delay(10);
   Serial.begin(9600);
