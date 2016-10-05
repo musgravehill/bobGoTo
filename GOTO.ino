@@ -138,7 +138,6 @@ void GOTO_process() {
       }
     }
 
-
     //calc count ticks for ra, dec
     RA_GOTO_count_ticks_made = 0L;
     DEC_GOTO_count_ticks_made = 0L;
@@ -174,14 +173,10 @@ void GOTO_tick() {
       DEC_GOTO_count_ticks_made++;
     }
   }
+  GOTO_check_goto_is_completed();
 }
 
 void GOTO_calc_positions() {
-  if  ((RA_GOTO_count_ticks_made >= RA_GOTO_count_ticks_need) && (DEC_GOTO_count_ticks_made >= DEC_GOTO_count_ticks_need)) {
-    SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed
-    MOTOR_set_RA_dir(true); //run star-speed
-  }
-
   //-------стеллариум ГОТО шлет приказ, а мы выставили телескоп туда и сразу пишем гото-координаты в текущие------
   if (SYS_STATE == SYS_STATE_GOTO_INIT) {
     RA_hex_position_curr =  RA_hex_position_goto;
@@ -223,6 +218,14 @@ void GOTO_calc_positions() {
       Serial.print(" DEC_GOTO_count_ticks_made=");
       Serial.println(DEC_GOTO_count_ticks_made, DEC);*/
 
+  }
+}
+
+void GOTO_check_goto_is_completed() {
+  if  ((RA_GOTO_count_ticks_made >= RA_GOTO_count_ticks_need) && (DEC_GOTO_count_ticks_made >= DEC_GOTO_count_ticks_need)) {
+    SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed
+
+    MOTOR_set_RA_dir(true); //run star-speed
   }
 }
 

@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<!-- saved from url=(0025)https://toster.ru/q/43070 -->
+<html lang="ru" class="js no-touch svg inlinesvg"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--<base href="https://toster.ru/">--><base href=".">
+<title>Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="День добрый. Голова пухнет кучей других вопросов и никак не хочет осилить работу с таймерами((((
+
+Что надо:
+ — вызывать два прерывания на разных таймерах
+ — иметь возможность быстрого изменения частоты работы таймеров
+
+Вот есть такой код (простите, но тег code как то тут все в кашу смешал)
+
+volatile unsigned int tcnt2; 
+
+volatile unsigned int flag;
+
+void setup()  
+{ 
+     flag=true; 
+    TIMSK2 &amp;= ~(1&amp;lt;&amp;lt;TOIE2); //разрешения прерывания по переполнению таймера/счетчика Т2  
+    TCCR2A ">
+<meta property="og:image" content="http://habrastorage.org/files/c48/ffd/51a/c48ffd51a25f4f768797115b24d88c1a.jpg">
+<meta property="og:image" content="http://habrastorage.org/files/528/9d7/507/5289d7507916409b97f6274040dec084.jpg">
+<meta property="og:title" content="Помогите с прерываниями по таймерам Arduino MEGA">
+<meta property="og:description" content="Ответили на вопрос 4 человека. Оцените лучшие ответы! И подпишитесь на вопрос, чтобы узнавать о появлении новых ответов.">
+<meta property="og:keywords" content="arduino, микроконтроллеры, таймеры">
+<meta property="og:url" content="https://toster.ru/q/43070">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:domain" content="toster.ru">
+<meta name="twitter:site" content="@toster_ru">
+<meta name="twitter:creator" content="@toster_ru">
+<meta name="twitter:title" content="Помогите с прерываниями по таймерам Arduino MEGA">
+<meta name="twitter:description" content="Ответили на вопрос 4 человека. Оцените лучшие ответы! И подпишитесь на вопрос, чтобы узнавать о появлении новых ответов.">
+<meta name="twitter:url" content="https://toster.ru/q/43070">
+<meta name="keywords" content="Тостер, вопросы, ответы, ИТ, информационные технологии, toster, toster.ru, IT">
+<meta property="og:site_name" content="«Тостер» — вопросы и ответы">
+<meta property="og:type" content="website">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta http-equiv="cleartype" content="on">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/css">
+<link rel="stylesheet" href="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/frontend.31b85a53-7901-11e6-81cb-38eaa71001f0.css">
+
+<link rel="icon" href="https://habracdn.net/toster/images/favicons/favicon.ico" type="image/x-icon">
+<link href="https://habracdn.net/toster/images/favicons/apple-touch-icon-57x57.png" rel="apple-touch-icon" sizes="57x57">
+<link href="https://habracdn.net/toster/images/favicons/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+<link href="https://habracdn.net/toster/images/favicons/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+<link href="https://habracdn.net/toster/images/favicons/apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
+<link href="https://habracdn.net/toster/images/favicons/apple-touch-icon-60x60.png" rel="apple-touch-icon" sizes="60x60">
+<link href="https://habracdn.net/toster/images/favicons/apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120">
+<link href="https://habracdn.net/toster/images/favicons/apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76">
+<link href="https://habracdn.net/toster/images/favicons/apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152">
+<link href="https://habracdn.net/toster/images/favicons/apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180">
+<link href="https://habracdn.net/toster/images/favicons/favicon-192x192.png" rel="icon" sizes="192x192" type="image/png">
+<link href="https://habracdn.net/toster/images/favicons/favicon-160x160.png" rel="icon" sizes="160x160" type="image/png">
+<link href="https://habracdn.net/toster/images/favicons/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png">
+<link href="https://habracdn.net/toster/images/favicons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+<link href="https://habracdn.net/toster/images/favicons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+<meta content="#434d61" name="msapplication-TileColor">
+<meta content="https://habracdn.net/toster/images/favicons/mstile-144x144.png" name="msapplication-TileImage">
+<meta content="Тостер" name="application-name">
+<meta content="Тостер" name="apple-mobile-web-app-title">
+<meta name="google-site-verification" content="j8HWPnNFKDvKsovqTFZZarpWY06A0Gd2e2wKdfgmWnI">
+<meta name="yandex-verification" content="556b759af57efeb5">
+<meta name="yandex-verification" content="6039c88a7b8cdadb">
+<script type="text/javascript" async="" src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/watch.js.Без названия"></script><script async="" src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/analytics.js.Без названия"></script><script async="" src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/fbevents.js.Без названия"></script><script type="text/javascript" src="https://an.yandex.ru/system/context.js" async=""></script><script type="text/javascript" src="https://an.yandex.ru/system/context.js" async=""></script><script type="text/javascript" src="https://an.yandex.ru/system/context.js" async=""></script><script type="text/javascript" src="https://an.yandex.ru/system/context.js" async=""></script><script type="text/javascript" src="https://an.yandex.ru/system/context.js" async=""></script><script src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/modernizr.custom.js.Без названия" async="async"></script>
+<script src="https://habracdn.net/toster/js/lib/adriver.core.2.js"></script>
+  <script type="text/javascript">
+  //<![CDATA[
+    var crtg_nid = "2580";
+    var crtg_cookiename = "cto_rtt";
+    var crtg_varname = "crtg_content";
+    
+    function crtg_getCookie(c_name) {
+        var i, x, y, ARRCookies = document.cookie.split(";");
+        for (i = 0; i < ARRCookies.length; i++) {
+            x = ARRCookies[i].substr(0, ARRCookies[i].indexOf("="));
+            y = ARRCookies[i].substr(ARRCookies[i].indexOf("=") + 1);
+            x = x.replace(/^\s+|\s+$/g, "");
+            if (x == c_name) {
+                return unescape(y);
+            }
+        }
+        return '';
+    }
+    var crtg_content = crtg_getCookie(crtg_cookiename);
+    var crtg_rnd = Math.floor(Math.random() * 99999999999);
+    var crtg_url = location.protocol + '//rtax.criteo.com/delivery/rta/rta.js?netId=' + escape(crtg_nid);
+    crtg_url += '&cookieName=' + escape(crtg_cookiename);
+    crtg_url += '&rnd=' + crtg_rnd;
+    crtg_url += '&varName=' + escape(crtg_varname);
+    var crtg_script = document.createElement('script');
+    crtg_script.type = 'text/javascript';
+    crtg_script.src = crtg_url;
+    crtg_script.async = true;
+    if (document.getElementsByTagName("head").length > 0) document.getElementsByTagName("head")[0].appendChild(crtg_script);
+    else if (document.getElementsByTagName("body").length > 0) document.getElementsByTagName("body")[0].appendChild(crtg_script);
+    
+  //]]>
+  </script><script type="text/javascript" src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/rta.js.Без названия" async=""></script>
+  <script>
+    var adcm_config = {
+      id:1034,
+      platformId: 34,
+    init: function () { window.adcm.call(); }
+    };
+  </script>
+  <script src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/adcm.js.Без названия" async=""></script>
+  <script src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/processor.js.Без названия"></script></head>
+  <body>
+    <div class="tmservices-panel" role="tm_panel">
+  <ul class="tmenu-mservices">
+    <li class="tmenu-mservices__item">
+      <a class="tmenu-mservices__item-link" href="http://tmfeed.ru/?utm_source=tm_tmfeed&amp;utm_medium=tm_top_panel&amp;utm_campaign=tm_promo">TM Feed</a>
+    </li>
+    <li class="tmenu-mservices__item">
+      <a class="tmenu-mservices__item-link" href="http://habrahabr.ru/?utm_source=tm_toster&amp;utm_medium=tm_top_panel&amp;utm_campaign=tm_promo">Хабрахабр</a>
+    </li>
+    <li class="tmenu-mservices__item">
+      <a class="tmenu-mservices__item-link" href="http://geektimes.ru/?utm_source=tm_toster&amp;utm_medium=tm_top_panel&amp;utm_campaign=tm_promo">Geektimes</a>
+    </li>
+    <li class="tmenu-mservices__item">
+      <a class="tmenu-mservices__item-link tmenu-mservices__item-link_current" href="http://toster.ru/?utm_source=tm_toster&amp;utm_medium=tm_top_panel&amp;utm_campaign=tm_promo">Тостер</a>
+    </li>
+    <li class="tmenu-mservices__item">
+      <a class="tmenu-mservices__item-link" href="http://moikrug.ru/?utm_source=tm_toster&amp;utm_medium=tm_top_panel&amp;utm_campaign=tm_promo">Мой круг</a>
+    </li>
+    <li class="tmenu-mservices__item last-item">
+      <a class="tmenu-mservices__item-link" href="http://freelansim.ru/?utm_source=tm_toster&amp;utm_medium=tm_top_panel&amp;utm_campaign=tm_promo">Фрилансим</a>
+    </li>
+    <li class="tmenu-mservices__item tmspecials">
+      <span id="adriver_banner_465568687"></span>
+    <a href="http://bit.ly/2dFszhi" target="_blank" class="tmspecials__item-link" style="color: #E3107D!important">Cisco в облаке</a><a href="http://bit.ly/2dxvfSW" target="_blank" class="tmspecials__item-link" style="color: #F27405!important">HP Spectre</a><a href="http://bit.ly/2dTUiz1" target="_blank" class="tmspecials__item-link" style="color: #091BDB!important">Бандеролька</a></li>
+  </ul>
+</div>
+    <div class="layout">
+      <div class="layout__canvas" id="js-canvas">
+        <aside class="layout__navbar sticky" role="navbar">
+          <a class="logo logo_sidebar" href="https://toster.ru/">
+            <svg class="icon_svg icon_logo">
+              <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_logo"></use>
+            </svg>
+          </a>
+          <section class="user-panel" role="user_expand_menu">
+      <div class="user-panel_head">
+      <svg class="icon_svg icon_menu_lock" viewBox="0 0 32 32">
+        <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_menu_lock"></use>
+      </svg>
+      <a class="user-panel__login-link" href="https://toster.ru/auth/ac?ret=@referer">Войти на сайт</a>
+    </div>
+    </section>
+<ul class="main-menu">
+    <li class="main-menu__item">
+    <a class="main-menu__link " id="item_questions" href="https://toster.ru/questions">
+      <svg class="icon_svg icon_menu_questions" viewBox="0 0 32 32">
+        <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_menu_question"></use>
+      </svg>
+      Все вопросы
+    </a>
+  </li>
+  <li class="main-menu__item">
+    <a class="main-menu__link " href="https://toster.ru/tags">
+      <svg class="icon_svg icon_menu_tags" viewBox="0 0 32 32">
+        <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_menu_tags"></use>
+      </svg>
+      Все теги
+    </a>
+  </li>
+  <li class="main-menu__item">
+    <a class="main-menu__link " href="https://toster.ru/users">
+      <svg class="icon_svg icon_menu_users" viewBox="0 0 34 32">
+        <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_menu_users"></use>
+      </svg>
+      Пользователи
+    </a>
+  </li>
+  </ul>
+  <section class="promo-block promo-block_sticky-bottom">
+    <h3 class="promo-block__title">Тостер&nbsp;— вопросы и&nbsp;ответы для IT-специалистов</h3>
+    <p class="promo-block__desc">Получайте ответы на&nbsp;вопросы по&nbsp;любой теме из&nbsp;области&nbsp;IT от&nbsp;специалистов в&nbsp;этой теме.</p>
+    <a class="btn btn_green" href="https://toster.ru/info/about">Узнать больше</a>
+  </section>
+        </aside>
+        <div class="layout__body">
+          <header class="layout__topbar">
+            <div class="layout__topbar_suggest">
+              <div class="layout__topbar_wrap">
+                <form class="suggest" action="https://toster.ru/search" method="get" id="header_search_form">
+  <div class="suggest__field_wrap">
+    <div class="suggest__wrap_fluid">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input class="suggest__field ui-autocomplete-input" type="search" autocomplete="off" name="q" placeholder="Найти вопрос, ответ, тег или пользователя">
+    </div>
+    <button class="btn btn_link" type="button" role="btn_suggest_close">
+      <span>Закрыть</span>
+    </button>
+  </div>
+  <button class="btn btn_suggest" type="button" role="btn_suggest">
+    <svg class="icon_svg icon_search" viewBox="0 0 32 32">
+      <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_search"></use>
+    </svg>
+  </button>
+</form>
+                <div class="layout__topbar_add-question">
+                  <a class="btn btn_green btn_add-question" href="https://toster.ru/question/new" role="auth_popup_trigger" data-value="Чтобы задать вопрос и получить на него квалифицированный ответ." data-title="" data-auth-ret="question/new" data-no-button="">
+                    <svg class="icon_svg icon_plus" viewBox="0 0 32 32">
+                      <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_plus"></use>
+                    </svg>
+                    <span>Задать вопрос</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="layout__topbar_canvas-toggler">
+              <button class="btn btn_navbar_toggle" role="toggle_navbar" type="button">
+                <svg class="icon_svg icon_burger" viewBox="0 0 32 32">
+                  <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_burger"></use>
+                </svg>
+                              </button>
+              <a class="logo logo_topbar" href="https://toster.ru/">
+                <svg class="icon_svg icon_logo">
+                  <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_logo"></use>
+                </svg>
+              </a>
+            </div>
+          </header>
+          <section class="column column_wrap" role="wrap_section">
+            <div class="column_main">
+              <main class="page">
+                <div class="flash-notices is_stuck" role="notices_container_flash" style="position: fixed; top: 0px; width: 799px;"></div><div style="position: static; width: 799px; height: 0px; display: block; vertical-align: baseline; float: none;"></div>
+                <div class="notices-container" role="notice_container">
+                                  </div>
+                        <div class="page__body" id="question_show" itemscope="" itemtype="http://schema.org/Question">
+  <div class="question question_full">
+    <header class="question-head">
+  <div class="user-summary user-summary_question" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">
+  <a class="user-summary__avatar" href="https://toster.ru/user/IIIKochevnikIII">
+    <meta itemprop="image" content="//habrastorage.org/getpro/toster/avatars/767/c01/607/767c01607590bcd810ef04dd53164162.jpg">
+      <img src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy" alt="IIIKochevnikIII">
+  </a>
+  <div class="user-summary__desc">
+    <a class="user-summary__name" href="https://toster.ru/user/IIIKochevnikIII" itemprop="url">
+      <meta itemprop="name" content="IIIKochevnikIII">
+      IIIKochevnikIII    </a>
+    <span class="user-summary__nickname">
+      <meta itemprop="alternateName" content="IIIKochevnikIII">
+      @IIIKochevnikIII    </span>
+      </div>
+</div>
+        <div class="question-head_subscribers">
+      <ul class="subscribers-list subscribers-list_short">
+                  <li class="subscribers-list__item" title="DvLpb подписан">
+            <a class="subscribers-list__user-avatar" href="https://toster.ru/user/DvLpb">
+                <svg class="icon_userpic" viewBox="0 0 32 32">
+    <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_userpic"></use>
+  </svg>
+            </a>
+          </li>
+                          <li class="subscribers-list__item" title="Akint подписан">
+            <a class="subscribers-list__user-avatar" href="https://toster.ru/user/Akint">
+                <img src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(1)" alt="Akint">
+            </a>
+          </li>
+                          <li class="subscribers-list__item" title="denm подписан">
+            <a class="subscribers-list__user-avatar" href="https://toster.ru/user/denm">
+                <img src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(2)" alt="denm">
+            </a>
+          </li>
+                        <li class="subscribers-list__item subscribers-list__item_more" title="Все подписчики на вопрос">
+          <a role="link_subscribers" href="https://toster.ru/question/subscribers?question_id=43070#question_subscribers">
+            <svg class="icon_svg icon_dots" viewBox="0 0 131 32">
+              <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_dots"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+    </header>
+    <nav class="question__tags">
+      <a class="question__tags-image" href="https://toster.ru/tag/arduino">
+            <img class="tag__image tag__image_bg" src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(3)" alt="arduino" itemprop="image">
+    </a>
+      <ul class="tags-list">
+              <li class="tags-list__item  tag_632">
+          <a href="https://toster.ru/tag/arduino">
+            Arduino          </a>
+        </li>
+                    <li class="tags-list__item  tag_152884">
+          <a href="https://toster.ru/tag/%D0%BC%D0%B8%D0%BA%D1%80%D0%BE%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D0%BB%D0%B5%D1%80%D1%8B">
+            Микроконтроллеры          </a>
+        </li>
+                    <li class="tags-list__item  tag_279073">
+          <a href="https://toster.ru/tag/%D1%82%D0%B0%D0%B9%D0%BC%D0%B5%D1%80%D1%8B">
+            Таймеры          </a>
+        </li>
+                </ul>
+    </nav>
+<h1 class="question__title" itemprop="name ">
+  Помогите с прерываниями по таймерам Arduino MEGA</h1>
+<div class="question__body">
+  <div class="question__text" itemprop="text description">
+    День добрый. Голова пухнет кучей других вопросов и никак не хочет осилить работу с таймерами((((<br>
+<br>
+Что надо:<br>
+ — вызывать два прерывания на разных таймерах<br>
+ — иметь возможность быстрого изменения частоты работы таймеров<br>
+<br>
+Вот есть такой код (простите, но тег code как то тут все в кашу смешал)<br>
+<code class="hljs cpp">
+<span class="hljs-keyword">volatile</span> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> tcnt2; 
+
+<span class="hljs-keyword">volatile</span> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> flag;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span>  
+</span>{ 
+     flag=<span class="hljs-keyword">true</span>; 
+    TIMSK2 &amp;= ~(<span class="hljs-number">1</span>&lt;&lt;TOIE2); <span class="hljs-comment">//разрешения прерывания по переполнению таймера/счетчика Т2  </span>
+    TCCR2A &amp;= ~((<span class="hljs-number">1</span>&lt;&lt;WGM21) | (<span class="hljs-number">1</span>&lt;&lt;WGM20));<span class="hljs-comment">// Режим работы таймера/счетчика </span>
+    TCCR2B &amp;= ~(<span class="hljs-number">1</span>&lt;&lt;WGM22);<span class="hljs-comment">// Режим работы таймера/счетчика </span>
+    ASSR &amp;= ~(<span class="hljs-number">1</span>&lt;&lt;AS2);  <span class="hljs-comment">//Выбор источника синхронизации таймера если AS2=0 от системного генератора </span>
+    tcnt2 = <span class="hljs-number">1</span>; <span class="hljs-comment">//  16000000/64/f=tcnt2 </span>
+    TIMSK2 |= (<span class="hljs-number">1</span>&lt;&lt;TOIE2);<span class="hljs-comment">//Разрешение прерывания по переполнению Т2. </span>
+} 
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span>  
+</span>{ 
+}  
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MyInterupt</span><span class="hljs-params">()</span> 
+</span>{ 
+  <span class="hljs-keyword">if</span> (flag) {
+ flag=<span class="hljs-keyword">false</span>;
+}
+<span class="hljs-keyword">else</span>{
+    flag=<span class="hljs-keyword">true</span>;
+}
+<span class="hljs-comment">//обработчик вашего прерывания </span>
+}   
+<span class="hljs-comment">//****************обработчик прерывания******************** </span>
+ISR(TIMER2_OVF_vect)  
+{ 
+    TCNT2 = tcnt2; 
+    MyInterupt(); 
+} </code><br>
+<br>
+Он как бы работает и делает то, что надо. Почти.<br>
+Хочу попросить исправить его так, что бы:<br>
+ — можно было выбирать таймер. Т.е. какие значения надо писать для каких таймеров? Если правильно понимаю — то в этой строчке выбирается таймер и режим его работы<br>
+<code class="hljs cpp"> TIMSK2 &amp;= ~(<span class="hljs-number">1</span>&lt;&lt;TOIE2); <span class="hljs-comment">//разрешения прерывания по переполнению таймера/счетчика Т2 </span>
+</code><br>
+Но нам для изменения (плавного) частоты его работы надо задать не переполнение, а, видимо, совпадение с определенным значением и менять это значение?<br>
+<br>
+И не совсем понятно как привязывается обработчик прерывания к конкретному счетчику<br>
+<code class="hljs markdown">//<span class="hljs-strong">*****</span><span class="hljs-strong">*****</span><span class="hljs-strong">*****</span><span class="hljs-emphasis">*обработчик прерывания*</span><span class="hljs-strong">*****</span><span class="hljs-strong">*****</span><span class="hljs-strong">*****</span><span class="hljs-emphasis">***</span>*
+29
+ISR(TIMER2<span class="hljs-emphasis">_OVF_</span>vect) 
+30
+{
+31
+<span class="hljs-code">    TCNT2 = tcnt2;</span>
+32
+<span class="hljs-code">    MyInterupt();</span>
+33
+}
+</code><br>
+<br>
+В общем мне нужен скетч с подробным комментариями вида:<br>
+ — вот тут мы выбираем таймер — значения для таймера 1, 2, 3 надо ввести такие-то<br>
+ — вот тут мы задаем скорость работы — значения от и до…<br>
+ — вот тут мы включаем прерывание (вкл такое-то значение, выкл такое-то)<br>
+ — вот тут мы цепляем обработчик на такое-то прерывания. Значения такие-то будут для таких-то таймеров.<br>
+<br>
+Готов отблагодарить любым возможным способом включая финансовый.  </div>
+      <ul class="question__attrs inline-list">
+      <li class="inline-list__item inline-list__item_bullet">
+        <span class="question__pub-date">
+          Вопрос задан
+          <time pubdate="" itemprop="dateCreated" datetime="2013-07-07 14:28:54" title="Дата публикации: 07 июля 2013, в 14:28">
+            более трёх лет назад          </time>
+        </span>
+      </li>
+              <li class="inline-list__item inline-list__item_bullet">
+          <span class="question__views-count question__views-count_full">
+            <meta itemprop="interactionCount" content="12439 views">
+            12439             просмотров          </span>
+        </li>
+                </ul>
+    </div>
+    <div class="question__comments-link">
+        <a class="btn btn_link btn_comments-toggle" href="javascript:void(0)" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы написать комментарий">
+    <span>Комментировать</span>
+  </a>
+    </div>
+    <footer class="buttons-group buttons-group_question">
+        <a class="btn btn_subscribe" href="https://toster.ru/#" role="auth_popup_trigger" title="Подписаться на вопрос" data-value="Чтобы получать уведомления о новых ответах на вопрос.">
+    Подписаться
+          <span class="btn__counter" role="subscribers_count">
+        <meta itemprop="interactionCount" content="4 UserSubscriptions">
+        4      </span>
+          </a>
+        <a class="btn btn_link btn_comments-toggle" href="javascript:void(0)" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы написать комментарий">
+    <span>Комментировать</span>
+  </a>
+            <div class="dropdown dropdown_share" role="dropdown">
+  <button class="btn btn_share" role="dropdown_trigger" data-toggle="dropdown" type="button" title=" Поделиться вопросом">
+    <svg class="icon_svg icon_sharing" viewBox="0 0 32 32">
+      <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_sharing"></use>
+    </svg>
+  </button>
+  <div class="dropdown__menu">
+        <ul class="menu menu_dropdown">
+  <li class="menu__item">
+    <a class="menu__item-link link_fb" href="https://www.facebook.com/sharer/sharer.php?u=https://toster.ru/q/43070" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, &#39;Опубликовать ссылку в Facebook&#39;, &#39;width=640,height=436,toolbar=0,status=0&#39;); ga(&#39;send&#39;, &#39;social&#39;, &#39;facebook&#39;, &#39;share&#39;, &#39;https://toster.ru/q/43070&#39;); return false" target="_blank">
+      Facebook
+    </a>
+  </li>
+  <li class="menu__item menu__item">
+    <a class="menu__item-link link_vk" href="http://vk.com/share.php?url=https://toster.ru/q/43070" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, &#39;Опубликовать ссылку во Вконтакте&#39;, &#39;width=800,height=300&#39;); pages.clearCache(this.href); ga(&#39;send&#39;, &#39;social&#39; &#39;vkontakte&#39;, &#39;share&#39;, &#39;https://toster.ru/q/43070&#39;); return false" target="_blank">
+      Вконтакте
+    </a>
+  </li>
+  <li class="menu__item">
+                  <a class="menu__item-link link_tw" href="http://twitter.com/intent/tweet?text=IIIKochevnikIII%20%D1%81%D0%BF%D1%80%D0%B0%D1%88%D0%B8%D0%B2%D0%B0%D0%B5%D1%82%20%C2%AB%D0%9F%D0%BE%D0%BC%D0%BE%D0%B3%D0%B8%D1%82%D0%B5+%D1%81+%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%D0%BC%D0%B8+%D0%BF%D0%BE+%D1%82%D0%B0%D0%B9%D0%BC%D0%B5%D1%80%D0%B0%D0%BC+Arduino+MEGA%C2%BB%20https://toster.ru/q/43070+via+@toster_ru+%23toster" onclick="ga(&#39;send&#39;, &#39;social&#39;, &#39;twitter&#39;, &#39;tweet&#39;, &#39;https://toster.ru/q/43070&#39;);" title="Опубликовать ссылку в Twitter" target="_blank">
+      Twitter
+    </a>
+  </li>
+  <li class="menu__item">
+    <a class="menu__item-link link_gp" href="https://plus.google.com/share?url=https://toster.ru/q/43070" onclick="window.open(this.href, &#39;Опубликовать ссылку в Google Plus&#39;, &#39;width=800,height=300&#39;); ga(&#39;send&#39;, &#39;social&#39;, &#39;gplus&#39;, &#39;share&#39;, &#39;https://toster.ru/q/43070&#39;); return false" target="_blank">
+      Google
+    </a>
+  </li>
+</ul>
+  </div>
+</div>
+    </footer>
+    <div class="question__comments hidden" role="question_comments">
+  <ul class="content-list content-list_comments empty" role="question_comments_list">
+      </ul>
+  </div>
+  </div>
+      <div class="adsbygoogle_wrap adsbygoogle_desktop">
+  <!-- Yandex.RTB R-A-149488-8 -->
+  <div id="yandex_rtb_R-A-149488-8"></div>
+  <script type="text/javascript">
+    (function(w, d, n, s, t) {
+      w[n] = w[n] || [];
+      w[n].push(function() {
+        Ya.Context.AdvManager.render({
+          blockId: "R-A-149488-8",
+          renderTo: "yandex_rtb_R-A-149488-8",
+          async: true
+        });
+      });
+      t = d.getElementsByTagName("script")[0];
+      s = d.createElement("script");
+      s.type = "text/javascript";
+      s.src = "//an.yandex.ru/system/context.js";
+      s.async = true;
+      t.parentNode.insertBefore(s, t);
+    })(this, this.document, "yandexContextAsyncCallbacks");
+  </script>
+  
+</div>
+      <div class="adsbygoogle_wrap adsbygoogle_mobile">
+  <!-- Yandex.RTB R-A-149488-12 -->
+  <div id="yandex_rtb_R-A-149488-12"></div>
+  <script type="text/javascript">
+    (function(w, d, n, s, t) {
+        w[n] = w[n] || [];
+        w[n].push(function() {
+            Ya.Context.AdvManager.render({
+                blockId: "R-A-149488-12",
+                renderTo: "yandex_rtb_R-A-149488-12",
+                async: true
+            });
+        });
+        t = d.getElementsByTagName("script")[0];
+        s = d.createElement("script");
+        s.type = "text/javascript";
+        s.src = "//an.yandex.ru/system/context.js";
+        s.async = true;
+        t.parentNode.insertBefore(s, t);
+    })(this, this.document, "yandexContextAsyncCallbacks");
+  </script>
+  
+</div>
+  <div class="question__additionals">
+        <div class="section section_solutions  " id="solutions" role="solutions_section">
+                  <header class="section-header">
+  <strong class="section-header__title">
+    Решения вопроса          <span class="section-header__counter" role="answers_counter">1</span>
+          </strong>
+</header>
+      <ul class="content-list content-list_answers" id="solutions_list">
+        <li class="content-list__item" role="answer_item " id="answer_item_163184">
+    <div class="answer_wrapper " id="answer_163184" role="toggle_delete_answer" itemprop="suggestedAnswer acceptedAnswer" itemscope="" itemtype="http://schema.org/Answer">
+      <article class="answer answer_solution" data-created_at="1373224547">
+  <header class="answer__header">
+    <div class="user-summary " itemprop="creator" itemscope="" itemtype="http://schema.org/Person">
+  <a class="user-summary__avatar" href="https://toster.ru/user/Ocelot">
+    <meta itemprop="image" content="//habrastorage.org/getpro/toster/avatars/e01/0f7/094/e010f70940a5e28f22a7a1c44d3f8326.jpg">
+      <img src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(4)" alt="Ocelot">
+  </a>
+  <div class="user-summary__desc">
+    <a class="user-summary__name" href="https://toster.ru/user/Ocelot" itemprop="url">
+      <meta itemprop="name" content="Ocelot">
+      Ocelot    </a>
+    <span class="user-summary__nickname">
+      <meta itemprop="alternateName" content="Ocelot">
+      @Ocelot    </span>
+      </div>
+</div>
+  </header>
+  <div class="answer__body">
+        <div class="answer__body_inner">
+      <div class="answer__text" itemprop="text">
+        <pre><code class="cpp hljs"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span>
+</span>{
+<span class="hljs-comment">//------ Timer0 ----------</span>
+TCCR0A = (<span class="hljs-number">1</span>&lt;&lt;WGM01);   <span class="hljs-comment">// Режим CTC (сброс по совпадению)</span>
+TCCR0B = (<span class="hljs-number">1</span>&lt;&lt;CS00);    <span class="hljs-comment">// Тактирование от CLK.</span>
+                       <span class="hljs-comment">// Если нужен предделитель :</span>
+<span class="hljs-comment">// TCCR0B = (1&lt;&lt;CS01);           // CLK/8</span>
+<span class="hljs-comment">// TCCR0B = (1&lt;&lt;CS00)|(1&lt;&lt;CS01); // CLK/64</span>
+<span class="hljs-comment">// TCCR0B = (1&lt;&lt;CS02);           // CLK/256</span>
+<span class="hljs-comment">// TCCR0B = (1&lt;&lt;CS00)|(1&lt;&lt;CS02); // CLK/1024</span>
+
+OCR0A = <span class="hljs-number">123</span>;            <span class="hljs-comment">// Верхняя граница счета. Диапазон от 0 до 255.</span>
+                        <span class="hljs-comment">// Частота прерываний будет = Fclk/(N*(1+OCR0A)) </span>
+                        <span class="hljs-comment">// где N - коэф. предделителя (1, 8, 64, 256 или 1024)</span>
+TIMSK0 = (<span class="hljs-number">1</span>&lt;&lt;OCIE0A);   <span class="hljs-comment">// Разрешить прерывание по совпадению</span>
+
+<span class="hljs-comment">//------ Timer1 ----------</span>
+TCCR1B = (<span class="hljs-number">1</span>&lt;&lt;WGM12);    <span class="hljs-comment">// Режим CTC (сброс по совпадению)</span>
+TCCR1B |= (<span class="hljs-number">1</span>&lt;&lt;CS10);    <span class="hljs-comment">// Тактирование от CLK.</span>
+                        <span class="hljs-comment">// Если нужен предделитель :</span>
+<span class="hljs-comment">// TCCR1B |= (1&lt;&lt;CS11);           // CLK/8</span>
+<span class="hljs-comment">// TCCR1B |= (1&lt;&lt;CS10)|(1&lt;&lt;CS11); // CLK/64</span>
+<span class="hljs-comment">// TCCR1B |= (1&lt;&lt;CS12);           // CLK/256</span>
+<span class="hljs-comment">// TCCR1B |= (1&lt;&lt;CS10)|(1&lt;&lt;CS12); // CLK/1024</span>
+
+OCR1A = <span class="hljs-number">2678</span>;           <span class="hljs-comment">// Верхняя граница счета. Диапазон от 0 до 65535.</span>
+                        <span class="hljs-comment">// Частота прерываний будет = Fclk/(N*(1+OCR1A)) </span>
+                        <span class="hljs-comment">// где N - коэф. предделителя (1, 8, 64, 256 или 1024)</span>
+TIMSK1 = (<span class="hljs-number">1</span>&lt;&lt;OCIE1A);   <span class="hljs-comment">// Разрешить прерывание по совпадению</span>
+
+<span class="hljs-comment">//------ Timer2 ----------</span>
+TCCR2A = (<span class="hljs-number">1</span>&lt;&lt;WGM21);    <span class="hljs-comment">// Режим CTC (сброс по совпадению)</span>
+TCCR2B = (<span class="hljs-number">1</span>&lt;&lt;CS20);     <span class="hljs-comment">// Тактирование от CLK.</span>
+                        <span class="hljs-comment">// Если нужен предделитель :</span>
+<span class="hljs-comment">// TCCR2B = (1&lt;&lt;CS21);                     // CLK/8</span>
+<span class="hljs-comment">// TCCR2B = (1&lt;&lt;CS20)|(1&lt;&lt;CS21);           // CLK/32</span>
+<span class="hljs-comment">// TCCR2B = (1&lt;&lt;CS22);                     // CLK/64</span>
+<span class="hljs-comment">// TCCR2B = (1&lt;&lt;CS20)|(1&lt;&lt;CS22);           // CLK/128</span>
+<span class="hljs-comment">// TCCR2B = (1&lt;&lt;CS21)|(1&lt;&lt;CS22);           // CLK/256</span>
+<span class="hljs-comment">// TCCR2B = (1&lt;&lt;CS20)|(1&lt;&lt;CS21)|(1&lt;&lt;CS22); // CLK/1024</span>
+
+OCR2A = <span class="hljs-number">234</span>;            <span class="hljs-comment">// Верхняя граница счета. Диапазон от 0 до 255.</span>
+                        <span class="hljs-comment">// Частота прерываний будет = Fclk/(N*(1+OCR2A)) </span>
+                        <span class="hljs-comment">// где N - коэф. предделителя (1, 8, 32, 64, 128, 256 или 1024)</span>
+TIMSK2 = (<span class="hljs-number">1</span>&lt;&lt;OCIE2A);   <span class="hljs-comment">// Разрешить прерывание по совпадению</span>
+
+sei ();                 <span class="hljs-comment">// Глобально разрешить прерывания</span>
+}
+
+ISR (TIMER0_COMPA_vect)
+{
+    <span class="hljs-comment">// Обработчик прерывания таймера 0</span>
+}
+
+ISR (TIMER1_COMPA_vect)
+{
+    <span class="hljs-comment">// Обработчик прерывания таймера 1</span>
+}
+
+ISR (TIMER2_COMPA_vect)
+{
+    <span class="hljs-comment">// Обработчик прерывания таймера 2</span>
+}
+</code></pre><br>
+<br>
+<i>Вместо тега CODE тег SOURCE используй, юный падаван.</i>      </div>
+      <div class="answer__date">
+        Ответ написан
+        <a class="date" href="https://toster.ru/answer?answer_id=163184#answers_list_answer">
+          <time itemprop="dateCreated" datetime="2013-07-07 22:15:47" title="Дата публикации: 07 июля 2013, в 22:15">
+            более трёх лет назад          </time>
+        </a>
+      </div>
+      <div class="answer__comments-link" role="mobile_answers_link">
+          <a class="btn btn_link btn_comments-toggle" href="javascript:void(0)" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы написать комментарий">
+    <span>Комментировать</span>
+  </a>
+      </div>
+          </div>
+    <svg class="icon_svg icon_check_answer" viewBox="0 0 45 32">
+      <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_check"></use>
+    </svg>
+  </div>
+</article>
+      <footer class="buttons-group buttons-group_answer" role="desktop_answers_link">
+          <a class="btn btn_like" href="javascript:void(0);" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы поблагодарить автора ответа.">
+    Нравится
+    <meta itemprop="interactionCount" content="4 UserLikes">
+    <span class="btn__counter" role="likes_count">4</span>  </a>
+                  <a class="btn btn_link btn_comments-toggle" href="javascript:void(0)" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы написать комментарий">
+    <span>Комментировать</span>
+  </a>
+                <div class="dropdown dropdown_share" role="dropdown">
+  <button class="btn btn_share" role="dropdown_trigger" data-toggle="dropdown" type="button" title=" Поделиться ответом">
+    <svg class="icon_svg icon_sharing" viewBox="0 0 32 32">
+      <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_sharing"></use>
+    </svg>
+  </button>
+  <div class="dropdown__menu">
+        <ul class="menu menu_dropdown">
+  <li class="menu__item">
+    <a class="menu__item-link link_fb" href="https://www.facebook.com/sharer/sharer.php?u=https://toster.ru/answer?answer_id=163184" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, &#39;Опубликовать ссылку в Facebook&#39;, &#39;width=640,height=436,toolbar=0,status=0&#39;); ga(&#39;send&#39;, &#39;social&#39;, &#39;facebook&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=163184&#39;); return false" target="_blank">
+      Facebook
+    </a>
+  </li>
+  <li class="menu__item menu__item">
+    <a class="menu__item-link link_vk" href="http://vk.com/share.php?url=https://toster.ru/answer?answer_id=163184" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, &#39;Опубликовать ссылку во Вконтакте&#39;, &#39;width=800,height=300&#39;); pages.clearCache(this.href); ga(&#39;send&#39;, &#39;social&#39; &#39;vkontakte&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=163184&#39;); return false" target="_blank">
+      Вконтакте
+    </a>
+  </li>
+  <li class="menu__item">
+                      <a class="menu__item-link link_tw" href="http://twitter.com/intent/tweet?text=Ocelot%20%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B8%D0%BB%20%D0%BD%D0%B0%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%C2%AB%D0%9F%D0%BE%D0%BC%D0%BE%D0%B3%D0%B8%D1%82%D0%B5+%D1%81+%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%D0%BC%D0%B8+%D0%BF%D0%BE+%D1%82%D0%B0%D0%B9%D0%BC%D0%B5%D1%80%D0%B0%D0%BC+Arduino+MEGA%C2%BB%20https://toster.ru/answer?answer_id=163184+via+@toster_ru+%23toster" onclick="ga(&#39;send&#39;, &#39;social&#39;, &#39;twitter&#39;, &#39;tweet&#39;, &#39;https://toster.ru/answer?answer_id=163184&#39;);" title="Опубликовать ссылку в Twitter" target="_blank">
+      Twitter
+    </a>
+  </li>
+  <li class="menu__item">
+    <a class="menu__item-link link_gp" href="https://plus.google.com/share?url=https://toster.ru/answer?answer_id=163184" onclick="window.open(this.href, &#39;Опубликовать ссылку в Google Plus&#39;, &#39;width=800,height=300&#39;); ga(&#39;send&#39;, &#39;social&#39;, &#39;gplus&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=163184&#39;); return false" target="_blank">
+      Google
+    </a>
+  </li>
+</ul>
+  </div>
+</div>
+      </footer>
+          </div>
+  </li>
+    </ul>
+    </div>
+    <a class="question__invate-expert" href="https://toster.ru/#" role="auth_popup_trigger" data-value="Чтобы пригласить эксперта, который сможет ответить на вопрос" data-question="43070">
+      Пригласить эксперта
+    </a>
+                <div class="section section_answers " id="answers" role="answers_section ">
+      <meta itemprop="answerCount" content="4">
+                  <header class="section-header">
+  <strong class="section-header__title">
+    Ответы на вопрос          <span class="section-header__counter" role="answers_counter">3</span>
+          </strong>
+</header>
+      <ul class="content-list content-list_answers" id="answers_list">
+        <li class="content-list__item" role="answer_item " id="answer_item_163432">
+    <div class="answer_wrapper " id="answer_163432" role="toggle_delete_answer" itemprop="suggestedAnswer " itemscope="" itemtype="http://schema.org/Answer">
+      <article class="answer " data-created_at="1373369638">
+  <header class="answer__header">
+    <div class="user-summary " itemprop="creator" itemscope="" itemtype="http://schema.org/Person">
+  <a class="user-summary__avatar" href="https://toster.ru/user/svd71">
+    <meta itemprop="image" content="//habrastorage.org/getpro/toster/avatars/f25/4c3/64f/f254c364f5d2def7bac4825e82974b22.png">
+      <img src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(5)" alt="svd71">
+  </a>
+  <div class="user-summary__desc">
+    <a class="user-summary__name" href="https://toster.ru/user/svd71" itemprop="url">
+      <meta itemprop="name" content="svd71">
+      svd71    </a>
+    <span class="user-summary__nickname">
+      <meta itemprop="alternateName" content="svd71">
+      @svd71    </span>
+      </div>
+</div>
+  </header>
+  <div class="answer__body">
+        <div class="answer__body_inner">
+      <div class="answer__text" itemprop="text">
+        <blockquote>можно было выбирать таймер. Т.е. какие значения надо писать для каких таймеров? Если правильно понимаю — то в этой строчке выбирается таймер и режим его работы</blockquote><br>
+<br>
+В зависимости от аппаратной реализации на конкретной модели микроконтроллера есть несколько таймеров. У простеньких моделей обычно по 2 (один 8-митный и один 16-битный).<br>
+Указывая какие регистры вы меняете, ведется управление этими таймерами. Обычно цифра в названии регистра указывает какой таймер используется. Каждое прерывание жестко привязано к определенному таймеру в коде коллеге ocelot:<br>
+<pre><code class="cpp hljs">ISR (TIMER&lt;b&gt;<span class="hljs-number">0</span>&lt;/b&gt;_COMPA_vect)
+</code></pre><br>
+указывает, что TIMER<b>0</b>_COMPA_vect — идет для таймера 0.<br>
+<br>
+TIMSK2 &amp;= ~(1&lt;&lt;TOIE2); //разрешения прерывания по переполнению таймера/счетчика Т2<br>
+Но нам для изменения (плавного) частоты его работы надо задать не переполнение, а, видимо, совпадение с определенным значением и менять это значение?<br>
+<br>
+все правильно. Когда таймер отсчитал нужное количество тиков, превышающих установленное пороговое значение (в примере <pre><code class="cpp hljs">OCR0A = <span class="hljs-number">123</span>;            <span class="hljs-comment">// Верхняя граница счета. Диапазон от 0 до 255</span>
+</code></pre><br>
+и <pre><code class="cpp hljs">OCR1A = <span class="hljs-number">2678</span>;           <span class="hljs-comment">// Верхняя граница счета. Диапазон от 0 до 65535</span>
+</code></pre>: тут кстати заметна разница между испольтованием 8и и 16и битных значений). <br>
+Соотвественно и нужно выставлять флаги, какое прерывание должно сработать: по переполнению или по совпадению. я не вижу особой разницы без использования внешнего тактирования между обеими методами, ведь переполнение всего лишь на единицу больше сравнения. Еще одна деталь: при сравнении могут использоваться одновременно 2 значения (А и В, в примере все сделано для А). Поётому прерывание будет вызываться для обейх совпадений.<br>
+<br>
+<blockquote>И не совсем понятно как привязывается обработчик прерывания к конкретному счетчику</blockquote><br>
+Это делается записью значения в регистр TIMSKх (х — номер таимера). В этот регистр записывается байт у кототого выставляются биты нужных прерываний:<br>
+ Bit 2 – TOIE1: Timer/Counter1, Overflow Interrupt Enable — прерывание по переполнению.<br>
+ Bit 3 – OCIE1B: Timer/Counter1, Output Compare B Match Interrupt Enable — по совпаденияу значения В.<br>
+ Bit 4 – OCIE1A: Timer/Counter1, Output Compare A Match Interrupt Enable — по совпадению значения в А.      </div>
+      <div class="answer__date">
+        Ответ написан
+        <a class="date" href="https://toster.ru/answer?answer_id=163432#answers_list_answer">
+          <time itemprop="dateCreated" datetime="2013-07-09 14:33:58" title="Дата публикации: 09 июля 2013, в 14:33">
+            более трёх лет назад          </time>
+        </a>
+      </div>
+      <div class="answer__comments-link" role="mobile_answers_link">
+          <a class="btn btn_link btn_comments-toggle" href="https://toster.ru/answer?answer_id=163432#comments_list_163432" id="reply_answer_comment_link_163432" title="Написать комментарий" role="toggle_answer_comments">
+    <span>
+              <meta itemprop="interactionCount" content="1 UserComments">
+        <strong>
+          1        </strong>
+        комментарий          </span>
+  </a>
+      </div>
+          </div>
+    <svg class="icon_svg icon_check_answer" viewBox="0 0 45 32">
+      <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_check"></use>
+    </svg>
+  </div>
+</article>
+      <footer class="buttons-group buttons-group_answer" role="desktop_answers_link">
+          <a class="btn btn_like" href="javascript:void(0);" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы поблагодарить автора ответа.">
+    Нравится
+    <meta itemprop="interactionCount" content="0 UserLikes">
+      </a>
+                  <a class="btn btn_link btn_comments-toggle" href="https://toster.ru/answer?answer_id=163432#comments_list_163432" id="reply_answer_comment_link_163432" title="Написать комментарий" role="toggle_answer_comments">
+    <span>
+              <meta itemprop="interactionCount" content="1 UserComments">
+        <strong>
+          1        </strong>
+        комментарий          </span>
+  </a>
+                <div class="dropdown dropdown_share" role="dropdown">
+  <button class="btn btn_share" role="dropdown_trigger" data-toggle="dropdown" type="button" title=" Поделиться ответом">
+    <svg class="icon_svg icon_sharing" viewBox="0 0 32 32">
+      <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_sharing"></use>
+    </svg>
+  </button>
+  <div class="dropdown__menu">
+        <ul class="menu menu_dropdown">
+  <li class="menu__item">
+    <a class="menu__item-link link_fb" href="https://www.facebook.com/sharer/sharer.php?u=https://toster.ru/answer?answer_id=163432" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, &#39;Опубликовать ссылку в Facebook&#39;, &#39;width=640,height=436,toolbar=0,status=0&#39;); ga(&#39;send&#39;, &#39;social&#39;, &#39;facebook&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=163432&#39;); return false" target="_blank">
+      Facebook
+    </a>
+  </li>
+  <li class="menu__item menu__item">
+    <a class="menu__item-link link_vk" href="http://vk.com/share.php?url=https://toster.ru/answer?answer_id=163432" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, &#39;Опубликовать ссылку во Вконтакте&#39;, &#39;width=800,height=300&#39;); pages.clearCache(this.href); ga(&#39;send&#39;, &#39;social&#39; &#39;vkontakte&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=163432&#39;); return false" target="_blank">
+      Вконтакте
+    </a>
+  </li>
+  <li class="menu__item">
+                      <a class="menu__item-link link_tw" href="http://twitter.com/intent/tweet?text=svd71%20%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B8%D0%BB%20%D0%BD%D0%B0%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%C2%AB%D0%9F%D0%BE%D0%BC%D0%BE%D0%B3%D0%B8%D1%82%D0%B5+%D1%81+%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%D0%BC%D0%B8+%D0%BF%D0%BE+%D1%82%D0%B0%D0%B9%D0%BC%D0%B5%D1%80%D0%B0%D0%BC+Arduino+MEGA%C2%BB%20https://toster.ru/answer?answer_id=163432+via+@toster_ru+%23toster" onclick="ga(&#39;send&#39;, &#39;social&#39;, &#39;twitter&#39;, &#39;tweet&#39;, &#39;https://toster.ru/answer?answer_id=163432&#39;);" title="Опубликовать ссылку в Twitter" target="_blank">
+      Twitter
+    </a>
+  </li>
+  <li class="menu__item">
+    <a class="menu__item-link link_gp" href="https://plus.google.com/share?url=https://toster.ru/answer?answer_id=163432" onclick="window.open(this.href, &#39;Опубликовать ссылку в Google Plus&#39;, &#39;width=800,height=300&#39;); ga(&#39;send&#39;, &#39;social&#39;, &#39;gplus&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=163432&#39;); return false" target="_blank">
+      Google
+    </a>
+  </li>
+</ul>
+  </div>
+</div>
+      </footer>
+            <div class="answer__comments hidden" id="answer_comments_163432" role="answer_comments">
+      <ul class="content-list content-list_comments " role="answer_comments_list" id="comments_list_163432" itemscope="" itemtype="http://schema.org/UserComments">
+                    <li class="content-list__item" role="comments_item">
+    <div class="comment " id="comment_205510" role="comment toggle_delete_comment" itemscope="" itemtype="http://schema.org/Comment">
+      <div class="comment__header">
+        <div class="user-summary user-summary_comment" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">
+  <a class="user-summary__avatar" href="https://toster.ru/user/Ocelot">
+    <meta itemprop="image" content="//habrastorage.org/getpro/toster/avatars/e01/0f7/094/e010f70940a5e28f22a7a1c44d3f8326.jpg">
+      <img src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(4)" alt="Ocelot">
+  </a>
+  <div class="user-summary__desc">
+    <a class="user-summary__name" href="https://toster.ru/user/Ocelot" itemprop="url">
+      <meta itemprop="name" content="Ocelot">
+      Ocelot    </a>
+    <span class="user-summary__nickname">
+      <meta itemprop="alternateName" content="Ocelot">
+      @Ocelot    </span>
+      </div>
+</div>
+      </div>
+      <div class="comment__body">
+                <div class="comment__body_inner">
+          <div class="comment__text" itemprop="about text">
+            Сейчас запутаете человека.<br>
+<br>
+&gt;по переполнению или по совпадению. я не вижу особой разницы<br>
+Разница есть. По переполнению можно генерировать прерывания каждые 256 тактов (для 8-битного счетчика). По сравнению — каждые 2, каждые 3, 4… 254, 255 или каждые 256 тактов по выбору. Естественно, при условии сброса по совпадению. То есть режим CTC дает возможность гораздо точнее настраивать временной интервал.<br>
+<br>
+&gt; при сравнении могут использоваться одновременно 2 значения <br>
+Могут-то могут, но оба прерывания будут следовать с одной и той же частотой, просто одно раньше, другое позже. Да, это иногда полезно, но по условиям задачи нужно немного другое.          </div>
+          <div class="comment__date">
+            Написано
+            <a class="date date_comment" href="https://toster.ru/q/43070#comment_205510">
+              <time title="Дата публикации: 09 июля 2013, в 20:20" itemprop="dateCreated" datetime="2013-07-09 20:20:22">
+                более трёх лет назад              </time>
+            </a>
+          </div>
+        </div>
+      </div>
+          </div>
+  </li>
+                      </ul>
+          </div>
+        </div>
+  </li>
+          <li class="content-list__item" role="answer_item " id="answer_item_163548">
+    <div class="answer_wrapper " id="answer_163548" role="toggle_delete_answer" itemprop="suggestedAnswer " itemscope="" itemtype="http://schema.org/Answer">
+      <article class="answer " data-created_at="1373440566">
+  <header class="answer__header">
+    <div class="user-summary " itemprop="creator" itemscope="" itemtype="http://schema.org/Person">
+  <a class="user-summary__avatar" href="https://toster.ru/user/IIIKochevnikIII">
+    <meta itemprop="image" content="//habrastorage.org/getpro/toster/avatars/767/c01/607/767c01607590bcd810ef04dd53164162.jpg">
+      <img src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy" alt="IIIKochevnikIII">
+  </a>
+  <div class="user-summary__desc">
+    <a class="user-summary__name" href="https://toster.ru/user/IIIKochevnikIII" itemprop="url">
+      <meta itemprop="name" content="IIIKochevnikIII">
+      IIIKochevnikIII    </a>
+    <span class="user-summary__nickname">
+      <meta itemprop="alternateName" content="IIIKochevnikIII">
+      @IIIKochevnikIII    </span>
+      </div>
+</div>
+  </header>
+  <div class="answer__body">
+        <div class="answer__body_inner">
+      <div class="answer__text" itemprop="text">
+        Спасибо всем большое! Но все оказалось проще — нашел отличную библиотеку<br>
+<a href="https://github.com/carlosrafaelgn/ArduinoTimer/">ардуино таймеров</a>, которая делает все, что надо!      </div>
+      <div class="answer__date">
+        Ответ написан
+        <a class="date" href="https://toster.ru/answer?answer_id=163548#answers_list_answer">
+          <time itemprop="dateCreated" datetime="2013-07-10 10:16:06" title="Дата публикации: 10 июля 2013, в 10:16">
+            более трёх лет назад          </time>
+        </a>
+      </div>
+      <div class="answer__comments-link" role="mobile_answers_link">
+          <a class="btn btn_link btn_comments-toggle" href="javascript:void(0)" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы написать комментарий">
+    <span>Комментировать</span>
+  </a>
+      </div>
+          </div>
+    <svg class="icon_svg icon_check_answer" viewBox="0 0 45 32">
+      <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_check"></use>
+    </svg>
+  </div>
+</article>
+      <footer class="buttons-group buttons-group_answer" role="desktop_answers_link">
+          <a class="btn btn_like" href="javascript:void(0);" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы поблагодарить автора ответа.">
+    Нравится
+    <meta itemprop="interactionCount" content="0 UserLikes">
+      </a>
+                  <a class="btn btn_link btn_comments-toggle" href="javascript:void(0)" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы написать комментарий">
+    <span>Комментировать</span>
+  </a>
+                <div class="dropdown dropdown_share" role="dropdown">
+  <button class="btn btn_share" role="dropdown_trigger" data-toggle="dropdown" type="button" title=" Поделиться ответом">
+    <svg class="icon_svg icon_sharing" viewBox="0 0 32 32">
+      <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_sharing"></use>
+    </svg>
+  </button>
+  <div class="dropdown__menu">
+        <ul class="menu menu_dropdown">
+  <li class="menu__item">
+    <a class="menu__item-link link_fb" href="https://www.facebook.com/sharer/sharer.php?u=https://toster.ru/answer?answer_id=163548" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, &#39;Опубликовать ссылку в Facebook&#39;, &#39;width=640,height=436,toolbar=0,status=0&#39;); ga(&#39;send&#39;, &#39;social&#39;, &#39;facebook&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=163548&#39;); return false" target="_blank">
+      Facebook
+    </a>
+  </li>
+  <li class="menu__item menu__item">
+    <a class="menu__item-link link_vk" href="http://vk.com/share.php?url=https://toster.ru/answer?answer_id=163548" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, &#39;Опубликовать ссылку во Вконтакте&#39;, &#39;width=800,height=300&#39;); pages.clearCache(this.href); ga(&#39;send&#39;, &#39;social&#39; &#39;vkontakte&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=163548&#39;); return false" target="_blank">
+      Вконтакте
+    </a>
+  </li>
+  <li class="menu__item">
+                      <a class="menu__item-link link_tw" href="http://twitter.com/intent/tweet?text=IIIKochevnikIII%20%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B8%D0%BB%20%D0%BD%D0%B0%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%C2%AB%D0%9F%D0%BE%D0%BC%D0%BE%D0%B3%D0%B8%D1%82%D0%B5+%D1%81+%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%D0%BC%D0%B8+%D0%BF%D0%BE+%D1%82%D0%B0%D0%B9%D0%BC%D0%B5%D1%80%D0%B0%D0%BC+Arduino+MEGA%C2%BB%20https://toster.ru/answer?answer_id=163548+via+@toster_ru+%23toster" onclick="ga(&#39;send&#39;, &#39;social&#39;, &#39;twitter&#39;, &#39;tweet&#39;, &#39;https://toster.ru/answer?answer_id=163548&#39;);" title="Опубликовать ссылку в Twitter" target="_blank">
+      Twitter
+    </a>
+  </li>
+  <li class="menu__item">
+    <a class="menu__item-link link_gp" href="https://plus.google.com/share?url=https://toster.ru/answer?answer_id=163548" onclick="window.open(this.href, &#39;Опубликовать ссылку в Google Plus&#39;, &#39;width=800,height=300&#39;); ga(&#39;send&#39;, &#39;social&#39;, &#39;gplus&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=163548&#39;); return false" target="_blank">
+      Google
+    </a>
+  </li>
+</ul>
+  </div>
+</div>
+      </footer>
+          </div>
+  </li>
+          <li class="content-list__item" role="answer_item " id="answer_item_470359">
+    <div class="answer_wrapper " id="answer_470359" role="toggle_delete_answer" itemprop="suggestedAnswer " itemscope="" itemtype="http://schema.org/Answer">
+      <article class="answer " data-created_at="1420353886">
+  <header class="answer__header">
+    <div class="user-summary " itemprop="creator" itemscope="" itemtype="http://schema.org/Person">
+  <a class="user-summary__avatar" href="https://toster.ru/user/vanyamba-electronics">
+    <meta itemprop="image" content="https://toster.ru/images/no_avatar.png">
+      <svg class="icon_userpic" viewBox="0 0 32 32">
+    <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_userpic"></use>
+  </svg>
+  </a>
+  <div class="user-summary__desc">
+    <a class="user-summary__name" href="https://toster.ru/user/vanyamba-electronics" itemprop="url">
+      <meta itemprop="name" content="vanyamba-electronics">
+      vanyamba-electronics    </a>
+    <span class="user-summary__nickname">
+      <meta itemprop="alternateName" content="vanyamba-electronics">
+      @vanyamba-electronics    </span>
+      </div>
+</div>
+  </header>
+  <div class="answer__body">
+        <div class="answer__body_inner">
+      <div class="answer__text" itemprop="text">
+        <pre><code class="hljs cpp"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> &lt;ve_avr.h&gt; <span class="hljs-comment">// Используется библиотека VEduino</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> "myheader.h"</span>
+
+<span class="hljs-comment">/* 
+ * Эта функция должна быть определена в заголовке myheader.h
+ * чтобы её код не вызывался, а был включен в тело функции-обработчика прерывания.
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">MyInterupt</span><span class="hljs-params">()</span> 
+</span>{ 
+  <span class="hljs-keyword">if</span> (flag) { 
+    flag=<span class="hljs-keyword">false</span>; 
+  } 
+  <span class="hljs-keyword">else</span>{ 
+    flag=<span class="hljs-keyword">true</span>; 
+  } <span class="hljs-comment">//обработчик вашего прерывания </span>
+} 
+
+<span class="hljs-keyword">volatile</span> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> tcnt2;
+<span class="hljs-keyword">volatile</span> <span class="hljs-keyword">bool</span> flag;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span>
+</span>{
+  flag = <span class="hljs-keyword">true</span>;
+  DEV_TICTRL2.overflowIntDisable();
+  DEV_TIMER2.setWaveGenMode(Timer2::Normal);
+  DEV_TIMER2.setPrescaler(Prescaler2::Prescaler64);
+  DEV_ASYNCST.setTimer2ClkSrc(AsyncStatus::CLKIO);
+  tcnt2 = <span class="hljs-number">1</span>;
+  DEV_TICTRL2.overflowIntEnable();
+  enableInterrupts();
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span> </span>{ } 
+
+<span class="hljs-comment">//****************обработчик прерывания******************** </span>
+ISR(TIMER2_OVF_vect)
+{ 
+  DEV_TIMER2.setCounter(tcnt2); 
+  MyInterupt(); 
+}</code></pre>      </div>
+      <div class="answer__date">
+        Ответ написан
+        <a class="date" href="https://toster.ru/answer?answer_id=470359#answers_list_answer">
+          <time itemprop="dateCreated" datetime="2015-01-04 09:44:46" title="Дата публикации: 04 янв. 2015, в 09:44">
+            более года назад          </time>
+        </a>
+      </div>
+      <div class="answer__comments-link" role="mobile_answers_link">
+          <a class="btn btn_link btn_comments-toggle" href="javascript:void(0)" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы написать комментарий">
+    <span>Комментировать</span>
+  </a>
+      </div>
+          </div>
+    <svg class="icon_svg icon_check_answer" viewBox="0 0 45 32">
+      <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_check"></use>
+    </svg>
+  </div>
+</article>
+      <footer class="buttons-group buttons-group_answer" role="desktop_answers_link">
+          <a class="btn btn_like" href="javascript:void(0);" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы поблагодарить автора ответа.">
+    Нравится
+    <meta itemprop="interactionCount" content="0 UserLikes">
+      </a>
+                  <a class="btn btn_link btn_comments-toggle" href="javascript:void(0)" role="auth_popup_trigger" title="Необходимо авторизоваться на сайте" data-value="Чтобы написать комментарий">
+    <span>Комментировать</span>
+  </a>
+                <div class="dropdown dropdown_share" role="dropdown">
+  <button class="btn btn_share" role="dropdown_trigger" data-toggle="dropdown" type="button" title=" Поделиться ответом">
+    <svg class="icon_svg icon_sharing" viewBox="0 0 32 32">
+      <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_sharing"></use>
+    </svg>
+  </button>
+  <div class="dropdown__menu">
+        <ul class="menu menu_dropdown">
+  <li class="menu__item">
+    <a class="menu__item-link link_fb" href="https://www.facebook.com/sharer/sharer.php?u=https://toster.ru/answer?answer_id=470359" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, &#39;Опубликовать ссылку в Facebook&#39;, &#39;width=640,height=436,toolbar=0,status=0&#39;); ga(&#39;send&#39;, &#39;social&#39;, &#39;facebook&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=470359&#39;); return false" target="_blank">
+      Facebook
+    </a>
+  </li>
+  <li class="menu__item menu__item">
+    <a class="menu__item-link link_vk" href="http://vk.com/share.php?url=https://toster.ru/answer?answer_id=470359" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, &#39;Опубликовать ссылку во Вконтакте&#39;, &#39;width=800,height=300&#39;); pages.clearCache(this.href); ga(&#39;send&#39;, &#39;social&#39; &#39;vkontakte&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=470359&#39;); return false" target="_blank">
+      Вконтакте
+    </a>
+  </li>
+  <li class="menu__item">
+                      <a class="menu__item-link link_tw" href="http://twitter.com/intent/tweet?text=vanyamba-electronics%20%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B8%D0%BB%20%D0%BD%D0%B0%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%C2%AB%D0%9F%D0%BE%D0%BC%D0%BE%D0%B3%D0%B8%D1%82%D0%B5+%D1%81+%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%D0%BC%D0%B8+%D0%BF%D0%BE+%D1%82%D0%B0%D0%B9%D0%BC%D0%B5%D1%80%D0%B0%D0%BC+Arduino+MEGA%C2%BB%20https://toster.ru/answer?answer_id=470359+via+@toster_ru+%23toster" onclick="ga(&#39;send&#39;, &#39;social&#39;, &#39;twitter&#39;, &#39;tweet&#39;, &#39;https://toster.ru/answer?answer_id=470359&#39;);" title="Опубликовать ссылку в Twitter" target="_blank">
+      Twitter
+    </a>
+  </li>
+  <li class="menu__item">
+    <a class="menu__item-link link_gp" href="https://plus.google.com/share?url=https://toster.ru/answer?answer_id=470359" onclick="window.open(this.href, &#39;Опубликовать ссылку в Google Plus&#39;, &#39;width=800,height=300&#39;); ga(&#39;send&#39;, &#39;social&#39;, &#39;gplus&#39;, &#39;share&#39;, &#39;https://toster.ru/answer?answer_id=470359&#39;); return false" target="_blank">
+      Google
+    </a>
+  </li>
+</ul>
+  </div>
+</div>
+      </footer>
+          </div>
+  </li>
+    </ul>
+    </div>
+    <div class="section section_form-answers">
+            <header class="section-header">
+  <strong class="section-header__title">
+    Ваш ответ на вопрос      </strong>
+</header>
+            <div class="empty-block">
+  <div class="empty-block__inner">
+    <h3 class="empty-block__title icon_unauthorized" role="title_replace">
+      Войдите, чтобы написать ответ    </h3>
+              <a class="empty-block__button" href="https://toster.ru/auth/ac?ret=@referer">
+        Войти через TM ID      </a>
+          </div>
+</div>
+    </div>
+          <div class="adsbygoogle_wrap adsbygoogle_mobile adsbygoogle_h_250">
+  <!-- Yandex.RTB R-A-149488-13 -->
+  <div id="yandex_rtb_R-A-149488-13"></div>
+  <script type="text/javascript">
+    (function(w, d, n, s, t) {
+        w[n] = w[n] || [];
+        w[n].push(function() {
+            Ya.Context.AdvManager.render({
+                blockId: "R-A-149488-13",
+                renderTo: "yandex_rtb_R-A-149488-13",
+                async: true
+            });
+        });
+        t = d.getElementsByTagName("script")[0];
+        s = d.createElement("script");
+        s.type = "text/javascript";
+        s.src = "//an.yandex.ru/system/context.js";
+        s.async = true;
+        t.parentNode.insertBefore(s, t);
+    })(this, this.document, "yandexContextAsyncCallbacks");
+  </script>
+  
+</div>
+                        <header class="section-header">
+  <strong class="section-header__title">
+    Похожие вопросы      </strong>
+</header>
+        <ul class="content-list" id="related_questions_43070">
+            <li class="content-list__item" role="content-list_item">
+  <div class="question question_short" itemscope="" itemtype="http://schema.org/Question">
+    <div class="question__content">
+      <div class="question__content_fluid">
+                <nav class="question__tags">
+                      <a class="question__tags-image" href="https://toster.ru/tag/arduino">
+                      <img class="tag__image tag__image_bg" src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(3)" alt="arduino" itemprop="image">
+              </a>
+                                          <ul class="tags-list tags-list_short">
+                            <li class="tags-list__item  tag_632">
+                <a href="https://toster.ru/tag/arduino">
+                  Arduino                </a>
+              </li>
+                              <li class="tags-list__item tags-list__item_more">
+                  +4                  ещё
+                </li>
+                                        </ul>
+                            </nav>
+        <h2 class="question__title" itemprop="name">
+          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/356355" itemprop="url">
+            Что можно сделать с датчиками движения, системами безопасностями, насколько они устарели?          </a>
+        </h2>
+        <ul class="question__attrs inline-list">
+          <li class="inline-list__item inline-list__item_bullet">
+            <span class="question__views-count" title="Количество подписавшихся на вопрос">
+                              <meta itemprop="interactionCount" content="2 subscribers">
+                2                 подписчика                          </span>
+          </li>
+          <li class="inline-list__item inline-list__item_bullet">
+            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 23 сент. 2016, в 16:34" itemprop="dateCreated" datetime="2016-09-23 16:34:22">
+              23 сент.            </time>
+          </li>
+                      <li class="inline-list__item inline-list__item_bullet">
+              <span class="question__views-count">
+                <meta itemprop="interactionCount" content="250 views">
+                250                 просмотров              </span>
+            </li>
+                                      </ul>
+      </div>
+    </div>
+    <div class="question__answers-count ">
+      <a class="mini-counter" href="https://toster.ru/q/356355#answers" title="Количество ответов на вопрос" role="lazy_anchor">
+        <div class="mini-counter__count mini-counter__count_grey">
+                    <span itemprop="answerCount">
+            5          </span>
+        </div>
+        <div class="mini-counter__value">
+          ответов        </div>
+      </a>
+    </div>
+  </div>
+</li>
+          <li class="content-list__item" role="content-list_item">
+  <div class="question question_short" itemscope="" itemtype="http://schema.org/Question">
+    <div class="question__content">
+      <div class="question__content_fluid">
+                <nav class="question__tags">
+                      <a class="question__tags-image" href="https://toster.ru/tag/arduino">
+                      <img class="tag__image tag__image_bg" src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(3)" alt="arduino" itemprop="image">
+              </a>
+                                          <ul class="tags-list tags-list_short">
+                            <li class="tags-list__item  tag_632">
+                <a href="https://toster.ru/tag/arduino">
+                  Arduino                </a>
+              </li>
+                              <li class="tags-list__item tags-list__item_more">
+                  +3                  ещё
+                </li>
+                                        </ul>
+                            </nav>
+        <h2 class="question__title" itemprop="name">
+          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/338353" itemprop="url">
+            Как запустить arduino?          </a>
+        </h2>
+        <ul class="question__attrs inline-list">
+          <li class="inline-list__item inline-list__item_bullet">
+            <span class="question__views-count" title="Количество подписавшихся на вопрос">
+                              <meta itemprop="interactionCount" content="2 subscribers">
+                2                 подписчика                          </span>
+          </li>
+          <li class="inline-list__item inline-list__item_bullet">
+            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 20 июля 2016, в 20:21" itemprop="dateCreated" datetime="2016-07-20 20:21:23">
+              20 июля            </time>
+          </li>
+                      <li class="inline-list__item inline-list__item_bullet">
+              <span class="question__views-count">
+                <meta itemprop="interactionCount" content="350 views">
+                350                 просмотров              </span>
+            </li>
+                                      </ul>
+      </div>
+    </div>
+    <div class="question__answers-count question__answers_has-solution">
+      <a class="mini-counter" href="https://toster.ru/q/338353#answers" title="Количество ответов на вопрос" role="lazy_anchor">
+        <div class="mini-counter__count mini-counter__count_grey">
+                      <svg class="icon_svg icon_check" viewBox="0 0 45 32">
+              <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_check"></use>
+            </svg>
+                              <span itemprop="answerCount">
+            2          </span>
+        </div>
+        <div class="mini-counter__value">
+          ответа        </div>
+      </a>
+    </div>
+  </div>
+</li>
+          <li class="content-list__item" role="content-list_item">
+  <div class="question question_short" itemscope="" itemtype="http://schema.org/Question">
+    <div class="question__content">
+      <div class="question__content_fluid">
+                <nav class="question__tags">
+                      <a class="question__tags-image" href="https://toster.ru/tag/arduino">
+                      <img class="tag__image tag__image_bg" src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(3)" alt="arduino" itemprop="image">
+              </a>
+                                          <ul class="tags-list tags-list_short">
+                            <li class="tags-list__item  tag_632">
+                <a href="https://toster.ru/tag/arduino">
+                  Arduino                </a>
+              </li>
+                              <li class="tags-list__item tags-list__item_more">
+                  +2                  ещё
+                </li>
+                                        </ul>
+                            </nav>
+        <h2 class="question__title" itemprop="name">
+          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/336753" itemprop="url">
+            Как создать USB HID из Arduino?          </a>
+        </h2>
+        <ul class="question__attrs inline-list">
+          <li class="inline-list__item inline-list__item_bullet">
+            <span class="question__views-count" title="Количество подписавшихся на вопрос">
+                              <meta itemprop="interactionCount" content="5 subscribers">
+                5                 подписчиков                          </span>
+          </li>
+          <li class="inline-list__item inline-list__item_bullet">
+            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 14 июля 2016, в 21:27" itemprop="dateCreated" datetime="2016-07-14 21:27:16">
+              14 июля            </time>
+          </li>
+                      <li class="inline-list__item inline-list__item_bullet">
+              <span class="question__views-count">
+                <meta itemprop="interactionCount" content="382 views">
+                382                 просмотра              </span>
+            </li>
+                                      </ul>
+      </div>
+    </div>
+    <div class="question__answers-count ">
+      <a class="mini-counter" href="https://toster.ru/q/336753#answers" title="Количество ответов на вопрос" role="lazy_anchor">
+        <div class="mini-counter__count mini-counter__count_grey">
+                    <span itemprop="answerCount">
+            3          </span>
+        </div>
+        <div class="mini-counter__value">
+          ответа        </div>
+      </a>
+    </div>
+  </div>
+</li>
+          <li class="content-list__item" role="content-list_item">
+  <div class="question question_short" itemscope="" itemtype="http://schema.org/Question">
+    <div class="question__content">
+      <div class="question__content_fluid">
+                <nav class="question__tags">
+                      <a class="question__tags-image" href="https://toster.ru/tag/arduino">
+                      <img class="tag__image tag__image_bg" src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(3)" alt="arduino" itemprop="image">
+              </a>
+                                          <ul class="tags-list tags-list_short">
+                            <li class="tags-list__item  tag_632">
+                <a href="https://toster.ru/tag/arduino">
+                  Arduino                </a>
+              </li>
+                              <li class="tags-list__item tags-list__item_more">
+                  +4                  ещё
+                </li>
+                                        </ul>
+                            </nav>
+        <h2 class="question__title" itemprop="name">
+          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/325220" itemprop="url">
+            Микроконтроллерное устройство диагностики игровых приставок. Какие характеристики можно снимать?          </a>
+        </h2>
+        <ul class="question__attrs inline-list">
+          <li class="inline-list__item inline-list__item_bullet">
+            <span class="question__views-count" title="Количество подписавшихся на вопрос">
+                              <meta itemprop="interactionCount" content="3 subscribers">
+                3                 подписчика                          </span>
+          </li>
+          <li class="inline-list__item inline-list__item_bullet">
+            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 02 июня 2016, в 20:58" itemprop="dateCreated" datetime="2016-06-02 20:58:02">
+              02 июня            </time>
+          </li>
+                      <li class="inline-list__item inline-list__item_bullet">
+              <span class="question__views-count">
+                <meta itemprop="interactionCount" content="280 views">
+                280                 просмотров              </span>
+            </li>
+                                      </ul>
+      </div>
+    </div>
+    <div class="question__answers-count ">
+      <a class="mini-counter" href="https://toster.ru/q/325220#answers" title="Количество ответов на вопрос" role="lazy_anchor">
+        <div class="mini-counter__count mini-counter__count_grey">
+                    <span itemprop="answerCount">
+            4          </span>
+        </div>
+        <div class="mini-counter__value">
+          ответа        </div>
+      </a>
+    </div>
+  </div>
+</li>
+          <li class="content-list__item" role="content-list_item">
+  <div class="question question_short" itemscope="" itemtype="http://schema.org/Question">
+    <div class="question__content">
+      <div class="question__content_fluid">
+                <nav class="question__tags">
+                      <a class="question__tags-image" href="https://toster.ru/tag/arduino">
+                      <img class="tag__image tag__image_bg" src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(3)" alt="arduino" itemprop="image">
+              </a>
+                                          <ul class="tags-list tags-list_short">
+                            <li class="tags-list__item  tag_632">
+                <a href="https://toster.ru/tag/arduino">
+                  Arduino                </a>
+              </li>
+                              <li class="tags-list__item tags-list__item_more">
+                  +3                  ещё
+                </li>
+                                        </ul>
+                            </nav>
+        <h2 class="question__title" itemprop="name">
+          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/324891" itemprop="url">
+            Как реализовать хорошую графику на arduino?          </a>
+        </h2>
+        <ul class="question__attrs inline-list">
+          <li class="inline-list__item inline-list__item_bullet">
+            <span class="question__views-count" title="Количество подписавшихся на вопрос">
+                              <meta itemprop="interactionCount" content="4 subscribers">
+                4                 подписчика                          </span>
+          </li>
+          <li class="inline-list__item inline-list__item_bullet">
+            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 01 июня 2016, в 22:07" itemprop="dateCreated" datetime="2016-06-01 22:07:09">
+              01 июня            </time>
+          </li>
+                      <li class="inline-list__item inline-list__item_bullet">
+              <span class="question__views-count">
+                <meta itemprop="interactionCount" content="931 views">
+                931                 просмотр              </span>
+            </li>
+                                      </ul>
+      </div>
+    </div>
+    <div class="question__answers-count question__answers_has-solution">
+      <a class="mini-counter" href="https://toster.ru/q/324891#answers" title="Количество ответов на вопрос" role="lazy_anchor">
+        <div class="mini-counter__count mini-counter__count_grey">
+                      <svg class="icon_svg icon_check" viewBox="0 0 45 32">
+              <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_check"></use>
+            </svg>
+                              <span itemprop="answerCount">
+            6          </span>
+        </div>
+        <div class="mini-counter__value">
+          ответов        </div>
+      </a>
+    </div>
+  </div>
+</li>
+          <li class="content-list__item" role="content-list_item">
+  <div class="question question_short" itemscope="" itemtype="http://schema.org/Question">
+    <div class="question__content">
+      <div class="question__content_fluid">
+                <nav class="question__tags">
+                      <a class="question__tags-image" href="https://toster.ru/tag/arduino">
+                      <img class="tag__image tag__image_bg" src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(3)" alt="arduino" itemprop="image">
+              </a>
+                                          <ul class="tags-list tags-list_short">
+                            <li class="tags-list__item  tag_632">
+                <a href="https://toster.ru/tag/arduino">
+                  Arduino                </a>
+              </li>
+                              <li class="tags-list__item tags-list__item_more">
+                  +3                  ещё
+                </li>
+                                        </ul>
+                            </nav>
+        <h2 class="question__title" itemprop="name">
+          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/319913" itemprop="url">
+            Есть ли готовый протокол обмена по Serial между Qt и Arduino?          </a>
+        </h2>
+        <ul class="question__attrs inline-list">
+          <li class="inline-list__item inline-list__item_bullet">
+            <span class="question__views-count" title="Количество подписавшихся на вопрос">
+                              <meta itemprop="interactionCount" content="2 subscribers">
+                2                 подписчика                          </span>
+          </li>
+          <li class="inline-list__item inline-list__item_bullet">
+            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 15 мая 2016, в 21:48" itemprop="dateCreated" datetime="2016-05-15 21:48:33">
+              15 мая            </time>
+          </li>
+                      <li class="inline-list__item inline-list__item_bullet">
+              <span class="question__views-count">
+                <meta itemprop="interactionCount" content="313 views">
+                313                 просмотров              </span>
+            </li>
+                                      </ul>
+      </div>
+    </div>
+    <div class="question__answers-count ">
+      <a class="mini-counter" href="https://toster.ru/q/319913#answers" title="Количество ответов на вопрос" role="lazy_anchor">
+        <div class="mini-counter__count mini-counter__count_grey">
+                    <span itemprop="answerCount">
+            1          </span>
+        </div>
+        <div class="mini-counter__value">
+          ответ        </div>
+      </a>
+    </div>
+  </div>
+</li>
+          <li class="content-list__item" role="content-list_item">
+  <div class="question question_short" itemscope="" itemtype="http://schema.org/Question">
+    <div class="question__content">
+      <div class="question__content_fluid">
+                <nav class="question__tags">
+                      <a class="question__tags-image" href="https://toster.ru/tag/arduino">
+                      <img class="tag__image tag__image_bg" src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(3)" alt="arduino" itemprop="image">
+              </a>
+                                          <ul class="tags-list tags-list_short">
+                            <li class="tags-list__item  tag_632">
+                <a href="https://toster.ru/tag/arduino">
+                  Arduino                </a>
+              </li>
+                              <li class="tags-list__item tags-list__item_more">
+                  +1                  ещё
+                </li>
+                                        </ul>
+                            </nav>
+        <h2 class="question__title" itemprop="name">
+          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/315462" itemprop="url">
+            Могу ли я прошить ATmega16 используюя среду Arduino?          </a>
+        </h2>
+        <ul class="question__attrs inline-list">
+          <li class="inline-list__item inline-list__item_bullet">
+            <span class="question__views-count" title="Количество подписавшихся на вопрос">
+                              <meta itemprop="interactionCount" content="1 subscribers">
+                1                 подписчик                          </span>
+          </li>
+          <li class="inline-list__item inline-list__item_bullet">
+            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 28 апр. 2016, в 15:24" itemprop="dateCreated" datetime="2016-04-28 15:24:32">
+              28 апр.            </time>
+          </li>
+                      <li class="inline-list__item inline-list__item_bullet">
+              <span class="question__views-count">
+                <meta itemprop="interactionCount" content="211 views">
+                211                 просмотров              </span>
+            </li>
+                                      </ul>
+      </div>
+    </div>
+    <div class="question__answers-count question__answers_has-solution">
+      <a class="mini-counter" href="https://toster.ru/q/315462#answers" title="Количество ответов на вопрос" role="lazy_anchor">
+        <div class="mini-counter__count mini-counter__count_grey">
+                      <svg class="icon_svg icon_check" viewBox="0 0 45 32">
+              <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_check"></use>
+            </svg>
+                              <span itemprop="answerCount">
+            5          </span>
+        </div>
+        <div class="mini-counter__value">
+          ответов        </div>
+      </a>
+    </div>
+  </div>
+</li>
+          <li class="content-list__item" role="content-list_item">
+  <div class="question question_short" itemscope="" itemtype="http://schema.org/Question">
+    <div class="question__content">
+      <div class="question__content_fluid">
+                <nav class="question__tags">
+                      <a class="question__tags-image" href="https://toster.ru/tag/python">
+                      <img class="tag__image tag__image_bg" src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(6)" alt="python" itemprop="image">
+              </a>
+                                          <ul class="tags-list tags-list_short">
+                            <li class="tags-list__item  tag_340">
+                <a href="https://toster.ru/tag/python">
+                  Python                </a>
+              </li>
+                              <li class="tags-list__item tags-list__item_more">
+                  +2                  ещё
+                </li>
+                                        </ul>
+                            </nav>
+        <h2 class="question__title" itemprop="name">
+          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/315403" itemprop="url">
+            Можно ли STM32 Nucleo и MicroPython board v1.1 прошить с помощью С/С++?          </a>
+        </h2>
+        <ul class="question__attrs inline-list">
+          <li class="inline-list__item inline-list__item_bullet">
+            <span class="question__views-count" title="Количество подписавшихся на вопрос">
+                              <meta itemprop="interactionCount" content="1 subscribers">
+                1                 подписчик                          </span>
+          </li>
+          <li class="inline-list__item inline-list__item_bullet">
+            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 28 апр. 2016, в 12:18" itemprop="dateCreated" datetime="2016-04-28 12:18:13">
+              28 апр.            </time>
+          </li>
+                      <li class="inline-list__item inline-list__item_bullet">
+              <span class="question__views-count">
+                <meta itemprop="interactionCount" content="216 views">
+                216                 просмотров              </span>
+            </li>
+                                      </ul>
+      </div>
+    </div>
+    <div class="question__answers-count question__answers_has-solution">
+      <a class="mini-counter" href="https://toster.ru/q/315403#answers" title="Количество ответов на вопрос" role="lazy_anchor">
+        <div class="mini-counter__count mini-counter__count_grey">
+                      <svg class="icon_svg icon_check" viewBox="0 0 45 32">
+              <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_check"></use>
+            </svg>
+                              <span itemprop="answerCount">
+            2          </span>
+        </div>
+        <div class="mini-counter__value">
+          ответа        </div>
+      </a>
+    </div>
+  </div>
+</li>
+          <li class="content-list__item" role="content-list_item">
+  <div class="question question_short" itemscope="" itemtype="http://schema.org/Question">
+    <div class="question__content">
+      <div class="question__content_fluid">
+                <nav class="question__tags">
+                      <a class="question__tags-image" href="https://toster.ru/tag/arduino">
+                      <img class="tag__image tag__image_bg" src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/proxy(3)" alt="arduino" itemprop="image">
+              </a>
+                                          <ul class="tags-list tags-list_short">
+                            <li class="tags-list__item  tag_632">
+                <a href="https://toster.ru/tag/arduino">
+                  Arduino                </a>
+              </li>
+                              <li class="tags-list__item tags-list__item_more">
+                  +2                  ещё
+                </li>
+                                        </ul>
+                            </nav>
+        <h2 class="question__title" itemprop="name">
+          <a class="question__title-link question__title-link_list" href="https://toster.ru/q/312203" itemprop="url">
+            С чего начать в программировании микроконтроллеров?          </a>
+        </h2>
+        <ul class="question__attrs inline-list">
+          <li class="inline-list__item inline-list__item_bullet">
+            <span class="question__views-count" title="Количество подписавшихся на вопрос">
+                              <meta itemprop="interactionCount" content="27 subscribers">
+                27                 подписчиков                          </span>
+          </li>
+          <li class="inline-list__item inline-list__item_bullet">
+            <time class="question__date question__date_publish" pubdate="" title="Дата публикации: 18 апр. 2016, в 13:09" itemprop="dateCreated" datetime="2016-04-18 13:09:41">
+              18 апр.            </time>
+          </li>
+                      <li class="inline-list__item inline-list__item_bullet">
+              <span class="question__views-count">
+                <meta itemprop="interactionCount" content="2695 views">
+                2695                 просмотров              </span>
+            </li>
+                                      </ul>
+      </div>
+    </div>
+    <div class="question__answers-count question__answers_has-solution">
+      <a class="mini-counter" href="https://toster.ru/q/312203#answers" title="Количество ответов на вопрос" role="lazy_anchor">
+        <div class="mini-counter__count mini-counter__count_grey">
+                      <svg class="icon_svg icon_check" viewBox="0 0 45 32">
+              <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_check"></use>
+            </svg>
+                              <span itemprop="answerCount">
+            8          </span>
+        </div>
+        <div class="mini-counter__value">
+          ответов        </div>
+      </a>
+    </div>
+  </div>
+</li>
+      <li class="content-list__item content-list__item_more" role="related_replace">
+    <a class="btn btn_outline_grey" role="related_more" data-remote="" href="https://toster.ru/questions/related?question_id=43070&amp;skip=10">
+      <span class="more">Показать ещё</span>
+      <span class="load">Загружается…</span>
+    </a>
+  </li>
+  </ul>
+                <dl class="side-projects" id="moikrug_block">
+    <dt class="section-header section-header_side-projects">
+      <a class="section-header__title" href="http://moikrug.ru/?utm_source=tm_toster&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">
+        Вакансии с Моего Круга
+      </a>
+      <a class="section-header__link_all" href="http://moikrug.ru/?utm_source=tm_toster&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">
+        Все вакансии
+      </a>
+    </dt>
+    <dd class="side-projects__content">
+      <ul class="content-list">
+                  <li class="content-list__item">
+            <div class="vacancy ">
+              <div class="vacancy__company-name">
+                                  <a href="https://moikrug.ru/companies/adidas?utm_source=tm_toster&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">
+                    <strong>adidas Group</strong>
+                  </a>
+                                              </div>
+              <div class="vacancy__title">
+                <a href="https://moikrug.ru/vacancies/1000029168?utm_source=tm_toster&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">CRM Support Specialist (L2)</a>
+              </div>
+                          </div>
+          </li>
+                          <li class="content-list__item">
+            <div class="vacancy ">
+              <div class="vacancy__company-name">
+                                  <a href="https://moikrug.ru/companies/interweb?utm_source=tm_toster&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">
+                    <strong>Interweb</strong>
+                  </a>
+                                              </div>
+              <div class="vacancy__title">
+                <a href="https://moikrug.ru/vacancies/1000029167?utm_source=tm_toster&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">Системный администратор</a>
+              </div>
+                              <ul class="vacancy__attrs inline-list">
+                                      <li class="inline-list__item inline-list__item_bullet">
+                      <span class="inline-list__value">Томск</span>
+                    </li>
+                                                                          <li class="inline-list__item inline-list__item_bullet">
+                      <span class="inline-list__value">Полный рабочий день</span>
+                    </li>
+                                                                          <li class="inline-list__item inline-list__item_bullet">
+                      <span class="inline-list__value">от 90 000 руб.</span>
+                    </li>
+                                                    </ul>
+                                        </div>
+          </li>
+                          <li class="content-list__item">
+            <div class="vacancy ">
+              <div class="vacancy__company-name">
+                                  <a href="https://moikrug.ru/companies/artlog?utm_source=tm_toster&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">
+                    <strong>Артлог</strong>
+                  </a>
+                                              </div>
+              <div class="vacancy__title">
+                <a href="https://moikrug.ru/vacancies/1000029165?utm_source=tm_toster&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">Senior Ruby on Rails Developer</a>
+              </div>
+                          </div>
+          </li>
+                          <li class="content-list__item">
+            <div class="vacancy ">
+              <div class="vacancy__company-name">
+                                  <a href="https://moikrug.ru/companies/glavzakupki?utm_source=tm_toster&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">
+                    <strong>ГлавЗакупки</strong>
+                  </a>
+                                              </div>
+              <div class="vacancy__title">
+                <a href="https://moikrug.ru/vacancies/1000029163?utm_source=tm_toster&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">Web-дизайнер / IT-специалист</a>
+              </div>
+                              <ul class="vacancy__attrs inline-list">
+                                      <li class="inline-list__item inline-list__item_bullet">
+                      <span class="inline-list__value">Москва</span>
+                    </li>
+                                                                          <li class="inline-list__item inline-list__item_bullet">
+                      <span class="inline-list__value">Полный рабочий день</span>
+                    </li>
+                                                                          <li class="inline-list__item inline-list__item_bullet">
+                      <span class="inline-list__value">от 60 000 руб.</span>
+                    </li>
+                                                    </ul>
+                                        </div>
+          </li>
+                          <li class="content-list__item">
+            <div class="vacancy vacancy_marked">
+              <div class="vacancy__company-name">
+                                  <a href="https://moikrug.ru/companies/advertstar?utm_source=tm_toster&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">
+                    <strong>Advertstar Performance Network</strong>
+                  </a>
+                                              </div>
+              <div class="vacancy__title">
+                <a href="https://moikrug.ru/vacancies/1000029162?utm_source=tm_toster&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">Аккаунт менеджер (Account manager)</a>
+              </div>
+                              <ul class="vacancy__attrs inline-list">
+                                      <li class="inline-list__item inline-list__item_bullet">
+                      <span class="inline-list__value">Санкт-Петербург</span>
+                    </li>
+                                                                          <li class="inline-list__item inline-list__item_bullet">
+                      <span class="inline-list__value">Полный рабочий день</span>
+                    </li>
+                                                                          <li class="inline-list__item inline-list__item_bullet">
+                      <span class="inline-list__value">от 30 000 до 120 000 руб.</span>
+                    </li>
+                                                    </ul>
+                                        </div>
+          </li>
+                        <li class="content-list__item content-list__item_more">
+          <a class="btn btn_outline_grey" href="http://moikrug.ru/?utm_source=tm_toster&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">
+            <span class="more">Ещё вакансии</span>
+          </a>
+        </li>
+      </ul>
+    </dd>
+  </dl>
+          <dl class="side-projects">
+    <dt class="section-header section-header_side-projects">
+      <a class="section-header__title" href="http://freelansim.ru/?utm_source=toster_tm&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">
+        Заказы с Фрилансим
+      </a>
+      <a class="section-header__link_all" href="http://freelansim.ru/?utm_source=toster_tm&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">
+        Все заказы
+      </a>
+    </dt>
+    <dd class="side-projects__content">
+      <ul class="content-list">
+                  <li class="content-list__item freelansim-task_wrap">
+            <div class="freelansim-task ">
+              <div class="freelansim-task_fluid">
+                <div class="freelansim-task__title">
+                  <a href="http://freelansim.ru/tasks/156349?utm_source=toster_tm&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">Yii2 разработчик</a>
+                </div>
+                <ul class="freelansim__meta inline-list">
+                  <li class="inline-list__item inline-list__item_bullet">
+                    <span class="inline-list__value">
+                      2                      отклика                    </span>
+                  </li>
+                  <li class="inline-list__item inline-list__item_bullet">
+                    <span class="inline-list__value">05 окт. 2016, в 08:35</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="freelansim-task__price">
+              Цена договорная            </div>
+          </li>
+                          <li class="content-list__item freelansim-task_wrap">
+            <div class="freelansim-task ">
+              <div class="freelansim-task_fluid">
+                <div class="freelansim-task__title">
+                  <a href="http://freelansim.ru/tasks/156347?utm_source=toster_tm&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">Разработка проекта на Python</a>
+                </div>
+                <ul class="freelansim__meta inline-list">
+                  <li class="inline-list__item inline-list__item_bullet">
+                    <span class="inline-list__value">
+                      0                      откликов                    </span>
+                  </li>
+                  <li class="inline-list__item inline-list__item_bullet">
+                    <span class="inline-list__value">05 окт. 2016, в 08:09</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="freelansim-task__price">
+              Цена договорная            </div>
+          </li>
+                          <li class="content-list__item freelansim-task_wrap">
+            <div class="freelansim-task ">
+              <div class="freelansim-task_fluid">
+                <div class="freelansim-task__title">
+                  <a href="http://freelansim.ru/tasks/156345?utm_source=toster_tm&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">Ищем Python программиста для доработки нашей кастомной CRM</a>
+                </div>
+                <ul class="freelansim__meta inline-list">
+                  <li class="inline-list__item inline-list__item_bullet">
+                    <span class="inline-list__value">
+                      1                      отклик                    </span>
+                  </li>
+                  <li class="inline-list__item inline-list__item_bullet">
+                    <span class="inline-list__value">05 окт. 2016, в 07:46</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="freelansim-task__price">
+              200000 руб./за проект            </div>
+          </li>
+                          <li class="content-list__item freelansim-task_wrap">
+            <div class="freelansim-task ">
+              <div class="freelansim-task_fluid">
+                <div class="freelansim-task__title">
+                  <a href="http://freelansim.ru/tasks/156341?utm_source=toster_tm&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">Ищу Senior DevOps для консультаций </a>
+                </div>
+                <ul class="freelansim__meta inline-list">
+                  <li class="inline-list__item inline-list__item_bullet">
+                    <span class="inline-list__value">
+                      4                      отклика                    </span>
+                  </li>
+                  <li class="inline-list__item inline-list__item_bullet">
+                    <span class="inline-list__value">05 окт. 2016, в 01:14</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="freelansim-task__price">
+              Цена договорная            </div>
+          </li>
+                          <li class="content-list__item freelansim-task_wrap">
+            <div class="freelansim-task ">
+              <div class="freelansim-task_fluid">
+                <div class="freelansim-task__title">
+                  <a href="http://freelansim.ru/tasks/156339?utm_source=toster_tm&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">Ищу Senior DBA (MySQL/Percona) для консультаций</a>
+                </div>
+                <ul class="freelansim__meta inline-list">
+                  <li class="inline-list__item inline-list__item_bullet">
+                    <span class="inline-list__value">
+                      3                      отклика                    </span>
+                  </li>
+                  <li class="inline-list__item inline-list__item_bullet">
+                    <span class="inline-list__value">05 окт. 2016, в 01:11</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="freelansim-task__price">
+              Цена договорная            </div>
+          </li>
+                        <li class="content-list__item content-list__item_more">
+          <a class="btn btn_outline_grey" href="http://freelansim.ru/?utm_source=toster_tm&amp;utm_medium=tm_section&amp;utm_campaign=tm_promo" target="_blank">
+            <span class="more">Ещё заказы</span>
+          </a>
+        </li>
+      </ul>
+    </dd>
+  </dl>
+  </div>
+</div>
+              </main>
+            </div>
+            <aside class="column_sidebar">
+                    <div class="adsbygoogle_wrap adsbygoogle_desktop adsbygoogle_h_250">
+    <div id="yandex_rtb_R-A-149488-7" style="background-color: #fff;"></div>
+    <script type="text/javascript">
+    //<![CDATA[
+      (function(w, d, n, s, t) {
+        var sidebarAdSlot = '149488-7';
+        w[n] = w[n] || [];
+        w[n].push(function() {
+          Ya.Context.AdvManager.render({
+            blockId: 'R-A-' + sidebarAdSlot,
+            renderTo: 'yandex_rtb_R-A-' + sidebarAdSlot,
+            async: true
+          });
+        });
+        t = d.getElementsByTagName("script")[0];
+        s = d.createElement("script");
+        s.type = "text/javascript";
+        s.src = "//an.yandex.ru/system/context.js";
+        s.async = true;
+        t.parentNode.insertBefore(s, t);
+      })(this, this.document, "yandexContextAsyncCallbacks");
+    //]]>
+    </script>
+  </div>
+    <dl class="panel-heading panel-heading_inner" role="most_interest">
+    <dt class="panel-heading__title panel-heading__title_underline">
+      Самое интересное за 24 часа
+    </dt>
+    <dd class="panel-heading__content panel-heading__content_inner">
+      <ul class="content-list content-list_sidebar-block">
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/359246">
+            Как вырасти из программиста в менеджмент?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                9                подписчиков              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                9                ответов              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/359349">
+            Я устал от зоопарка?). Или на чем поднять радиус?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                8                подписчиков              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                4                ответа              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin has_solution" href="https://toster.ru/q/359498">
+            Как запустить стартап-сайт, чтобы не "лег" от наплыва людей и ддос?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                5                подписчиков              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                5                ответов              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/359557">
+            Какие оптимальные настройки памяти и кэша для Squid, при условии что используется мощный компьютер?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                3                подписчика              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                0                ответов              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/359558">
+            Нужен туториал по посадке вёрстки на WP?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                2                подписчика              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                2                ответа              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/359560">
+            Как происходит деплой современного фронтенда?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                5                подписчиков              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                1                ответ              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/359562">
+            Существует ли какой-нибудь "аналог" htmlbook, только для svg?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                4                подписчика              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                1                ответ              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/359572">
+            Как устроиться в штаты на удаленную работу .NET?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                2                подписчика              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                0                ответов              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/359574">
+            Как спроектировать крупный проект по верстке?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                2                подписчика              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                0                ответов              </span>
+            </li>
+          </ul>
+        </li>
+                <li class="content-list__item">
+          <a class="question__title-link question__title_thin " href="https://toster.ru/q/359576">
+            Как реализовывать график с градиентом (background) + линия прогноза?          </a>
+          <ul class="inline-list inline-list_meta-attrs">
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество человек, интересующихся вопросом">
+                2                подписчика              </span>
+            </li>
+            <li class="inline-list__item inline-list__item_bullet">
+              <span title="Количество ответов на вопрос">
+                0                ответов              </span>
+            </li>
+          </ul>
+        </li>
+              </ul>
+    </dd>
+  </dl>
+    <div class="sidebar-block_center is_stuck" role="sticky_banner" style="opacity: 1; position: fixed; top: 0px; width: 300px;">
+    <!-- R-149488-3 Яндекс.RTB-блок  -->
+    <div id="yandex_ad_R-149488-3"></div>
+    <script type="text/javascript">
+      (function(w, d, n, s, t) {
+          w[n] = w[n] || [];
+          w[n].push(function() {
+              Ya.Context.AdvManager.render({
+                  blockId: "R-149488-3",
+                  renderTo: "yandex_ad_R-149488-3",
+                  async: true
+              });
+          });
+          t = d.getElementsByTagName("script")[0];
+          s = d.createElement("script");
+          s.type = "text/javascript";
+          s.src = "//an.yandex.ru/system/context.js";
+          s.async = true;
+          t.parentNode.insertBefore(s, t);
+      })(this, this.document, "yandexContextAsyncCallbacks");
+    </script>
+  </div><div style="position: static; width: 300px; height: 0px; display: block; vertical-align: baseline; float: none;"></div>
+            </aside>
+          </section>
+        </div>
+        <footer class="layout__footer">
+          <div class="layout__footer_inner">
+  <nav class="menu_services">
+    <ul class="menu menu_inline">
+      <li class="menu__item">
+        <a class="menu__item-link" href="http://tmtm.ru/">
+          <span class="copyright_short">© TM</span>
+        </a>
+      </li>
+      <li class="menu__item">
+        <a class="menu__item-link" href="https://toster.ru/info/about">О сайте</a>
+      </li>
+      <li class="menu__item">
+        <a class="menu__item-link" href="https://toster.ru/feedback">Обратная связь</a>
+      </li>
+      <li class="menu__item">
+        <a class="menu__item-link" href="http://habrahabr.ru/company/tm/">Блог</a>
+      </li>
+    </ul>
+  </nav>
+  <nav class="menu_socials">
+    <ul class="menu menu_inline">
+      <li class="menu__item">
+        <a class="menu__item-link tw" href="https://twitter.com/toster_ru" title="Наш аккаунт в Twitter">
+          <svg class="icon_svg icon_social_twitter" viewBox="0 0 39 32">
+            <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_social_twitter"></use>
+          </svg>
+        </a>
+      </li>
+      <li class="menu__item">
+        <a class="menu__item-link fb" href="https://www.facebook.com/toster.ru" title="Наша группа в Facebook">
+          <svg class="icon_svg icon_social_facebook" viewBox="0 0 17 32">
+            <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_social_facebook"></use>
+          </svg>
+        </a>
+      </li>
+      <li class="menu__item">
+        <a class="menu__item-link vk" href="http://vk.com/toster_ru" title="Наша группа на Вконтакте">
+          <svg class="icon_svg icon_social_vk" viewBox="0 0 56 32">
+            <use xlink:href="https://toster.ru/images/sprite_0.1.svg#icon_social_vk"></use>
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '322477921209238');
+fbq('track', 'PageView');
+</script>
+<noscript>&lt;img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=322477921209238&amp;ev=PageView&amp;noscript=1"
+/&gt;</noscript>
+<!-- End Facebook Pixel Code -->
+
+          <img class="footer__pix" src="https://ad.adriver.ru/cgi-bin/rle.cgi?sid=1&amp;ad=505035&amp;bt=21&amp;pid=1844621&amp;bid=3690124&amp;bn=3690124&amp;rnd=538787923" style="display: none !important;">
+        </footer>
+        <div class="popup__overlay hidden" role="popup auth_popup" data-default-title="Войдите на сайт">
+  <div class="popup popup_auth">
+    <div class="popup__body">
+                        <div class="empty-block">
+  <div class="empty-block__inner">
+    <h3 class="empty-block__title icon_unauthorized" role="title_replace">
+      Войдите на сайт    </h3>
+          <div class="empty-block__description" role="desc_replace">
+        Чтобы задать вопрос и получить на него квалифицированный ответ.      </div>
+                  <a class="empty-block__button" href="https://toster.ru/auth/ac">
+        Войти через TM ID      </a>
+          </div>
+</div>
+    </div>
+    <button class="btn btn_link popup__close-btn" type="reset" role="btn_popup_close">
+      <span>Закрыть</span>
+    </button>
+  </div>
+</div>
+      </div>
+    </div>
+    <script src="./Помогите с прерываниями по таймерам Arduino MEGA — Toster.ru_files/frontend.31b85a53-7901-11e6-81cb-38eaa71001f0.js.Без названия"></script>
+                  <script type="text/javascript">
+    //<![CDATA[
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-726094-14', 'toster.ru');
+      ga('require', 'displayfeatures');
+      ga('set', 'dimension1', 'guest'); // user type - guest/authorized
+      ga('send', 'pageview');
+      
+    //]]>
+    </script>
+      <script type="text/javascript">
+  //<![CDATA[
+    (function (d, w, c) {(w[c] = w[c] || []).push(function() {try {w.yaCounter24049246 = new Ya.Metrika({id:24049246, webvisor:true, clickmap:true, trackLinks:true, accurateTrackBounce:true}); } catch(e) { } });
+    var n = d.getElementsByTagName("script")[0],
+    s = d.createElement("script"),
+    f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+    if (w.opera == "[object Opera]") {
+    d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+    
+  //]]>
+  </script>
+  <noscript>
+    &lt;div&gt;
+      &lt;img src="//mc.yandex.ru/watch/24049246" style="position:absolute; left:-9999px;" alt=""&gt;
+    &lt;/div&gt;
+  </noscript>
+  
+
+<ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="display: none;"></ul></body></html>
