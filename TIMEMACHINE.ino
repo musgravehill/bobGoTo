@@ -19,6 +19,7 @@ void TIMEMACHINE_loop() {
 }
 
 void TIMEMACHINE_331ms() {
+  GOTO_check_goto_is_completed();
   //button
 }
 

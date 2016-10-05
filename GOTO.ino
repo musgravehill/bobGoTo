@@ -175,7 +175,6 @@ void GOTO_tick() {
       DEC_GOTO_count_ticks_made++;
     }
   }
-  GOTO_check_goto_is_completed();
 }
 
 void GOTO_calc_positions() {
