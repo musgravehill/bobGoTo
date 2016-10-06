@@ -4,13 +4,13 @@
   time loop() runs
 */
 void serialEvent() {
-  File dataFile = SD.open("serialEvent.txt", FILE_WRITE);
+  File dataFile = SD.open("event.txt", FILE_WRITE);
   while (Serial.available()) {
     char inChar = (char)Serial.read();
 
-    if (dataFile) {
+    /*if (dataFile) {
       dataFile.print(inChar);
-    }
+      }*/
 
     // STELLARIUM DOESNOT SEND any \r \n! Only solid eeeeeeerFFFFFFFF,FFFFFFFeeeeeee
     //if (inChar == '\n' || inChar == '\r' )
@@ -26,13 +26,13 @@ void serialEvent() {
   if (SYS_str_from_stellarium.length() == 18 ) {
     GOTO_processSerialCommand(); //r017DDC8F,14AF9C50
     if (dataFile) {
-      dataFile.println("SYS_str_from_stellarium=");
-      dataFile.println(SYS_str_from_stellarium);      
+      dataFile.print("SYS_str_from_stellarium=");
+      dataFile.println(SYS_str_from_stellarium);
     }
   }
 
   if (dataFile) {
-    dataFile.print("|___|");
+    //dataFile.print("|___|");
     dataFile.close();
   }
 }
@@ -52,7 +52,7 @@ void serialEvent() {
       SYS_str_from_stellarium += inChar;
     }
   }
-}*/
+  }*/
 
 //выдаст нули для дополнения строки до 8 символов: 4FA -> 00000
 String SERIAL_prependZeroTo8Digits(unsigned long value_hex) {
