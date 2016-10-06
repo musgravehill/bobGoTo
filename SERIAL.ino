@@ -1,7 +1,50 @@
-void SERIAL_listen() {
+
+/*  SerialEvent occurs whenever a new data comes in the
+  hardware serial RX.  This routine is run between each
+  time loop() runs
+*/
+void serialEvent() {
+  File dataFile = SD.open("serialEvent.txt", FILE_WRITE);
   while (Serial.available()) {
-    char inChar = (char)Serial.read();    
-    //if (inChar == '\n' || inChar == '\r' ) // STELLARIUM DOESNOT SEND any \r \n! Only solid eeeeeeerFFFFFFFF,FFFFFFFeeeeeee
+    char inChar = (char)Serial.read();
+
+    if (dataFile) {
+      dataFile.print(inChar);
+    }
+
+    // STELLARIUM DOESNOT SEND any \r \n! Only solid eeeeeeerFFFFFFFF,FFFFFFFeeeeeee
+    //if (inChar == '\n' || inChar == '\r' )
+    if (inChar == 'r') {
+      SYS_str_from_stellarium = "r"; //make fresh new string
+    }
+    else if (inChar != 'e') { //not 'e', so it can be 1234567890ABCDEF, from Stellaium
+      SYS_str_from_stellarium += inChar;
+    }
+  }
+
+
+  if (SYS_str_from_stellarium.length() == 18 ) {
+    GOTO_processSerialCommand(); //r017DDC8F,14AF9C50
+    if (dataFile) {
+      dataFile.println("SYS_str_from_stellarium=");
+      dataFile.println(SYS_str_from_stellarium);      
+    }
+  }
+
+  if (dataFile) {
+    dataFile.print("|___|");
+    dataFile.close();
+  }
+}
+
+
+
+/*void SERIAL_listen() {
+  while (Serial.available()) {
+    char inChar = (char)Serial.read();
+
+    // STELLARIUM DOESNOT SEND any \r \n! Only solid eeeeeeerFFFFFFFF,FFFFFFFeeeeeee
+    //if (inChar == '\n' || inChar == '\r' )
     if (inChar == 'r') {
       SYS_str_from_stellarium = "r";
     }
@@ -9,7 +52,7 @@ void SERIAL_listen() {
       SYS_str_from_stellarium += inChar;
     }
   }
-}
+}*/
 
 //выдаст нули для дополнения строки до 8 символов: 4FA -> 00000
 String SERIAL_prependZeroTo8Digits(unsigned long value_hex) {

@@ -5,26 +5,21 @@ void TIMEMACHINE_loop() {
     TIMEMACHINE_331ms();
     TIMEMACHINE_prevMicros_331ms = TIMEMACHINE_currMillis;
   }
-  if ((TIMEMACHINE_currMillis - TIMEMACHINE_prevMicros_1013ms) > 1013L) {
-    TIMEMACHINE_1013ms();
-    TIMEMACHINE_prevMicros_1013ms = TIMEMACHINE_currMillis;
-  }
-  if ((TIMEMACHINE_currMillis - TIMEMACHINE_prevMicros_1979ms) > 1979L) {
-    TIMEMACHINE_1979ms();
-    TIMEMACHINE_prevMicros_1979ms = TIMEMACHINE_currMillis;
-  }
+  if ((TIMEMACHINE_currMillis - TIMEMACHINE_prevMicros_873ms) > 873L) {
+    TIMEMACHINE_873ms();
+    TIMEMACHINE_prevMicros_873ms = TIMEMACHINE_currMillis;
+  }  
 }
 
 void TIMEMACHINE_331ms() {
   BUTTON_check();
   GOTO_check_goto_is_completed();  
 }
-void TIMEMACHINE_1013ms() {  
-  GOTO_processSerialCommand();   //from prev serial
-  SERIAL_listen();   //listen string, but process in next step => for serial-sync-period like delay
-}
-void TIMEMACHINE_1979ms() {
+void TIMEMACHINE_873ms() {  
+  //GOTO_processSerialCommand();   //from prev serial
+  //SERIAL_listen();   //listen string, but process in next step => for serial-sync-period like delay
   GOTO_calc_positions();  
-  GOTO_current_positions_send_to_stellarium();
+  GOTO_current_positions_send_to_stellarium(); //делай МАХ частоту отправки, Стеллариум отзывчивее и не тупит
 }
+
 

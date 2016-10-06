@@ -41,8 +41,8 @@
 //Если бы скоростьГОТО==скоростьЗвезд, то в догонку прирост = 0, система "застыла" на месте и ведет точку.
 //А против звезд получится сложение 2х скоростей: goto+звздная
 // = (gotoSpeed_us_for_microtick/starSpeed_us_for_microtick) * RA_step_per_motor_microstep = (64/18699) * 932.0675553385417
-//or  (star_moto_freq/goto_motor-freq)   * 932.0675553385417 
-#define GOTO_plusminus_dRA_per_1_tick 3.559911034243855  
+//or  (star_moto_freq/goto_motor-freq)   * 932.0675553385417
+#define GOTO_plusminus_dRA_per_1_tick 3.559911034243855
 
 int8_t RA_dRA_star_compensation_sign = 1; // 1==counter star; -1 = chase the star
 int8_t RA_dRA_sign = 1;
@@ -55,8 +55,7 @@ int8_t DEC_dDEC_sign = 1;
 
 //TIMEMACHINE
 uint32_t TIMEMACHINE_prevMicros_331ms = 1L;
-uint32_t TIMEMACHINE_prevMicros_1013ms = 1L;
-uint32_t TIMEMACHINE_prevMicros_1979ms = 1L;
+uint32_t TIMEMACHINE_prevMicros_873ms = 1L;
 
 String SYS_str_from_stellarium = "";
 
@@ -66,7 +65,7 @@ unsigned long RA_hex_position_goto = 0L;
 unsigned long DEC_hex_position_goto = 0L;
 
 //телескоп вручную наводим, жмем ГОТО туда же. Коорд совпали. Жми кнопку goto_synced
-uint8_t SYS_STATE = SYS_STATE_GOTO_INIT; 
+uint8_t SYS_STATE = SYS_STATE_GOTO_INIT;
 
 unsigned long RA_GOTO_count_ticks_made = 0L;
 unsigned long DEC_GOTO_count_ticks_made = 0L;
@@ -76,6 +75,23 @@ unsigned long DEC_GOTO_count_ticks_need = 0L;
 unsigned long GOTO_RA_count_ticks_made_prev = 0L;
 unsigned long GOTO_DEC_count_ticks_made_prev = 0L;
 
+/*                                                         TODO
+1. add serialEvent, delete serial-lisen from timemachine
+2. 
+
+*/
+
+
+////////////////////////////////////////////////////////////////////////////////
+//** MOSI - pin 11
+//** MISO - pin 12
+//** CLK - pin 13
+//** CS - pin 10
+#include <SPI.h>
+#include <SD.h>
+const int chipSelect = 10;
+///////////////////////////////////////////////////////////////////////////////
+
 
 void setup() {
   BUTTON_init();
@@ -83,8 +99,7 @@ void setup() {
   delay(10);
   Serial.begin(9600);
   delay(10);
-
-  pinMode(13,  OUTPUT);
+  SD.begin(chipSelect);
 }
 
 void loop() {
