@@ -4,33 +4,22 @@
   time loop() runs
 */
 void serialEvent() {
-  //File dataFile = SD.open("event.txt", FILE_WRITE);
+
   while (Serial.available()) {
     char inChar = (char)Serial.read();
-
-    /*if (dataFile) {
-      dataFile.print(inChar);
-      }*/
 
     // STELLARIUM DOESNOT SEND any \r \n! Only solid eeeeeeerFFFFFFFF,FFFFFFFeeeeeee
     if (inChar == 'r') {
       SYS_chars_from_stellarium_pos = 0;
       SYS_chars_from_stellarium[SYS_chars_from_stellarium_pos] = 'r';
     }
-    else if (inChar != 'e') { //not 'e', so it can be 1234567890,ABCDEF from Stellaium
+    else if ((SYS_chars_from_stellarium_pos <= 16) &&  (inChar != 'e')) {
+      //in with 0..16, then pos++, so last char: 16 in -> 16++ -> [17]=lastChar
+      //not 'e', so it can be 1234567890,ABCDEF from Stellaium
       SYS_chars_from_stellarium_pos++;
       SYS_chars_from_stellarium[SYS_chars_from_stellarium_pos] = inChar;
     }
   }
-
-  /*if (dataFile) {
-    uint8_t si = SYS_str_from_stellarium.length();
-    dataFile.print("L=");
-    dataFile.print(si, DEC);
-    dataFile.print(" S=");
-    dataFile.println(SYS_str_from_stellarium);
-    dataFile.close();
-    }*/
 
   //rABC45678,12345678 = 17 position; 0=r 1=A 2=B
   if (SYS_chars_from_stellarium_pos == 17) {

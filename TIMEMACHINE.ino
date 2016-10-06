@@ -17,7 +17,8 @@ void TIMEMACHINE_331ms() {
 }
 void TIMEMACHINE_873ms() {    
   GOTO_calc_positions();  
-  GOTO_current_positions_send_to_stellarium(); //делай МАХ частоту отправки, Стеллариум отзывчивее и не тупит
+  //делай МАХ частоту отправки, Стеллариум отзывчивее и не тупит
+  GOTO_current_positions_send_to_stellarium(); 
 }
 
 

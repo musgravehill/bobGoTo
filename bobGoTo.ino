@@ -76,21 +76,24 @@ unsigned long DEC_GOTO_count_ticks_need = 0L;
 unsigned long GOTO_RA_count_ticks_made_prev = 0L;
 unsigned long GOTO_DEC_count_ticks_made_prev = 0L;
 
-/*                                                         TODO
-  1. add serialEvent, delete serial-lisen from timemachine
-  2.
-
-*/
-
-
 ////////////////////////////////////////////////////////////////////////////////
 //** MOSI - pin 11
 //** MISO - pin 12
 //** CLK - pin 13
 //** CS - pin 10
-#include <SPI.h>
-#include <SD.h>
-const int chipSelect = 10;
+//#include <SPI.h>
+//#include <SD.h>
+//const int chipSelect = 10;
+//SD.begin(chipSelect);
+//File dataFile = SD.open("event.txt", FILE_WRITE);
+/*if (dataFile) {
+    uint8_t si = SYS_str_from_stellarium.length();
+    dataFile.print("L=");
+    dataFile.print(si, DEC);
+    dataFile.print(" S=");
+    dataFile.println(SYS_str_from_stellarium);
+    dataFile.close();
+    }*/
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -99,8 +102,7 @@ void setup() {
   MOTOR_init();
   delay(10);
   Serial.begin(9600);
-  delay(10);
-  SD.begin(chipSelect);
+  delay(10);  
 }
 
 void loop() {
