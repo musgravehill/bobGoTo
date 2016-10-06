@@ -16,7 +16,7 @@ void BUTTON_check() {
       MOTOR_set_RA_dir(true);
       for (uint8_t i = 0; i < 15; i++) {
         MOTOR_RA_TICK();
-        delay(4);
+        delay(8);
       }
     }
 
