@@ -9,6 +9,11 @@
 
 #define BUTTON_GOTO_SYNC 6 //PD6
 
+#define BUTTON_RA_FORWARD 7 //PD7
+#define BUTTON_RA_BACKWARD 8 //PB0
+#define BUTTON_DEC_FORWARD 9 //PB1
+#define BUTTON_DEC_BACKWARD 10 //PB2
+
 //========================================SKY MATH=========================================
 
 //Floats have only 6-7 decimal digits of precision
@@ -70,7 +75,7 @@ unsigned long RA_hex_position_goto = 0L;
 unsigned long DEC_hex_position_goto = 0L;
 
 //телескоп вручную наводим, жмем ГОТО туда же. Коорд совпали. Жми кнопку goto_synced
-uint8_t SYS_STATE = SYS_STATE_GOTO_INIT;
+uint8_t SYS_STATE = SYS_STATE_GOTO_READY; //SYS_STATE_GOTO_INIT
 
 unsigned long RA_GOTO_count_ticks_made = 0L;
 unsigned long DEC_GOTO_count_ticks_made = 0L;
