@@ -1,18 +1,22 @@
 #include <stdlib.h>
 
+//=======================INIT IN-OUT======================================================
+
+#define DRIVER_RA_DIR 2 //PD2
+#define DRIVER_RA_STEP 3 //PD3
+#define DRIVER_DEC_DIR 4 //PD4
+#define DRIVER_DEC_STEP 5 //PD5
+
+#define BUTTON_GOTO_SYNC 6 //PD6
+
+//========================================SKY MATH=========================================
+
 //Floats have only 6-7 decimal digits of precision
 //you can get more precision by using a double (e.g. up to 15 digits), on the Arduino, double is the same size as float!
 
 //max 4000 ticks per second for Arduino 16MHz, http://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html
 
 #define STARDAY_us = 86164090531L //micro second in star-day
-
-#define DRIVER_RA_STEP 8 //PB0
-#define DRIVER_RA_DIR 7 //PD7
-#define DRIVER_DEC_STEP 4 //PD4
-#define DRIVER_DEC_DIR 2 //PD2
-
-#define BUTTON_GOTO_SYNC 9 //PB1
 
 // тиков двигателя на полный оборот монти (зависит от редукции)
 // 144(червь)*2.5(ремень)*400(шагов на 1 оборот ШД)* 32(микрошаг DRIVER_MICROSTEP_X=32)
