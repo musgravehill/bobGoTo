@@ -57,7 +57,8 @@ int8_t DEC_dDEC_sign = 1;
 uint32_t TIMEMACHINE_prevMicros_331ms = 1L;
 uint32_t TIMEMACHINE_prevMicros_873ms = 1L;
 
-String SYS_str_from_stellarium = "";
+char SYS_chars_from_stellarium[19]; //r00000000,00000000\0  19 chars with terminator \0
+uint8_t SYS_chars_from_stellarium_pos = 0;
 
 unsigned long RA_hex_position_curr = 0L;
 unsigned long DEC_hex_position_curr = 0L;
@@ -76,8 +77,8 @@ unsigned long GOTO_RA_count_ticks_made_prev = 0L;
 unsigned long GOTO_DEC_count_ticks_made_prev = 0L;
 
 /*                                                         TODO
-1. add serialEvent, delete serial-lisen from timemachine
-2. 
+  1. add serialEvent, delete serial-lisen from timemachine
+  2.
 
 */
 

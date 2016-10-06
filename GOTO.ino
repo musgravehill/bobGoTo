@@ -1,11 +1,3 @@
-void GOTO_processSerialCommand() {
-  if ('r' == SYS_str_from_stellarium.charAt(0)) {
-    Serial.println("#");       
-    GOTO_process();    
-  }
-  SYS_str_from_stellarium = "";
-}
-
 void GOTO_current_positions_send_to_stellarium() {
   Serial.print(SERIAL_prependZeroTo8Digits(RA_hex_position_curr)); //допишем нули спереди
   Serial.print(RA_hex_position_curr, HEX); //позиция в HEX, а перед ней дописали нули, чтобы общая длина стала 8 символов
@@ -19,16 +11,33 @@ void GOTO_current_positions_send_to_stellarium() {
 void GOTO_process() {
   //если начинается приязка к стеллариуму, то просто получим гото-задание
   if (SYS_STATE == SYS_STATE_GOTO_INIT) {
-    char command_goto_RA_hex[9]; //one more element than your initialization is required, to hold the required null character.
-    char command_goto_DEC_hex[9];  //one more element than your initialization is required, to hold the required null character.
+    char command_goto_RA_hex[9]; //one more element than your initialization is required, to hold the required null character \0
+    char command_goto_DEC_hex[9];  //one more element than your initialization is required, to hold the required null character \0
 
-    uint8_t i;
-    i = SYS_str_from_stellarium.indexOf(',');
-    (SYS_str_from_stellarium.substring(1, i)).toCharArray(command_goto_RA_hex, 9);
-    (SYS_str_from_stellarium.substring(i + 1)).toCharArray(command_goto_DEC_hex, 9);
+    command_goto_RA_hex[0] = SYS_chars_from_stellarium[1]; // [0]=r
+    command_goto_RA_hex[1] = SYS_chars_from_stellarium[2];
+    command_goto_RA_hex[2] = SYS_chars_from_stellarium[3];
+    command_goto_RA_hex[3] = SYS_chars_from_stellarium[4];
+    command_goto_RA_hex[4] = SYS_chars_from_stellarium[5];
+    command_goto_RA_hex[5] = SYS_chars_from_stellarium[6];
+    command_goto_RA_hex[6] = SYS_chars_from_stellarium[7];
+    command_goto_RA_hex[7] = SYS_chars_from_stellarium[8];
+
+    command_goto_DEC_hex[0] =  SYS_chars_from_stellarium[10]; // [9]= ,
+    command_goto_DEC_hex[1] =  SYS_chars_from_stellarium[11];
+    command_goto_DEC_hex[2] =  SYS_chars_from_stellarium[12];
+    command_goto_DEC_hex[3] =  SYS_chars_from_stellarium[13];
+    command_goto_DEC_hex[4] =  SYS_chars_from_stellarium[14];
+    command_goto_DEC_hex[5] =  SYS_chars_from_stellarium[15];
+    command_goto_DEC_hex[6] =  SYS_chars_from_stellarium[16];
+    command_goto_DEC_hex[7] =  SYS_chars_from_stellarium[17];
 
     RA_hex_position_goto =  strtoul(command_goto_RA_hex, NULL, 16);
     DEC_hex_position_goto =  strtoul(command_goto_DEC_hex, NULL, 16);
+
+    //positions SYNCed! 
+    RA_hex_position_curr = RA_hex_position_goto;
+    DEC_hex_position_curr = DEC_hex_position_goto;    
 
     return;
   }
@@ -40,21 +49,29 @@ void GOTO_process() {
     GOTO_DEC_count_ticks_made_prev = 0L;
 
     //get goto-command from serial-string
-    char command_goto_RA_hex[9]; //one more element than your initialization is required, to hold the required null character.
-    char command_goto_DEC_hex[9];  //one more element than your initialization is required, to hold the required null character.
+    char command_goto_RA_hex[9]; //one more element than your initialization is required, to hold the required null character \0
+    char command_goto_DEC_hex[9];  //one more element than your initialization is required, to hold the required null character \0
 
-    uint8_t i;
-    i = SYS_str_from_stellarium.indexOf(',');
-    (SYS_str_from_stellarium.substring(1, i)).toCharArray(command_goto_RA_hex, 9);
-    (SYS_str_from_stellarium.substring(i + 1)).toCharArray(command_goto_DEC_hex, 9);
+    command_goto_RA_hex[0] = SYS_chars_from_stellarium[1]; // [0]=r
+    command_goto_RA_hex[1] = SYS_chars_from_stellarium[2];
+    command_goto_RA_hex[2] = SYS_chars_from_stellarium[3];
+    command_goto_RA_hex[3] = SYS_chars_from_stellarium[4];
+    command_goto_RA_hex[4] = SYS_chars_from_stellarium[5];
+    command_goto_RA_hex[5] = SYS_chars_from_stellarium[6];
+    command_goto_RA_hex[6] = SYS_chars_from_stellarium[7];
+    command_goto_RA_hex[7] = SYS_chars_from_stellarium[8];
+
+    command_goto_DEC_hex[0] =  SYS_chars_from_stellarium[10]; // [9]= ,
+    command_goto_DEC_hex[1] =  SYS_chars_from_stellarium[11];
+    command_goto_DEC_hex[2] =  SYS_chars_from_stellarium[12];
+    command_goto_DEC_hex[3] =  SYS_chars_from_stellarium[13];
+    command_goto_DEC_hex[4] =  SYS_chars_from_stellarium[14];
+    command_goto_DEC_hex[5] =  SYS_chars_from_stellarium[15];
+    command_goto_DEC_hex[6] =  SYS_chars_from_stellarium[16];
+    command_goto_DEC_hex[7] =  SYS_chars_from_stellarium[17];
 
     RA_hex_position_goto =  strtoul(command_goto_RA_hex, NULL, 16);
     DEC_hex_position_goto =  strtoul(command_goto_DEC_hex, NULL, 16);
-
-    /*Serial.print("RA_goto=");
-      Serial.print(RA_hex_position_goto, HEX);
-      Serial.print(" DEC_goto=");
-      Serial.println(DEC_hex_position_goto, HEX);*/
 
     unsigned long RA_difference_abs;
     unsigned long DEC_difference_abs;
@@ -219,7 +236,7 @@ void GOTO_BUTTON_coordinates_sync_ok() {
 //пусть вращается за звездами, наводка окончена
 void GOTO_set_normal_mode() {
   TIMER_STAR_config();
-  SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed  
+  SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed
   MOTOR_set_RA_dir(true); //run star-speed
 
   RA_hex_position_curr =  RA_hex_position_goto;

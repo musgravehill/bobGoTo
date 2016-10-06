@@ -4,7 +4,7 @@
   time loop() runs
 */
 void serialEvent() {
-  File dataFile = SD.open("event.txt", FILE_WRITE);
+  //File dataFile = SD.open("event.txt", FILE_WRITE);
   while (Serial.available()) {
     char inChar = (char)Serial.read();
 
@@ -13,27 +13,32 @@ void serialEvent() {
       }*/
 
     // STELLARIUM DOESNOT SEND any \r \n! Only solid eeeeeeerFFFFFFFF,FFFFFFFeeeeeee
-    //if (inChar == '\n' || inChar == '\r' )
     if (inChar == 'r') {
-      SYS_str_from_stellarium = "r"; //make fresh new string
+      SYS_chars_from_stellarium_pos = 0;
+      SYS_chars_from_stellarium[SYS_chars_from_stellarium_pos] = 'r';
     }
-    else if (inChar != 'e') { //not 'e', so it can be 1234567890ABCDEF, from Stellaium
-      SYS_str_from_stellarium += inChar;
-    }
-  }
-
-
-  if (SYS_str_from_stellarium.length() == 18 ) {
-    GOTO_processSerialCommand(); //r017DDC8F,14AF9C50
-    if (dataFile) {
-      dataFile.print("SYS_str_from_stellarium=");
-      dataFile.println(SYS_str_from_stellarium);
+    else if (inChar != 'e') { //not 'e', so it can be 1234567890,ABCDEF from Stellaium
+      SYS_chars_from_stellarium_pos++;
+      SYS_chars_from_stellarium[SYS_chars_from_stellarium_pos] = inChar;
     }
   }
 
-  if (dataFile) {
-    //dataFile.print("|___|");
+  /*if (dataFile) {
+    uint8_t si = SYS_str_from_stellarium.length();
+    dataFile.print("L=");
+    dataFile.print(si, DEC);
+    dataFile.print(" S=");
+    dataFile.println(SYS_str_from_stellarium);
     dataFile.close();
+    }*/
+
+  //rABC45678,12345678 = 17 position; 0=r 1=A 2=B
+  if (SYS_chars_from_stellarium_pos == 17) {
+    if ('r' == SYS_chars_from_stellarium[0]) {
+      Serial.println("#");
+      GOTO_process();
+    }
+    SYS_chars_from_stellarium_pos = 0;
   }
 }
 
