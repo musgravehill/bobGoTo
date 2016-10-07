@@ -205,11 +205,11 @@ void GOTO_process() {
       GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need = 0L;
     }
 
-
-    /*Serial.print("RA_ticks=");
-      Serial.print(RA_GOTO_count_ticks_need, DEC);
-      Serial.print(" DEC_ticks=");
-      Serial.println(DEC_GOTO_count_ticks_need, DEC);*/
+    /*Serial.println(" ");
+    Serial.print(" RAt=");  Serial.print(RA_GOTO_count_ticks_need, DEC);
+    Serial.print(" DECt=");  Serial.print(DEC_GOTO_count_ticks_need, DEC);
+    Serial.print(" RAtCompens=");  Serial.println(GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need, DEC);
+    */
 
     TIMER_GOTO_config(); //SET FAST TIMER TO TICK MOTORS FAST
 
