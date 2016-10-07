@@ -47,14 +47,17 @@
 //gotoSpeed_us_for_microtick  13998.25021872266 Hz by Timer1; recalc GOTO_plusminus_dRA_per_1_tick
 
 //прирост RA позиции при большой скорости ГОТО.
-//Если бы скоростьГОТО==скоростьЗвезд, то в догонку прирост = 0, система "застыла" на месте и ведет точку.
-//А против звезд получится сложение 2х скоростей: goto+звздная
-// = (gotoSpeed_us_for_microtick/starSpeed_us_for_microtick) * RA_step_per_motor_microstep = (64/18699) * 932.0675553385417
-//or  (star_moto_freq/goto_motor-freq)   * 932.0675553385417
-#define GOTO_plusminus_dRA_per_1_tick 3.559911034243855
+//когда вращение ГОТО за звездами, то они убегают, RA_step_per_motor_microstep уменьшается и микрошагов мотора надо больше
+//когда вращение ГОТО против звезд, то они навстречу, RA_step_per_motor_microstep увеличивается и микрошагов мотора надо меньше
+// при звездной скорости на каждый шаг небо сползает на RA_step_per_motor_microstep и мотор шагает на столько же. В итоге, мы ведем за небом.
+// при высокой скорости ГОТО небо успевает сдвинуться на меньшую величину, чем выше скорость ГОТО, тем меньше сдвинется небо
+// если скорость ГОТО сверх-высокая, то небо не успеет сползти) И будет меняться только координата)))
+// = (gotoSpeed_us_for_microtick/starSpeed_us_for_microtick) * RA_step_per_motor_microstep   
+//or  (star_moto_freq/goto_motor-freq) *RA_step_per_motor_microstep=  (/)  * 932.0675553385417
+#define GOTO_plusminus_dRA_per_1_tick 3.559911034243855 
 
-int8_t RA_dRA_star_compensation_sign = 1; // 1==counter star; -1 = chase the star
-int8_t RA_dRA_sign = 1;
+int8_t RA_dRA_sky_offset_sign = 1;
+int8_t RA_dRA_sign = 1; 
 int8_t DEC_dDEC_sign = 1;
 
 //телескоп ВСЕГДА вращается за небом

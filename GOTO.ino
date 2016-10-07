@@ -76,48 +76,68 @@ void GOTO_process() {
     unsigned long RA_difference_abs;
     unsigned long DEC_difference_abs;
 
-    /*
-      MAX <--------------- 0   RA
-      ----------------------> star goto here
-      <---- +dRA             -dRA  ---->
+    /*                    RA_coordinate in h.m.s
+                                STARs turns
+                                 SKY turns
+                               see from Earth
+
+                             8h    ←★   11h
+                          ★                ★
+                         ↙                     14h
+                       ★
+                                                ↑
+                   4h  ★          ★UMI         ★
+                       ↓
+                         ★                   16h
+                                             ↗
+                          0h ↘           21h
+                                 ★→
+             TELESCOPE turns counter-clock-wise too with star-speed
     */
+
+    // RA_pos надо уменьшить => вращаемся за звездами (против часовой)  MOTOR_set_RA_dir(true) => RA_step_per_motor_microstep меньше (звезды убегают)
+    // RA_pos надо увеличить => вращаемся против звезд (по часовой)  MOTOR_set_RA_dir(false) => RA_step_per_motor_microstep больше (звезды навстречу сами бегут)
 
     //если тупо наращивать или уменьшать до нужной точки
     unsigned long RA_difference_inc_or_dec_straight;
     // если перескочить через 0, выгодно если от края до края через 0, а не через весь диапазон
     unsigned long RA_difference_through_zero;
 
-    if (RA_hex_position_goto > RA_hex_position_curr) {
+    if (RA_hex_position_goto > RA_hex_position_curr) {  //  0__curr______goto___MAX
       RA_difference_inc_or_dec_straight = RA_hex_position_goto - RA_hex_position_curr; //  0__curr>>>>>goto___MAX
       RA_difference_through_zero = RA_hex_position_curr + (RA_max_hex_value - RA_hex_position_goto); // 0<<<<curr_____goto<<<<MAX
       if (RA_difference_inc_or_dec_straight < RA_difference_through_zero) {
+        //  0__curr>>>>>goto___MAX
         //select shorter RA_difference_inc_or_dec_straight
         RA_difference_abs = RA_difference_inc_or_dec_straight;
-        MOTOR_set_RA_dir(false); //TODO CHECK IT  //contra star
-        RA_dRA_sign = 1; //TODO CHECK IT
-        RA_dRA_star_compensation_sign = +1;  //шагов надо меньше против звезды, сдвиг за шаг большой, т.к. звезда навстречу
+        MOTOR_set_RA_dir(false); //против звезд по часовой стрелке
+        RA_dRA_sign = 1; //наращиваем координату
+        RA_dRA_sky_offset_sign = -1; //уменьшим кол-во шагов
       } else {
+        // 0<<<<curr_____goto<<<<MAX
         //select shorter RA_difference_through_zero
         RA_difference_abs = RA_difference_through_zero;
-        MOTOR_set_RA_dir(true); //TODO CHECK IT
-        RA_dRA_sign = -1; //TODO CHECK IT
-        RA_dRA_star_compensation_sign = -1; //шагов надо больше за звездой, сдвиг за шаг маленький, т.к. звезда убегает
+        MOTOR_set_RA_dir(true); //за звездами против часовой стрелки
+        RA_dRA_sign = -1; //уменьшаем координату
+        RA_dRA_sky_offset_sign = 1;//увеличим кол-во шагов, чтобы догнать звезду
       }
     } else {
       RA_difference_inc_or_dec_straight =  RA_hex_position_curr - RA_hex_position_goto ; //  0__goto<<<<<<curr___MAX
       RA_difference_through_zero = RA_hex_position_goto + (RA_max_hex_value - RA_hex_position_curr); // 0>>>>goto_____curr>>>>>MAX
       if (RA_difference_inc_or_dec_straight < RA_difference_through_zero) {
+        //  0__goto<<<<<<curr___MAX
         //select shorter RA_difference_inc_or_dec_straight
         RA_difference_abs = RA_difference_inc_or_dec_straight;
-        MOTOR_set_RA_dir(true); //TODO CHECK IT   //follow the star
-        RA_dRA_sign = -1; //TODO CHECK IT
-        RA_dRA_star_compensation_sign = -1; //шагов надо больше за звездой, сдвиг за шаг маленький, т.к. звезда убегает
+        MOTOR_set_RA_dir(true); //за звездой против часовой стрелки
+        RA_dRA_sign = -1; //уменьшаем координату
+        RA_dRA_sky_offset_sign = 1;//увеличим кол-во шагов, чтобы догнать звезду
       } else {
+        // 0>>>>goto_____curr>>>>>MAX
         //select shorter RA_difference_through_zero
         RA_difference_abs = RA_difference_through_zero;
-        MOTOR_set_RA_dir(false); //TODO CHECK IT  //contra star
-        RA_dRA_sign = 1; //TODO CHECK IT
-        RA_dRA_star_compensation_sign = +1; //шагов надо меньше против звезды, сдвиг за шаг большой, т.к. звезда навстречу
+        MOTOR_set_RA_dir(false); //против звезд по часовой стрелке
+        RA_dRA_sign = 1; //наращиваем координату
+        RA_dRA_sky_offset_sign = -1; //уменьшим кол-во шагов
       }
     }
 
@@ -130,29 +150,33 @@ void GOTO_process() {
       DEC_difference_inc_or_dec_straight = DEC_hex_position_goto - DEC_hex_position_curr; //  0__curr>>>>>goto___MAX
       DEC_difference_through_zero = DEC_hex_position_curr + (DEC_max_hex_value - DEC_hex_position_goto); // 0<<<<curr_____goto<<<<MAX
       if (DEC_difference_inc_or_dec_straight < DEC_difference_through_zero) {
+        //  0__curr>>>>>goto___MAX
         //select shorter DEC_difference_inc_or_dec_straight
         DEC_difference_abs = DEC_difference_inc_or_dec_straight;
         MOTOR_set_DEC_dir(false); //TODO CHECK IT
-        DEC_dDEC_sign = 1; //TODO CHECK IT
+        DEC_dDEC_sign = 1; //наращиваем координату
       } else {
+        // 0<<<<curr_____goto<<<<MAX
         //select shorter DEC_difference_through_zero
         DEC_difference_abs = DEC_difference_through_zero;
         MOTOR_set_DEC_dir(true); //TODO CHECK IT
-        DEC_dDEC_sign = -1; //TODO CHECK IT
+        DEC_dDEC_sign = -1; //уменьшаем координату
       }
     } else {
       DEC_difference_inc_or_dec_straight =  DEC_hex_position_curr - DEC_hex_position_goto ; //  0__goto<<<<<<curr___MAX
       DEC_difference_through_zero = DEC_hex_position_goto + (DEC_max_hex_value - DEC_hex_position_curr); // 0>>>>goto_____curr>>>>>MAX
       if (DEC_difference_inc_or_dec_straight < DEC_difference_through_zero) {
+        //  0__goto<<<<<<curr___MAX
         //select shorter DEC_difference_inc_or_dec_straight
         DEC_difference_abs = DEC_difference_inc_or_dec_straight;
         MOTOR_set_DEC_dir(true); //TODO CHECK IT
-        DEC_dDEC_sign = -1; //TODO CHECK IT
+        DEC_dDEC_sign = -1; //уменьшаем координату
       } else {
+        // 0>>>>goto_____curr>>>>>MAX
         //select shorter DEC_difference_through_zero
         DEC_difference_abs = DEC_difference_through_zero;
         MOTOR_set_DEC_dir(false); //TODO CHECK IT
-        DEC_dDEC_sign = 1; //TODO CHECK IT
+        DEC_dDEC_sign = 1; //наращиваем координату
       }
     }
 
@@ -163,12 +187,23 @@ void GOTO_process() {
     //пока мы крутим - а это время зависит от МАХ кол-ва тиков по RA или DEC
     //например, RA_difference_abs=0 DEC_difference_abs=100500 => будем тикать по DEC, а RA будет стоять,
     //НО небо-то ползет. Надо компенсировать дополнительно!
-    //небо сползет на GOTO_plusminus_dRA_per_1_tick * RA_GOTO_count_ticks_need
     // значит, надо RA перекрутить или недокрутить
-    RA_difference_abs = (RA_difference_abs > DEC_difference_abs) ? RA_difference_abs : DEC_difference_abs;
-    // расстояние / шаг; За звездой шаг короче, против звезды шаг длиннее
-    RA_GOTO_count_ticks_need = RA_difference_abs / (RA_step_per_motor_microstep + RA_dRA_star_compensation_sign * GOTO_plusminus_dRA_per_1_tick); 
-    DEC_GOTO_count_ticks_need = DEC_difference_abs / DEC_step_per_motor_microstep;
+    //Когда RA кончился, но еще тикает DEC...
+
+    //Путь RA = смещениеКоординатыRA ± (сдвиг_неба_пока_RA_наводится или сдвиг_неба_пока_DEC_наводится, смотря кто дольше)
+    RA_GOTO_count_ticks_need = RA_difference_abs / RA_step_per_motor_microstep; //изменение координаты только
+    DEC_GOTO_count_ticks_need = DEC_difference_abs / DEC_step_per_motor_microstep; //изменение координаты только
+
+    //а теперь для RA надо учесть сдвиг неба, пока ГОТО наводится (timer1 тикает)
+    if (RA_GOTO_count_ticks_need >= DEC_GOTO_count_ticks_need  ) {
+      //RA дольше будет тикать
+      //сдвиг неба = тиков * сдвиг_неба_за_1_тик
+      //шагов для прохода по сдвигу неба = сдвиг неба / сдвиг_за_1_шаг
+      RA_GOTO_count_ticks_need += RA_dRA_sky_offset_sign * (RA_GOTO_count_ticks_need * GOTO_plusminus_dRA_per_1_tick / RA_step_per_motor_microstep );
+    } else {
+      //DEC дольше будет тикать
+      RA_GOTO_count_ticks_need += RA_dRA_sky_offset_sign * (DEC_GOTO_count_ticks_need * GOTO_plusminus_dRA_per_1_tick / RA_step_per_motor_microstep );
+    }
 
     /*Serial.print("RA_ticks=");
       Serial.print(RA_GOTO_count_ticks_need, DEC);

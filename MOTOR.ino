@@ -10,7 +10,7 @@ void MOTOR_DEC_TICK() {
   PORTD &= ~_BV(PD5); //low
 }
 
-//RA true== star_speed; false == counter star rotation
+//RA true== star_speed (ПРОТИВ ЧАСОВОЙ СТРЕЛКИ); false == counter star rotation (ПО ЧАСОВОЙ СТРЕЛКЕ)
 void MOTOR_set_RA_dir(bool dir_forward) {
   if (dir_forward) {
     PORTD |= _BV(PD2); //high    
@@ -39,7 +39,7 @@ void MOTOR_init() {
   pinMode(DRIVER_DEC_DIR,  OUTPUT);
   digitalWrite(DRIVER_DEC_DIR, LOW);
 
-  MOTOR_set_RA_dir(true); //run star-speed
+  MOTOR_set_RA_dir(true); //run star-speed  ПРОТИВ ЧАСОВОЙ СТРЕЛКИ
   TIMER_STAR_config(); //run star-speed
 }
 
