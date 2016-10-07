@@ -268,7 +268,7 @@ void GOTO_check_goto_is_completed() {
 }
 
 //press btn GOTO_SYNC => coordinates set synced
-void GOTO_BUTTON_coordinates_sync_ok() {  
+void GOTO_BUTTON_coordinates_sync_ok() {
   GOTO_set_normal_mode();
 }
 
