@@ -206,9 +206,9 @@ void GOTO_process() {
     }
 
     /*Serial.println(" ");
-    Serial.print(" RAt=");  Serial.print(RA_GOTO_count_ticks_need, DEC);
-    Serial.print(" DECt=");  Serial.print(DEC_GOTO_count_ticks_need, DEC);
-    Serial.print(" RAtCompens=");  Serial.println(GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need, DEC);
+      Serial.print(" RAt=");  Serial.print(RA_GOTO_count_ticks_need, DEC);
+      Serial.print(" DECt=");  Serial.print(DEC_GOTO_count_ticks_need, DEC);
+      Serial.print(" RAtCompens=");  Serial.println(GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need, DEC);
     */
 
     TIMER_GOTO_config(); //SET FAST TIMER TO TICK MOTORS FAST
@@ -246,26 +246,26 @@ void GOTO_tick() {
 
 void GOTO_calc_positions() {
   //------------гото в процессе наведения, будем считать позицию по сделанным шагам---------------------------------
-  //if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
-  //TODO CHECK IT sign +-
-  unsigned long tmp = (RA_GOTO_count_ticks_made - GOTO_RA_count_ticks_made_prev) * (RA_step_per_motor_microstep - RA_dRA_sign * GOTO_plusminus_dRA_per_1_tick);
-  if (RA_dRA_sign > 0) {
-    RA_hex_position_curr += tmp;
-  } else {
-    RA_hex_position_curr -= tmp;
-  }
+  if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
+    //TODO CHECK IT sign +-
+    unsigned long tmp = (RA_GOTO_count_ticks_made - GOTO_RA_count_ticks_made_prev) * (RA_step_per_motor_microstep - RA_dRA_sign * GOTO_plusminus_dRA_per_1_tick);
+    if (RA_dRA_sign > 0) {
+      RA_hex_position_curr += tmp;
+    } else {
+      RA_hex_position_curr -= tmp;
+    }
 
-  //TODO CHECK IT sign +-
-  tmp = (DEC_GOTO_count_ticks_made - GOTO_DEC_count_ticks_made_prev) * DEC_step_per_motor_microstep;
-  if (DEC_dDEC_sign > 0) {
-    DEC_hex_position_curr +=  tmp;
-  } else {
-    DEC_hex_position_curr -=  tmp;
-  }
+    //TODO CHECK IT sign +-
+    tmp = (DEC_GOTO_count_ticks_made - GOTO_DEC_count_ticks_made_prev) * DEC_step_per_motor_microstep;
+    if (DEC_dDEC_sign > 0) {
+      DEC_hex_position_curr +=  tmp;
+    } else {
+      DEC_hex_position_curr -=  tmp;
+    }
 
-  GOTO_RA_count_ticks_made_prev = RA_GOTO_count_ticks_made;
-  GOTO_DEC_count_ticks_made_prev = DEC_GOTO_count_ticks_made;
-  //}
+    GOTO_RA_count_ticks_made_prev = RA_GOTO_count_ticks_made;
+    GOTO_DEC_count_ticks_made_prev = DEC_GOTO_count_ticks_made;
+  }
   //else координаты достигнуты, всё устаканилось
 }
 
@@ -287,10 +287,9 @@ void GOTO_set_normal_mode() {
   TIMER_STAR_config();
   SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed
   MOTOR_set_RA_dir(true); //run star-speed
-
-  //off for debugging
-  //RA_hex_position_curr =  RA_hex_position_goto;
-  //DEC_hex_position_curr = DEC_hex_position_goto;
+  
+  RA_hex_position_curr =  RA_hex_position_goto;
+  DEC_hex_position_curr = DEC_hex_position_goto;
 }
 
 
