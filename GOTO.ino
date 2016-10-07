@@ -112,14 +112,14 @@ void GOTO_process() {
         RA_difference_abs = RA_difference_inc_or_dec_straight;
         MOTOR_set_RA_dir(false); //против звезд по часовой стрелке
         RA_dRA_sign = 1; //наращиваем координату
-        RA_dRA_sky_offset_sign = -1; //уменьшим кол-во шагов
+        RA_dRA_sky_offset_sign = 1; //шаг увеличится, плюсуем
       } else {
         // 0<<<<curr_____goto<<<<MAX
         //select shorter RA_difference_through_zero
         RA_difference_abs = RA_difference_through_zero;
         MOTOR_set_RA_dir(true); //за звездами против часовой стрелки
         RA_dRA_sign = -1; //уменьшаем координату
-        RA_dRA_sky_offset_sign = 1;//увеличим кол-во шагов, чтобы догнать звезду
+        RA_dRA_sky_offset_sign = -1;//шаг укоротим, за звездой гонимся
       }
     } else {
       RA_difference_inc_or_dec_straight =  RA_hex_position_curr - RA_hex_position_goto ; //  0__goto<<<<<<curr___MAX
@@ -130,14 +130,14 @@ void GOTO_process() {
         RA_difference_abs = RA_difference_inc_or_dec_straight;
         MOTOR_set_RA_dir(true); //за звездой против часовой стрелки
         RA_dRA_sign = -1; //уменьшаем координату
-        RA_dRA_sky_offset_sign = 1;//увеличим кол-во шагов, чтобы догнать звезду
+        RA_dRA_sky_offset_sign = -1;//увеличим кол-во шагов, чтобы догнать звезду
       } else {
         // 0>>>>goto_____curr>>>>>MAX
         //select shorter RA_difference_through_zero
         RA_difference_abs = RA_difference_through_zero;
         MOTOR_set_RA_dir(false); //против звезд по часовой стрелке
         RA_dRA_sign = 1; //наращиваем координату
-        RA_dRA_sky_offset_sign = -1; //уменьшим кол-во шагов
+        RA_dRA_sky_offset_sign = 1; //шаг увеличится, плюсуем
       }
     }
 
@@ -191,19 +191,20 @@ void GOTO_process() {
     //Когда RA кончился, но еще тикает DEC...
 
     //Путь RA = смещениеКоординатыRA ± (сдвиг_неба_пока_RA_наводится или сдвиг_неба_пока_DEC_наводится, смотря кто дольше)
-    RA_GOTO_count_ticks_need = RA_difference_abs / RA_step_per_motor_microstep; //изменение координаты только
+    RA_GOTO_count_ticks_need = RA_difference_abs / (RA_step_per_motor_microstep + RA_dRA_sky_offset_sign * GOTO_plusminus_dRA_per_1_tick); //шаг укорачивается или удлиняется
     DEC_GOTO_count_ticks_need = DEC_difference_abs / DEC_step_per_motor_microstep; //изменение координаты только
 
-    //а теперь для RA надо учесть сдвиг неба, пока ГОТО наводится (timer1 тикает)
-    if (RA_GOTO_count_ticks_need >= DEC_GOTO_count_ticks_need  ) {
-      //RA дольше будет тикать
-      //сдвиг неба = тиков * сдвиг_неба_за_1_тик
-      //шагов для прохода по сдвигу неба = сдвиг неба / сдвиг_за_1_шаг
-      RA_GOTO_count_ticks_need += RA_dRA_sky_offset_sign * (RA_GOTO_count_ticks_need * GOTO_plusminus_dRA_per_1_tick / RA_step_per_motor_microstep );
-    } else {
-      //DEC дольше будет тикать
-      RA_GOTO_count_ticks_need += RA_dRA_sky_offset_sign * (DEC_GOTO_count_ticks_need * GOTO_plusminus_dRA_per_1_tick / RA_step_per_motor_microstep );
+    //Когда RA кончился, но еще тикает DEC...
+    GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_made = 0L;
+    if (DEC_GOTO_count_ticks_need > RA_GOTO_count_ticks_need) {
+      //GOTO_countTicksDEC_afterFinishingRA = DEC_GOTO_count_ticks_need - RA_GOTO_count_ticks_need;
+      //ГОТО-скорость выше звездной в [N = goto_motor-freq / star_moto_freq] раз, тикать надо меньше в N раз.
+      GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need = 0.003819370188195 * (DEC_GOTO_count_ticks_need - RA_GOTO_count_ticks_need);
     }
+    else {
+      GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need = 0L;
+    }
+
 
     /*Serial.print("RA_ticks=");
       Serial.print(RA_GOTO_count_ticks_need, DEC);
@@ -226,6 +227,15 @@ void GOTO_tick() {
     if (RA_GOTO_count_ticks_made < RA_GOTO_count_ticks_need) {
       MOTOR_RA_TICK();
       RA_GOTO_count_ticks_made++;
+    } else {
+      //Когда RA кончился, но еще тикает DEC...
+      if (GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_made == 0) {
+        MOTOR_set_RA_dir(true); //направление за звездами поставим перед первым тиком компенсации
+      }
+      if (GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_made < GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need) {
+        MOTOR_RA_TICK();
+        GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_made++;
+      }
     }
     if (DEC_GOTO_count_ticks_made < DEC_GOTO_count_ticks_need) {
       MOTOR_DEC_TICK();
@@ -236,26 +246,26 @@ void GOTO_tick() {
 
 void GOTO_calc_positions() {
   //------------гото в процессе наведения, будем считать позицию по сделанным шагам---------------------------------
-  if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
-    //TODO CHECK IT sign +-
-    unsigned long tmp = (RA_GOTO_count_ticks_made - GOTO_RA_count_ticks_made_prev) * (RA_step_per_motor_microstep - RA_dRA_sign * GOTO_plusminus_dRA_per_1_tick);
-    if (RA_dRA_sign > 0) {
-      RA_hex_position_curr += tmp;
-    } else {
-      RA_hex_position_curr -= tmp;
-    }
-
-    //TODO CHECK IT sign +-
-    tmp = (DEC_GOTO_count_ticks_made - GOTO_DEC_count_ticks_made_prev) * DEC_step_per_motor_microstep;
-    if (DEC_dDEC_sign > 0) {
-      DEC_hex_position_curr +=  tmp;
-    } else {
-      DEC_hex_position_curr -=  tmp;
-    }
-
-    GOTO_RA_count_ticks_made_prev = RA_GOTO_count_ticks_made;
-    GOTO_DEC_count_ticks_made_prev = DEC_GOTO_count_ticks_made;
+  //if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
+  //TODO CHECK IT sign +-
+  unsigned long tmp = (RA_GOTO_count_ticks_made - GOTO_RA_count_ticks_made_prev) * (RA_step_per_motor_microstep - RA_dRA_sign * GOTO_plusminus_dRA_per_1_tick);
+  if (RA_dRA_sign > 0) {
+    RA_hex_position_curr += tmp;
+  } else {
+    RA_hex_position_curr -= tmp;
   }
+
+  //TODO CHECK IT sign +-
+  tmp = (DEC_GOTO_count_ticks_made - GOTO_DEC_count_ticks_made_prev) * DEC_step_per_motor_microstep;
+  if (DEC_dDEC_sign > 0) {
+    DEC_hex_position_curr +=  tmp;
+  } else {
+    DEC_hex_position_curr -=  tmp;
+  }
+
+  GOTO_RA_count_ticks_made_prev = RA_GOTO_count_ticks_made;
+  GOTO_DEC_count_ticks_made_prev = DEC_GOTO_count_ticks_made;
+  //}
   //else координаты достигнуты, всё устаканилось
 }
 
@@ -278,8 +288,9 @@ void GOTO_set_normal_mode() {
   SYS_STATE = SYS_STATE_GOTO_READY; //run star-speed
   MOTOR_set_RA_dir(true); //run star-speed
 
-  RA_hex_position_curr =  RA_hex_position_goto;
-  DEC_hex_position_curr = DEC_hex_position_goto;
+  //off for debugging
+  //RA_hex_position_curr =  RA_hex_position_goto;
+  //DEC_hex_position_curr = DEC_hex_position_goto;
 }
 
 

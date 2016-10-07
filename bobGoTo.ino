@@ -78,12 +78,16 @@ unsigned long RA_hex_position_goto = 0L;
 unsigned long DEC_hex_position_goto = 0L;
 
 //телескоп вручную наводим, жмем ГОТО туда же. Коорд совпали. Жми кнопку goto_synced
-uint8_t SYS_STATE = SYS_STATE_GOTO_INIT; //SYS_STATE_GOTO_INIT
+uint8_t SYS_STATE = SYS_STATE_GOTO_READY; //SYS_STATE_GOTO_INIT
 
 unsigned long RA_GOTO_count_ticks_made = 0L;
 unsigned long DEC_GOTO_count_ticks_made = 0L;
 unsigned long RA_GOTO_count_ticks_need = 0L;
 unsigned long DEC_GOTO_count_ticks_need = 0L;
+
+//RA навелось, а DEC еще в процессе. Для компенсации вращения неба RA должно еще тикать, пока тикает DEC.
+unsigned long GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need = 0L; 
+unsigned long GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_made = 0L; 
 
 unsigned long GOTO_RA_count_ticks_made_prev = 0L;
 unsigned long GOTO_DEC_count_ticks_made_prev = 0L;

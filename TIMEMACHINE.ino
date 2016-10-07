@@ -13,12 +13,12 @@ void TIMEMACHINE_loop() {
 
 void TIMEMACHINE_331ms() {
   BUTTON_check();  
-  GOTO_check_goto_is_completed();  
+  GOTO_calc_positions();
+  GOTO_check_goto_is_completed();   //DBG
 }
 void TIMEMACHINE_873ms() {    
-  GOTO_calc_positions();  
-  //делай МАХ частоту отправки, Стеллариум отзывчивее и не тупит
-  GOTO_current_positions_send_to_stellarium(); 
+  GOTO_calc_positions();    
+  GOTO_current_positions_send_to_stellarium();  //делай МАХ частоту отправки, Стеллариум отзывчивее и не тупит
 }
 
 
