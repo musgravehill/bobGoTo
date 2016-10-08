@@ -45,8 +45,19 @@ void GOTO_process() {
     //начали ГОТО-наведение
     SYS_STATE = SYS_STATE_GOTO_PROCESS;
 
+    //init variables
+    RA_GOTO_count_ticks_made = 0L;
+    DEC_GOTO_count_ticks_made = 0L;
+    RA_GOTO_count_ticks_need = 0L;
+    DEC_GOTO_count_ticks_need = 0L;
+
+    GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need = 0L;
+    GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_made = 0L;
+    GOTO_skyRotationCompensation_RAstop_DECprocess_isNeedSetRaStarRotationDir = true;
+
     GOTO_RA_count_ticks_made_prev = 0L;
     GOTO_DEC_count_ticks_made_prev = 0L;
+
 
     //get goto-command from serial-string
     char command_goto_RA_hex[9]; //one more element than your initialization is required, to hold the required null character \0
@@ -181,9 +192,6 @@ void GOTO_process() {
     }
 
     //calc count ticks for ra, dec
-    RA_GOTO_count_ticks_made = 0L;
-    DEC_GOTO_count_ticks_made = 0L;
-
     //пока мы крутим - а это время зависит от МАХ кол-ва тиков по RA или DEC
     //например, RA_difference_abs=0 DEC_difference_abs=100500 => будем тикать по DEC, а RA будет стоять,
     //НО небо-то ползет. Надо компенсировать дополнительно!
@@ -200,7 +208,6 @@ void GOTO_process() {
       //GOTO_countTicksDEC_afterFinishingRA = DEC_GOTO_count_ticks_need - RA_GOTO_count_ticks_need;
       //ГОТО-скорость выше звездной в [N = goto_motor-freq / star_moto_freq] раз, тикать надо меньше в N раз.
       GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need = 0.003819370188195 * (DEC_GOTO_count_ticks_need - RA_GOTO_count_ticks_need);
-      GOTO_skyRotationCompensation_RAstop_DECprocess_isNeedSetRaStarRotationDir = true;
     }
     else {
       GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need = 0L;
@@ -228,22 +235,24 @@ void GOTO_tick() {
     if (RA_GOTO_count_ticks_made < RA_GOTO_count_ticks_need) {
       MOTOR_RA_TICK();
       RA_GOTO_count_ticks_made++;
-    } else {
-      //Когда RA кончился, но еще тикает DEC...
-      if (GOTO_skyRotationCompensation_RAstop_DECprocess_isNeedSetRaStarRotationDir) {
-        delay(200);
-        MOTOR_set_RA_dir(true); //направление за звездами поставим перед первым тиком компенсации
-        delay(10);
-        GOTO_skyRotationCompensation_RAstop_DECprocess_isNeedSetRaStarRotationDir = false;
-      }
-      if (GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_made < GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need) {
-        MOTOR_RA_TICK();
-        GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_made++;
-      }
     }
     if (DEC_GOTO_count_ticks_made < DEC_GOTO_count_ticks_need) {
       MOTOR_DEC_TICK();
       DEC_GOTO_count_ticks_made++;
+
+      //Когда RA кончился, но еще тикает DEC...
+      if (RA_GOTO_count_ticks_made >= RA_GOTO_count_ticks_need) {
+        if (GOTO_skyRotationCompensation_RAstop_DECprocess_isNeedSetRaStarRotationDir) {
+          delay(200);
+          MOTOR_set_RA_dir(true); //направление за звездами поставим перед первым тиком компенсации
+          delay(10);
+          GOTO_skyRotationCompensation_RAstop_DECprocess_isNeedSetRaStarRotationDir = false;
+        }
+        if (GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_made < GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need) {
+          MOTOR_RA_TICK();
+          GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_made++;
+        }
+      }
     }
   }
 }
