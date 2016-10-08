@@ -241,6 +241,8 @@ void GOTO_tick() {
       DEC_GOTO_count_ticks_made++;
 
       //Когда RA кончился, но еще тикает DEC...
+      TODO сделать так, чтобы тикало 1 раз на ***** тиков ДЕС. Будет плавно тикать.
+      А то РА крутилось против звезд с высокой скоростью, потом бац - сразу за звездами с высокой скоростью.
       if (RA_GOTO_count_ticks_made >= RA_GOTO_count_ticks_need) {
         if (GOTO_skyRotationCompensation_RAstop_DECprocess_isNeedSetRaStarRotationDir) {
           delay(200);
