@@ -52,12 +52,12 @@
 // при звездной скорости на каждый шаг небо сползает на RA_step_per_motor_microstep и мотор шагает на столько же. В итоге, мы ведем за небом.
 // при высокой скорости ГОТО небо успевает сдвинуться на меньшую величину, чем выше скорость ГОТО, тем меньше сдвинется небо
 // если скорость ГОТО сверх-высокая, то небо не успеет сползти) И будет меняться только координата)))
-// = (gotoSpeed_us_for_microtick/starSpeed_us_for_microtick) * RA_step_per_motor_microstep   
+// = (gotoSpeed_us_for_microtick/starSpeed_us_for_microtick) * RA_step_per_motor_microstep
 //or  (star_moto_freq/goto_motor-freq) *RA_step_per_motor_microstep=  (/)  * 932.0675553385417
-#define GOTO_plusminus_dRA_per_1_tick 3.559911034243855 
+#define GOTO_plusminus_dRA_per_1_tick 3.559911034243855
 
 int8_t RA_dRA_sky_offset_sign = 1;
-int8_t RA_dRA_sign = 1; 
+int8_t RA_dRA_sign = 1;
 int8_t DEC_dDEC_sign = 1;
 
 //телескоп ВСЕГДА вращается за небом
@@ -86,9 +86,12 @@ unsigned long RA_GOTO_count_ticks_need = 0L;
 unsigned long DEC_GOTO_count_ticks_need = 0L;
 
 //RA навелось, а DEC еще в процессе. Для компенсации вращения неба RA должно еще тикать, пока тикает DEC.
-unsigned long GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need = 0L; 
-unsigned long GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_made = 0L; 
+unsigned long GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need = 0L;
+unsigned long GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_made = 0L;
+//когда RA закончит наводку, включим направление мотора "за звездами"
+bool GOTO_skyRotationCompensation_RAstop_DECprocess_isNeedSetRaStarRotationDir = true; 
 
+//for position calculation while goto in process
 unsigned long GOTO_RA_count_ticks_made_prev = 0L;
 unsigned long GOTO_DEC_count_ticks_made_prev = 0L;
 
@@ -118,9 +121,9 @@ void setup() {
   MOTOR_init();
   delay(10);
   Serial.begin(9600);
-  delay(10);  
+  delay(10);
 }
 
 void loop() {
-  TIMEMACHINE_loop();  
+  TIMEMACHINE_loop();
 }
