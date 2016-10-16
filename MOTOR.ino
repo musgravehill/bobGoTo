@@ -1,28 +1,28 @@
 void MOTOR_RA_TICK() {
-  PORTD |= _BV(PD3); //high
+  PORTD |= _BV(PB5); //high
   delayMicroseconds(8); //DRV8825 needs 1.9 us
-  PORTD &= ~_BV(PD3); //low
+  PORTD &= ~_BV(PB5); //low
 }
 
 void MOTOR_DEC_TICK() {
-  PORTD |= _BV(PD5); //high
+  PORTD |= _BV(PB3); //high
   delayMicroseconds(8); //8us by OWON. DRV8825 needs 1.9 us
-  PORTD &= ~_BV(PD5); //low
+  PORTD &= ~_BV(PB3); //low
 }
 
 //RA true== star_speed (ПРОТИВ ЧАСОВОЙ СТРЕЛКИ); false == counter star rotation (ПО ЧАСОВОЙ СТРЕЛКЕ)
 void MOTOR_set_RA_dir(bool dir_forward) {
   if (dir_forward) {
-    PORTD |= _BV(PD2); //high    
+    PORTD |= _BV(PB4); //high    
   } else {
-    PORTD &= ~_BV(PD2); //low    
+    PORTD &= ~_BV(PB4); //low    
   }
 }
 void MOTOR_set_DEC_dir(bool dir_forward) {
   if (dir_forward) {
-    PORTD |= _BV(PD4); //high
+    PORTD |= _BV(PB2); //high
   } else {
-    PORTD &= ~_BV(PD4); //low
+    PORTD &= ~_BV(PB2); //low
   }
 }
 

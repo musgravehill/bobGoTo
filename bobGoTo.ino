@@ -2,17 +2,18 @@
 
 //=======================INIT IN-OUT======================================================
 
-#define DRIVER_RA_DIR 2 //PD2
-#define DRIVER_RA_STEP 3 //PD3
-#define DRIVER_DEC_DIR 4 //PD4
-#define DRIVER_DEC_STEP 5 //PD5
+#define DRIVER_RA_DIR 12 //PB4
+#define DRIVER_RA_STEP 13 //PB5
+#define DRIVER_DEC_DIR 10 //PB2
+#define DRIVER_DEC_STEP 11 //PB3
 
-#define BUTTON_GOTO_SYNC 6 //PD6
+#define BUTTON_GOTO_SYNC 5 //PD5
+#define BUTTON_GOTO_SYNC_LED 3 //PD3
 
 #define BUTTON_RA_FORWARD 7 //PD7
-#define BUTTON_RA_BACKWARD 8 //PB0
+#define BUTTON_RA_BACKWARD 6 //PD6
 #define BUTTON_DEC_FORWARD 9 //PB1
-#define BUTTON_DEC_BACKWARD 10 //PB2
+#define BUTTON_DEC_BACKWARD 8 //PB0
 
 //========================================SKY MATH=========================================
 

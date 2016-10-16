@@ -1,8 +1,8 @@
 void BUTTON_check() {
   uint8_t state;
 
-  //BUTTON_GOTO_SYNC 6 //PD6
-  state = bitRead(PIND, 6);
+  //BUTTON_GOTO_SYNC 5 //PD5
+  state = bitRead(PIND, 5);
   if (state == 1) {
     GOTO_BUTTON_coordinates_sync_ok();
   }
@@ -20,8 +20,8 @@ void BUTTON_check() {
       }
     }
 
-    //BUTTON_RA_BACKWARD 8 //PB0
-    state = bitRead(PINB, 0);
+    //BUTTON_RA_BACKWARD 6 //PD6
+    state = bitRead(PIND, 6);
     if (state == 1) {
       MOTOR_set_RA_dir(false);
       for (uint8_t i = 0; i < 15; i++) {
@@ -41,8 +41,8 @@ void BUTTON_check() {
       }
     }
 
-    //BUTTON_DEC_BACKWARD 10 //PB2
-    state = bitRead(PINB, 2);
+    //BUTTON_DEC_BACKWARD 8 //PB0
+    state = bitRead(PINB, 0);
     if (state == 1) {
       MOTOR_set_DEC_dir(false);
       for (uint8_t i = 0; i < 15; i++) {
@@ -56,6 +56,12 @@ void BUTTON_check() {
 
 void BUTTON_init() {
   pinMode(BUTTON_GOTO_SYNC,  INPUT);
+  pinMode(BUTTON_GOTO_SYNC_LED,  OUTPUT);
+
+  pinMode(BUTTON_RA_FORWARD,  INPUT);
+  pinMode(BUTTON_RA_BACKWARD,  INPUT);
+  pinMode(BUTTON_DEC_FORWARD,  INPUT);
+  pinMode(BUTTON_DEC_BACKWARD,  INPUT);
 }
 
 
