@@ -62,6 +62,8 @@ void BUTTON_init() {
   pinMode(BUTTON_RA_BACKWARD,  INPUT);
   pinMode(BUTTON_DEC_FORWARD,  INPUT);
   pinMode(BUTTON_DEC_BACKWARD,  INPUT);
+
+  PORTD |= _BV(PD3); //LED goto_sync ON
 }
 
 
