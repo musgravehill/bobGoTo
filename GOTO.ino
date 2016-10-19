@@ -36,7 +36,10 @@ void GOTO_process() {
     DEC_hex_position_goto =  strtoul(command_goto_DEC_hex, NULL, 16);
 
     //skip error, null, etc.
-    if ((RA_hex_position_goto < 100) || (DEC_hex_position_goto < 100) ) {
+    if ((RA_hex_position_goto < 0x100) || (DEC_hex_position_goto < 0x100) ) {
+      return;
+    }
+    if ((RA_hex_position_goto > 0xFFFFFFF1) || (DEC_hex_position_goto > 0xFFFFFFF1) ) {
       return;
     }
 
@@ -89,7 +92,11 @@ void GOTO_process() {
     DEC_hex_position_goto =  strtoul(command_goto_DEC_hex, NULL, 16);
 
     //skip error, null, etc.
-    if ((RA_hex_position_goto < 100) || (DEC_hex_position_goto < 100) ) {
+    if ((RA_hex_position_goto < 0x100) || (DEC_hex_position_goto < 0x100) ) {
+      SYS_STATE = SYS_STATE_GOTO_READY;
+      return;
+    }
+    if ((RA_hex_position_goto > 0xFFFFFFF1) || (DEC_hex_position_goto > 0xFFFFFFF1) ) {
       SYS_STATE = SYS_STATE_GOTO_READY;
       return;
     }
