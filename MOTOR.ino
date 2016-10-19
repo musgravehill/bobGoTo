@@ -13,16 +13,24 @@ void MOTOR_DEC_TICK() {
 //RA true== star_speed (ПРОТИВ ЧАСОВОЙ СТРЕЛКИ); false == counter star rotation (ПО ЧАСОВОЙ СТРЕЛКЕ)
 void MOTOR_set_RA_dir(bool dir_forward) {
   if (dir_forward) {
-    PORTB |= _BV(PB4); //high    
+    PORTB |= _BV(PB4); //high
   } else {
-    PORTB &= ~_BV(PB4); //low    
+    PORTB &= ~_BV(PB4); //low
   }
 }
 void MOTOR_set_DEC_dir(bool dir_forward) {
-  if (dir_forward) {
-    PORTB |= _BV(PB2); //high
+  if (DEC_IS_INVERT_DIR) {
+    if (dir_forward) {
+      PORTB &= ~_BV(PB2); //low
+    } else {
+      PORTB |= _BV(PB2); //high
+    }
   } else {
-    PORTB &= ~_BV(PB2); //low
+    if (dir_forward) {
+      PORTB |= _BV(PB2); //high
+    } else {
+      PORTB &= ~_BV(PB2); //low
+    }
   }
 }
 

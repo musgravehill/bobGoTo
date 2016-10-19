@@ -164,13 +164,13 @@ void GOTO_process() {
         //  0__curr>>>>>goto___MAX
         //select shorter DEC_difference_inc_or_dec_straight
         DEC_difference_abs = DEC_difference_inc_or_dec_straight;
-        MOTOR_set_DEC_dir(false); //TODO CHECK IT
+        MOTOR_set_DEC_dir(true); //TODO CHECK IT
         DEC_dDEC_sign = 1; //наращиваем координату
       } else {
         // 0<<<<curr_____goto<<<<MAX
         //select shorter DEC_difference_through_zero
         DEC_difference_abs = DEC_difference_through_zero;
-        MOTOR_set_DEC_dir(true); //TODO CHECK IT
+        MOTOR_set_DEC_dir(false); //TODO CHECK IT
         DEC_dDEC_sign = -1; //уменьшаем координату
       }
     } else {
@@ -180,13 +180,13 @@ void GOTO_process() {
         //  0__goto<<<<<<curr___MAX
         //select shorter DEC_difference_inc_or_dec_straight
         DEC_difference_abs = DEC_difference_inc_or_dec_straight;
-        MOTOR_set_DEC_dir(true); //TODO CHECK IT
+        MOTOR_set_DEC_dir(false); //TODO CHECK IT
         DEC_dDEC_sign = -1; //уменьшаем координату
       } else {
         // 0>>>>goto_____curr>>>>>MAX
         //select shorter DEC_difference_through_zero
         DEC_difference_abs = DEC_difference_through_zero;
-        MOTOR_set_DEC_dir(false); //TODO CHECK IT
+        MOTOR_set_DEC_dir(true); //TODO CHECK IT
         DEC_dDEC_sign = 1; //наращиваем координату
       }
     }

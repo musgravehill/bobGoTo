@@ -81,7 +81,11 @@ unsigned long DEC_hex_position_goto = 0L;
 //телескоп вручную наводим, жмем ГОТО туда же. Коорд совпали. Жми кнопку goto_synced
 uint8_t SYS_STATE = SYS_STATE_GOTO_INIT; //SYS_STATE_GOTO_INIT
 
-bool SYS_IS_RC_PROCESS = false; //управляем с пульта, автоматически тикать по осям не надо
+//управляем с пульта, автоматически тикать по осям не надо
+bool SYS_IS_RC_PROCESS = false; 
+
+//телескоп справо или слева - это влияет на DEC подъем-опускание, инвертируется всё
+bool DEC_IS_INVERT_DIR = true; 
 
 unsigned long RA_GOTO_count_ticks_made = 0L;
 unsigned long DEC_GOTO_count_ticks_made = 0L;
