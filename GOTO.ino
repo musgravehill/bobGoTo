@@ -35,6 +35,11 @@ void GOTO_process() {
     RA_hex_position_goto =  strtoul(command_goto_RA_hex, NULL, 16);
     DEC_hex_position_goto =  strtoul(command_goto_DEC_hex, NULL, 16);
 
+    //skip error, null, etc.
+    if ((RA_hex_position_goto < 100) || (DEC_hex_position_goto < 100) ) {
+      return;
+    }
+
     //positions SYNCed!
     RA_hex_position_curr = RA_hex_position_goto;
     DEC_hex_position_curr = DEC_hex_position_goto;
@@ -57,7 +62,6 @@ void GOTO_process() {
 
     GOTO_RA_count_ticks_made_prev = 0L;
     GOTO_DEC_count_ticks_made_prev = 0L;
-
 
     //get goto-command from serial-string
     char command_goto_RA_hex[9]; //one more element than your initialization is required, to hold the required null character \0
@@ -83,6 +87,12 @@ void GOTO_process() {
 
     RA_hex_position_goto =  strtoul(command_goto_RA_hex, NULL, 16);
     DEC_hex_position_goto =  strtoul(command_goto_DEC_hex, NULL, 16);
+
+    //skip error, null, etc.
+    if ((RA_hex_position_goto < 100) || (DEC_hex_position_goto < 100) ) {
+      SYS_STATE = SYS_STATE_GOTO_READY;
+      return;
+    }
 
     unsigned long RA_difference_abs;
     unsigned long DEC_difference_abs;
