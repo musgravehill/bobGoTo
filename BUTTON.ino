@@ -13,42 +13,50 @@ void BUTTON_check() {
     //BUTTON_RA_FORWARD 7 //PD7
     state = bitRead(PIND, 7);
     if (state == 0) {
+      SYS_IS_RC_PROCESS = true;
       MOTOR_set_RA_dir(true);
-      for (uint8_t i = 0; i < 15; i++) {
+      for (uint8_t i = 0; i < 63; i++) {
         MOTOR_RA_TICK();
-        delay(8);
+        delay(4);
       }
+      SYS_IS_RC_PROCESS = false;
     }
 
     //BUTTON_RA_BACKWARD 6 //PD6
     state = bitRead(PIND, 6);
     if (state == 0) {
+      SYS_IS_RC_PROCESS = true;
       MOTOR_set_RA_dir(false);
-      for (uint8_t i = 0; i < 15; i++) {
+      for (uint8_t i = 0; i < 63; i++) {
         MOTOR_RA_TICK();
         delay(4);
       }
-      MOTOR_set_RA_dir(true);
+      MOTOR_set_RA_dir(true); //return normal direction for sky-correction
+      SYS_IS_RC_PROCESS = false;
     }
 
     //BUTTON_DEC_FORWARD 9 //PB1
     state = bitRead(PINB, 1);
     if (state == 0) {
+      SYS_IS_RC_PROCESS = true;
       MOTOR_set_DEC_dir(true);
-      for (uint8_t i = 0; i < 15; i++) {
+      for (uint8_t i = 0; i < 63; i++) {
         MOTOR_DEC_TICK();
         delay(4);
       }
+      SYS_IS_RC_PROCESS = false;
     }
 
     //BUTTON_DEC_BACKWARD 8 //PB0
     state = bitRead(PINB, 0);
     if (state == 0) {
+      SYS_IS_RC_PROCESS = true;
       MOTOR_set_DEC_dir(false);
-      for (uint8_t i = 0; i < 15; i++) {
+      for (uint8_t i = 0; i < 63; i++) {
         MOTOR_DEC_TICK();
         delay(4);
       }
+      SYS_IS_RC_PROCESS = false;
     }
 
   }

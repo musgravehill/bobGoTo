@@ -71,14 +71,16 @@ void TIMER_GOTO_config() {
 
 // Обработчик прерывания таймера 1
 ISR (TIMER1_COMPA_vect) {
-  if (SYS_STATE == SYS_STATE_GOTO_INIT) {
-    MOTOR_RA_TICK(); //star speed
-  }
-  else if (SYS_STATE == SYS_STATE_GOTO_READY) {
-    MOTOR_RA_TICK(); //star speed
-  }
-  else if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
-    GOTO_tick();
+  if (!SYS_IS_RC_PROCESS) {
+    if (SYS_STATE == SYS_STATE_GOTO_INIT) {
+      MOTOR_RA_TICK(); //star speed
+    }
+    else if (SYS_STATE == SYS_STATE_GOTO_READY) {
+      MOTOR_RA_TICK(); //star speed
+    }
+    else if (SYS_STATE == SYS_STATE_GOTO_PROCESS) {
+      GOTO_tick();
+    }
   }
 }
 

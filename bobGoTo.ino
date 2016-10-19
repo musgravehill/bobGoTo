@@ -81,6 +81,8 @@ unsigned long DEC_hex_position_goto = 0L;
 //телескоп вручную наводим, жмем ГОТО туда же. Коорд совпали. Жми кнопку goto_synced
 uint8_t SYS_STATE = SYS_STATE_GOTO_INIT; //SYS_STATE_GOTO_INIT
 
+bool SYS_IS_RC_PROCESS = false; //управляем с пульта, автоматически тикать по осям не надо
+
 unsigned long RA_GOTO_count_ticks_made = 0L;
 unsigned long DEC_GOTO_count_ticks_made = 0L;
 unsigned long RA_GOTO_count_ticks_need = 0L;
@@ -90,7 +92,7 @@ unsigned long DEC_GOTO_count_ticks_need = 0L;
 unsigned long GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_need = 0L;
 unsigned long GOTO_countTicksRA_forSkyRotationCompensation_afterFinishingRA_whileInProcessDEC_made = 0L;
 //когда RA закончит наводку, включим направление мотора "за звездами"
-bool GOTO_skyRotationCompensation_RAstop_DECprocess_isNeedSetRaStarRotationDir = true; 
+bool GOTO_skyRotationCompensation_RAstop_DECprocess_isNeedSetRaStarRotationDir = true;
 
 //for position calculation while goto in process
 unsigned long GOTO_RA_count_ticks_made_prev = 0L;
