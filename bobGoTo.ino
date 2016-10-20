@@ -10,6 +10,9 @@
 #define BUTTON_GOTO_SYNC 5 //PD5
 #define BUTTON_GOTO_SYNC_LED 3 //PD3
 
+#define BUTTON_DEC_INVERT_DIR 4 //PD4
+#define BUTTON_DEC_INVERT_DIR_LED 2 //PD2
+
 #define BUTTON_RA_FORWARD 7 //PD7
 #define BUTTON_RA_BACKWARD 6 //PD6
 #define BUTTON_DEC_FORWARD 9 //PB1
@@ -82,10 +85,10 @@ unsigned long DEC_hex_position_goto = 0L;
 uint8_t SYS_STATE = SYS_STATE_GOTO_INIT; //SYS_STATE_GOTO_INIT
 
 //управляем с пульта, автоматически тикать по осям не надо
-bool SYS_IS_RC_PROCESS = false; 
+bool SYS_IS_RC_PROCESS = false;
 
 //телескоп справо или слева - это влияет на DEC подъем-опускание, инвертируется всё
-bool DEC_IS_INVERT_DIR = true; 
+bool DEC_IS_INVERT_DIR = false;
 
 unsigned long RA_GOTO_count_ticks_made = 0L;
 unsigned long DEC_GOTO_count_ticks_made = 0L;
@@ -129,6 +132,8 @@ void setup() {
   delay(10);
   Serial.begin(9600);
   delay(10);
+  BUTTON_GOTO_SYNC_LED_onoff(true);
+  BUTTON_DEC_INVERT_DIR_LED_onoff(DEC_IS_INVERT_DIR);
 }
 
 void loop() {
