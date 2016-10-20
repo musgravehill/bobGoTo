@@ -1,0 +1,27 @@
+connect FT232RL
+5V
+rt tx
+gnd
+----
+KEY|EN - not connected
+
+terminal "NO R N" ! No line ending!
+
+AT+PIN1234
+AT+NAMEbobgoto
+AT+BAUD4
+
+AT+VERSION   return linvorV1.5
+
+5. Do not check parity (The version, higher than V1.5, can use this command)
+Send: AT+PN (This is the default value)
+Back: OK NONE
+
+6. Set odd parity check (The version, higher than V1.5, can use this command)
+Send: AT+PO
+Back: OK ODD
+
+7 Set even parity check (The version, higher than V1.5, can use this command)
+Send: AT+PE
+Back: OK EVEN
+

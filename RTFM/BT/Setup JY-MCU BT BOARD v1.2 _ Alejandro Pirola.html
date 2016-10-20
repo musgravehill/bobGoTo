@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/ -->
+<html lang="es-ES"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="initial-scale=1.0, width=device-width">
+<title>Setup JY-MCU BT BOARD v1.2 | Alejandro Pirola</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://apirola.wordpress.com/xmlrpc.php">
+<!--[if lt IE 9]>
+<script src="https://s0.wp.com/wp-content/themes/pub/mixfolio/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<link rel="dns-prefetch" href="https://s2.wp.com/">
+<link rel="dns-prefetch" href="https://s1.wp.com/">
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="alternate" type="application/rss+xml" title="Alejandro Pirola » Feed" href="https://apirola.wordpress.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Alejandro Pirola » RSS de los comentarios" href="https://apirola.wordpress.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Alejandro Pirola » Setup JY-MCU BT BOARD v1.2 RSS de los comentarios" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/feed/">
+	<script async="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/beacon.js.Без названия"></script><script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1473172720h&ver=4.6.1-RC1-38499"}};
+			!function(a,b,c){function d(a){var c,d,e,f,g,h=b.createElement("canvas"),i=h.getContext&&h.getContext("2d"),j=String.fromCharCode;if(!i||!i.fillText)return!1;switch(i.textBaseline="top",i.font="600 32px Arial",a){case"flag":return i.fillText(j(55356,56806,55356,56826),0,0),!(h.toDataURL().length<3e3)&&(i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,65039,8205,55356,57096),0,0),c=h.toDataURL(),i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,55356,57096),0,0),d=h.toDataURL(),c!==d);case"diversity":return i.fillText(j(55356,57221),0,0),e=i.getImageData(16,16,1,1).data,f=e[0]+","+e[1]+","+e[2]+","+e[3],i.fillText(j(55356,57221,55356,57343),0,0),e=i.getImageData(16,16,1,1).data,g=e[0]+","+e[1]+","+e[2]+","+e[3],f!==g;case"simple":return i.fillText(j(55357,56835),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode8":return i.fillText(j(55356,57135),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode9":return i.fillText(j(55358,56631),0,0),0!==i.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity","unicode9"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/wp-emoji-release.min.js.Без названия" type="text/javascript"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="all-css-0" href="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/saved_resource" type="text/css" media="all">
+<script type="text/javascript" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/saved_resource(1)"></script>
+<link rel="stylesheet" id="all-css-0" href="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/style.css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s1.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://apirola.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Configurando JY-MCU BT BOARD v1.2" href="https://apirola.wordpress.com/2012/09/05/configurando-jy-mcu-bt-board-v1-2/">
+<link rel="next" title="MinimOSD rev.0.1 running arducam-osd 2.0" href="https://apirola.wordpress.com/2012/11/07/minimosd-rev-0-1-running-arducam-osd/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/">
+<link rel="shortlink" href="http://wp.me/pj1NI-43">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=json&amp;url=https%3A%2F%2Fapirola.wordpress.com%2F2012%2F09%2F05%2Fsetup-jy-mcu-bt-board-v1-2%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=xml&amp;url=https%3A%2F%2Fapirola.wordpress.com%2F2012%2F09%2F05%2Fsetup-jy-mcu-bt-board-v1-2%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Setup JY-MCU BT BOARD v1.2">
+<meta property="og:url" content="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/">
+<meta property="og:description" content="This  Bluetooth &lt;-&gt; RS232 adapter allows connection from any device that supports RS232 to PC or mobile device that supports Bluetooth. This walkthrough demonstrates how to configure some par…">
+<meta property="article:published_time" content="2012-09-05T16:56:01+00:00">
+<meta property="article:modified_time" content="2012-11-12T14:25:56+00:00">
+<meta property="og:site_name" content="Alejandro Pirola">
+<meta property="og:image" content="https://apirola.files.wordpress.com/2012/09/photo-3_thumb.jpg?w=519&amp;h=484">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:image" content="http://i.ebayimg.com/t/JY-MCU-Inex-V1-2-Bluetooth-Transeiver-RF-Module-Wireless-Serial-6-pin-Arduino-/00/s/NjAwWDYwMA==/$(KGrHqJ,!iQE-bl!ighlBP6ElIELGg~~60_12.JPG?w=240">
+<meta name="twitter:card" content="summary">
+<meta property="fb:app_id" content="249643311490">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="apple-touch-icon-precomposed" href="https://s0.wp.com/i/webclip.png">
+<link rel="openid.server" href="https://apirola.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://apirola.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://apirola.wordpress.com/osd.xml" title="Alejandro Pirola">
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com">
+<meta name="application-name" content="Alejandro Pirola"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="Just another monkey, coding for fun"><meta name="msapplication-task" content="name=Suscríbete;action-uri=https://apirola.wordpress.com/feed/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Regístrate para crear un blog gratis;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Asistencia de WordPress.com;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Foros de WordPress.com;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="title" content="Setup JY-MCU BT BOARD v1.2 | Alejandro Pirola en WordPress.com">
+<meta name="description" content="This  Bluetooth &lt;-&gt; RS232 adapter allows connection from any device that supports RS232 to PC or mobile device that supports Bluetooth. This walkthrough demonstrates how to configure some parameters such as name and Baud rate. http://www.goodluckbuy.com/arduino-serial-bluetooth-rf-transceiver-module-rs232-passive.html By default, this adapter has the following settings: RS232 9600 Baud 8N1 Device Name &quot;linvor&quot; (a name that occurs…">
+	<style type="text/css">
+		.header-image img {
+			-webkit-border-radius: 3px;
+			border-radius: 3px;
+			display: block;
+			margin: 0 auto 20px;
+		}
+	</style>
+			<script type="text/javascript" src="https://c.amazon-adsystem.com/aax2/amzn_ads.js"></script>
+		<script type="text/javascript">
+		try { amznads.getAds("3033"); } catch(e) { /* ignore */ }
+		</script>
+		<script type="text/javascript">
+		try {
+			var a9_p = amznads.getKeys(),
+			_ipw_custom = {
+				wordAds: '0',
+				adSafe: '1',
+				domain: 'apirola.wordpress.com',
+				pageURL: 'https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/'
+			};
+			if("undefined"!=typeof a9_p&&""!=a9_p&&null!==a9_p&&"[object Array]"===Object.prototype.toString.call(a9_p)){var a="",b=0,c=a9_p.length;a9_p.sort();for(var d=0;d<c;d++){a9_p[d-b]=a9_p[d-b].replace(/a1x6p/,"a160x600p");var e=a9_p[d-b].split("p");e[0]==a&&(a9_p.splice(d-b,1),b++);a=e[0]}_ipw_custom.amznPay=a9_p};document.close();
+		} catch(e) {}
+		</script>		<!-- Criteo AdBlock Plus script-->
+		<script type="text/javascript" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/publishertag.js.Без названия"></script>
+		<!-- IPONWEB header script -->
+		<script type="text/javascript">
+			window.__ATA = {
+				scriptSrc: '//s.pubmine.com/showad.js',
+				slotPrefix: 'automattic-id-',
+				initAd: function(o) {
+					var o = o || {},
+						g = window,
+						d = g.document,
+						wr = d.write,
+						id = g.__ATA.id();
+					wr.call(d, '<div id="' + id + '" data-section="' + (o.sectionId || 0) + '"' + (o.type ? ('data-type="' + o.type + '"') : '') + ' ' + (o.forcedUrl ? ('data-forcedurl="' + o.forcedUrl + '"') : '') + ' style="width:' + (o.width || 0) + 'px; height:' + (o.height || 0) + 'px;">');
+					g.__ATA.displayAd(id);
+					wr.call(d, '</div>');
+					g.__ATA.displayAdBlockedAd( id, o );
+				},
+				displayAd: function(id) {
+					window.__ATA.ids = window.__ATA.ids || {};
+					window.__ATA.ids[id] = 1;
+				},
+				customParams: _ipw_custom,
+				id: function() {
+					return window.__ATA.slotPrefix + (parseInt(Math.random() * 10000, 10) + 1 + (new Date()).getMilliseconds());
+				},
+				displayAdBlockedAd: function( id, t ) {
+					if ( true !== true ) {
+						return;
+					}
+
+					if ( typeof Criteo !== 'object' ) {
+						return;
+					}
+
+					if ( 300 === parseInt( t.width ) && 250 === parseInt( t.height ) ) {
+						var wpa = document.getElementsByClassName( 'wpa' );
+						for( var i = 0; i < wpa.length; i++ ) {
+							wpa[i].style.setProperty( 'visibility', 'visible', 'important' );
+							wpa[i].style.setProperty( 'display', 'inline-block', 'important' );
+						}
+
+						Criteo.DisplayAcceptableAdIfAdblocked( {
+							zoneid: 388248,
+							containerid: id,
+							collapsecontainerifnotadblocked: false
+						});
+					}
+				}
+			};
+			(function(d, ata) {
+				var pr = "https:" === d.location.protocol ? "https:" : "http:",
+					src = pr + ata.scriptSrc,
+					st = "text/javascript";
+				d.write('<scr' + 'ipt type="' + st + '" src="' + src + '"><\/scr' + 'ipt>');
+			})(window.document, window.__ATA);
+		</script><script type="text/javascript" src="https://s.pubmine.com/showad.js"></script>
+		<script type="text/javascript">
+		jQuery(window).ready(function () {
+			jQuery("a.wpa-about").text("Acerca de estos anuncios");
+		});
+		</script><link rel="amphtml" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/amp/"><style type="text/css" id="syntaxhighlighteranchor"></style>
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script><script type="text/javascript" async="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/ga.js.Без названия"></script>
+<script type="text/javascript" async="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/saved_resource(2)"></script><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/services.css"><script type="text/javascript" async="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/saved_resource(3)"></script></head>
+<body lang="en" class="single single-post postid-251 single-format-standard mp6 customizer-styles-applied single-author highlander-enabled highlander-light">
+	<div id="page" class="hfeed">
+		<header id="branding" role="banner" data-dropdown="dropdown">
+			<div id="branding-inner">
+				<div class="container">
+					<hgroup>
+						<h1 id="site-title">
+							<a href="https://apirola.wordpress.com/" title="Alejandro Pirola" rel="home">
+								Alejandro Pirola							</a>
+						</h1><!-- #site-title -->
+													<h2 id="site-description">
+								Just another monkey, coding for fun							</h2><!-- #site-description -->
+											</hgroup>
+
+					<nav role="navigation" class="nav site-navigation main-navigation">
+						<h1 class="assistive-text">Menú</h1>
+						<div class="assistive-text skip-link"><a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#content" title="Skip to content">Saltar al contenido.</a></div>
+
+						<div class="menu"><ul><li><a href="https://apirola.wordpress.com/">Inicio</a></li><li class="page_item page-item-2"><a href="https://apirola.wordpress.com/about/">About</a></li></ul></div>
+					</nav><!-- .nav .site-navigation .main-navigation -->
+
+					<div class="hide-on-phones">
+							<form method="get" id="searchform" action="https://apirola.wordpress.com/" role="search">
+		<label for="s" class="assistive-text">Buscar</label>
+		<input type="text" class="field" name="s" id="s" placeholder="Buscar …">
+		<input type="submit" class="submit" name="submit" id="searchsubmit" value="Buscar">
+	</form><!-- #searchform -->					</div><!-- .hide-on-phones -->
+				</div><!-- .container -->
+			</div><!-- #branding-inner -->
+		</header><!-- #branding -->
+
+		<div class="main-outer">
+			<div id="main" class="row">
+				<div class="twelve columns">
+					
+
+	<div id="primary" class="standard">
+		<div id="content" role="main">
+
+		
+			
+<article id="post-251" class="post-251 post type-post status-publish format-standard hentry category-uncategorized">
+	<header class="entry-header">
+					<h1 class="entry-title">
+				Setup JY-MCU BT BOARD&nbsp;v1.2			</h1><!-- .entry-title -->
+		
+					<div class="entry-meta">
+				<a class="posted-on single-author-blog" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/" title="4:56 pm" rel="bookmark"><time class="entry-date" datetime="2012-09-05T16:56:01+00:00" pubdate="">Publicado en septiembre 5, 2012</time></a>							</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+
+			<div class="entry-content">
+
+			<!-- Show Quote Attribution for Quote Post Format -->
+			
+			<p>This &nbsp;Bluetooth &lt;-&gt; RS232 adapter allows connection from any device that supports RS232 to PC or mobile device that supports Bluetooth. This walkthrough demonstrates how to configure some parameters such as name and Baud rate.</p>
+<p><a href="http://www.goodluckbuy.com/arduino-serial-bluetooth-rf-transceiver-module-rs232-passive.html">http://www.goodluckbuy.com/arduino-serial-bluetooth-rf-transceiver-module-rs232-passive.html</a></p>
+<p><img alt="JY-MCU Inex V1.2 Bluetooth Transeiver RF Module Wireless Serial 6 pin Arduino" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/$(KGrHqJ,!iQE-bl!ighlBP6ElIELGg--60_12.JPG" height="238" width="238"></p>
+<p><span id="more-251"></span>By default, this adapter has the following settings:</p>
+<p>RS232</p>
+<ul>
+<li>9600 Baud 8N1</li>
+<li>Device Name “linvor” (a name that occurs as the BT device).</li>
+<li>Device pin or pass: 1234</li>
+</ul>
+<p>Once paired with your PC or another device via BT, It creates a virtual port COMxx</p>
+<p>Default settings for COMxx are 9600 Baud, 8N1, but this can be changed &nbsp;BT device configuration (I have renamed it as Quadx650):</p>
+<p><a href="http://www.microsofttranslator.com/bv.aspx?from=es&amp;to=en&amp;a=http%3A%2F%2Fapirola.files.wordpress.com%2F2012%2F09%2Fimage.png"><img title="image" alt="image" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/image_thumb.png" height="467" width="644"></a></p>
+<p><a href="http://www.microsofttranslator.com/bv.aspx?from=es&amp;to=en&amp;a=http%3A%2F%2Fapirola.files.wordpress.com%2F2012%2F09%2Fimage1.png"><img title="image" alt="image" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/image_thumb1.png" height="399" width="644"></a></p>
+<p><a href="http://www.microsofttranslator.com/bv.aspx?from=es&amp;to=en&amp;a=http%3A%2F%2Fapirola.files.wordpress.com%2F2012%2F09%2Fimage2.png"><img title="image" alt="image" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/image_thumb2.png" height="472" width="644"></a></p>
+<p>But this only changes the virtual RS232 settings but we still need to setup RS232 in the other side.</p>
+<h4>The RS232 port configuration</h4>
+<p>At this point is necessary a cable or direct RS232 connection on your computer. There are a lot of alternatives on the market, in my case I use FTDI Basic (<a href="http://www.microsofttranslator.com/bv.aspx?from=es&amp;to=en&amp;a=http%3A%2F%2Fwww.rctimer.com%2Findex.php%3FgOo%3Dgoods_details.dwt%26goodsid%3D684%26productname%3D">Buy</a>)</p>
+<p><img alt="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/684.jpg"></p>
+<p>But there are many local alternatives, some directly available on a PC home depot.</p>
+<h4></h4>
+<h4>Connecting the module for configuring through AT commands</h4>
+<p>The module is configurable through AT commands sent from RX, TX PINs when it is not paired (connected through BT with the PC).</p>
+<p>From now on everytime I say MBT (module bluetooth) and FTDI (adapter rs232 – usb)</p>
+<ol>
+<li>Unpair BT device.</li>
+<li>Feed the module with 5v, in my case the USB adapter is 5V.
+<ol>
+<li>5V (FTDI) – &gt; 5v (MBT)</li>
+<li>GND – &gt; GND</li>
+</ol>
+</li>
+<li>Connect the RS232 pin
+<ol>
+<li>(MBT) TX – &gt; RX (FTDI)</li>
+<li>RX (of the MBT) – &gt; TX (FTDI)</li>
+</ol>
+</li>
+<li>Download <a href="http://www.microsofttranslator.com/bv.aspx?from=es&amp;to=en&amp;a=http%3A%2F%2Fwww.chiark.greenend.org.uk%2F~sgtatham%2Fputty%2Fdownload.html">PuTTY.exe</a></li>
+</ol>
+<p>Well now we can connect through FTDI to the MBT using PuTTY:</p>
+<p><a href="http://www.microsofttranslator.com/bv.aspx?from=es&amp;to=en&amp;a=http%3A%2F%2Fapirola.files.wordpress.com%2F2012%2F09%2Fimage3.png"><img title="image" alt="image" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/image_thumb3.png" height="369" width="644"></a></p>
+<p>COM17 is the FTDI port, in your case it could be another. Remember default setting is 9600 8N1 .</p>
+<p><a href="http://www.microsofttranslator.com/bv.aspx?from=es&amp;to=en&amp;a=http%3A%2F%2Fapirola.files.wordpress.com%2F2012%2F09%2Fimage4.png"><img title="image" alt="image" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/image_thumb4.png" height="190" width="644"></a></p>
+<p>In PuTTY type AT (do not press enter) and if the response is OK means that we did everything correctly.</p>
+<p>It is now time to set up the MBT using a series of AT commands. My recommendation is to open a Notepad and write the commands that we are going to use, then copy and paste in the terminal (use right click on the terminal, do not use Ctrl + V). Why? couse MBT process the command to fast, if you manually type the command it fails but when you paste the whole sentence it works fine.</p>
+<p>To change the device name BT must send AT+NAMExxxxx, in my case, use the following command to baptize it Quadx650</p>
+<blockquote><p>AT+NAMEQuadx650</p></blockquote>
+<p>To change the Baud rate, and upload it to 115200 use BAUD8 that in the table is equivalent to 115200.</p>
+<blockquote><p>AT+BAUD8</p></blockquote>
+<p>For testing it is possible to mate the device and open two consoles one pointing the FTDI COM and another to the COM on the MBT. Anything typed on a console should echo in the other.</p>
+<p><a href="http://www.microsofttranslator.com/bv.aspx?from=es&amp;to=en&amp;a=http%3A%2F%2Fapirola.files.wordpress.com%2F2012%2F09%2Fphoto-1.jpg"><img title="photo 1" alt="photo 1" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/photo-1_thumb.jpg" height="484" width="644"></a></p>
+<p><a href="http://www.microsofttranslator.com/bv.aspx?from=es&amp;to=en&amp;a=http%3A%2F%2Fapirola.files.wordpress.com%2F2012%2F09%2Fphoto-2.jpg"><img title="photo 2" alt="photo 2" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/photo-2_thumb.jpg" height="484" width="644"></a></p>
+<p><a href="http://www.microsofttranslator.com/bv.aspx?from=es&amp;to=en&amp;a=http%3A%2F%2Fapirola.files.wordpress.com%2F2012%2F09%2Fphoto-3.jpg"><img title="photo 3" alt="photo 3" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/photo-3_thumb.jpg" height="484" width="519"></a></p>
+<p>You can then change the parity, PIN etc. For them I leave the rest of the AT commands</p>
+<h4></h4>
+<h4>HCxx Manual</h4>
+<p>This is the HCxx manual, wich is the small board attached to JY-MCU:<a href="https://apirola.files.wordpress.com/2012/11/hc-serial-bluetooth-products-201104.pdf">&nbsp;https://apirola.files.wordpress.com/2012/11/hc-serial-bluetooth-products-201104.pdf</a></p>
+<h4>AT command set</h4>
+<blockquote><p>The way to the AT command mode: supply power to the module, it will enter to the AT mode if it<br>
+needn’t pair. The interval of command is about 1 second.<br>
+Default parameter: Baud rate:9600N81, ID: linvor, Password:1234</p>
+<p>1 Test communication<br>
+Send: AT (please send it every second)<br>
+Back: OK</p>
+<p>2 Reset the Bluetooth serial baud rate<br>
+Send: AT+BAUD1<br>
+Back: OK1200<br>
+Send: AT+BAUD2<br>
+Back: OK2400<br>
+……<br>
+1– 1200<br>
+2– 2400<br>
+3– 4800<br>
+4– 9600 (Default)<br>
+5– 19200<br>
+6– 38400<br>
+7– 57600<br>
+8– 115200<br>
+9– 230400<br>
+A– 460800<br>
+B— 921600<br>
+C— 1382400<br>
+PC can’t support the baud rate 115200 than lager. The solution is: make the MCUS have higher baud<br>
+rate (lager than 115200) through programming, and reset the baud rate to low level through the AT<br>
+command.<br>
+The baud rate reset by the AT command can be kept for the next time even though the power is cut<br>
+off.</p>
+<p>3. Reset the Bluetooth name<br>
+Send: AT+NAMEname<br>
+Back: OKname</p>
+<p>Parameter name: Name needed to be set (20 characters limited)<br>
+Por Ejemplo:<br>
+Send: AT + NAMEbill_gates<br>
+Back: OKname<br>
+Now, the Bluetooth name is reset to be “bill_gates”<br>
+The parameter can be kept even though the power is cut off. User can see the new Bluetooth name<br>
+PDA in refresh service. (Note: The name is limited in 20 characters.)</p>
+<p>4 change the Bluetooth password pair<br>
+Send: AT+PINxxxx<br>
+Back:OKsetpin<br>
+Parameter xxxx: The pair password needed to be set, is a 4-bit number. This command can be used<br>
+in the master and slave module. At some occasions, the master module may be asked to enter the<br>
+when the master password module tries to connect the slave module (adapter or cell-phone). Only if the<br>
+password is entered, the successful connection can be built. At the other occasions, the pair can be finish<br>
+automatically if the master module can search the proper slave module and the password is correct.<br>
+Besides the paired slave module, the master can connect the other devices who have slave module, such<br>
+as digital camera Bluetooth, Bluetooth GPS, Bluetooth serial printer etc.<br>
+Por Ejemplo:<br>
+Send: AT+PIN8888<br>
+Back: OKsetpin<br>
+Then the password is changed to be 8888, while the default is 1234.<br>
+This parameter can be kept even though the power is cut off.</p>
+<p>5. Do not check parity (The version, higher than V1.5, can use this command)<br>
+Send: AT+PN (This is the default value)<br>
+Back: OK NONE</p>
+<p>6. Set odd parity check (The version, higher than V1.5, can use this command)<br>
+Send: AT+PO<br>
+Back: OK ODD</p>
+<p>7 Set even parity check (The version, higher than V1.5, can use this command)<br>
+Send: AT+PE<br>
+Back: OK EVEN</p>
+<p>8 Get the AT version<br>
+Send: AT+VERSION<br>
+Back: LinvorV1.n</p></blockquote>
+		<div class="wpcnt">
+			<div class="wpa wpmrec" style="visibility: visible !important; display: inline-block !important;">
+				<a class="wpa-about" href="https://wordpress.com/about-these-ads/" rel="nofollow">Acerca de estos anuncios</a>
+				<div class="u">
+					<script type="text/javascript">
+					(function(g){g.__ATA.initAd({sectionId:26942, width:300, height:250});})(window);
+					</script><div id="automattic-id-5926" data-section="26942" style="width:300px; height:250px;"></div>
+				</div>
+			</div>
+		</div><div id="jp-post-flair" class="sharedaddy sd-like-enabled"><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-4535158-251-580868f812977" data-src="//widgets.wp.com/likes/#blog_id=4535158&amp;post_id=251&amp;origin=apirola.wordpress.com&amp;obj_id=4535158-251-580868f812977" data-name="like-post-frame-4535158-251-580868f812977"><h3 class="sd-title">Me gusta:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>Me gusta</span></span> <span class="loading">Cargando...</span></div><iframe class="post-likes-widget jetpack-likes-widget" name="like-post-frame-4535158-251-580868f812977" height="55px" width="100%" frameborder="0" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/saved_resource.html"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Relacionado</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal"><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="242" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://apirola.wordpress.com/2012/09/05/configurando-jy-mcu-bt-board-v1-2/" title="Configurando JY-MCU BT BOARD v1.2
+
+Este adaptador RS232 &amp;lt;-&amp;gt; Bluetooth nos permite disponer de conexión contra cualquier dispositivo que soporte RS232 desde la PC o dispositivo móvil que soporte Bluetooth. Este tutorial muestra como configurar algunos parametros como Nombre y Baud rate. Por defecto este adaptador tiene los siguientes settings: RS232 9600 Baud 8N1 Device…" rel="nofollow" data-origin="251" data-position="0">Configurando JY-MCU BT BOARD v1.2</a></span><span class="jp-relatedposts-post-context">En "Arduino"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="191" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://apirola.wordpress.com/2011/10/06/r-i-p-silverlight-y-flash/" title="R.I.P. Silverlight y Flash
+
+Creo que lo que el difunto Steve Jobs alguna vez vaticino sobre Flash se cumple. HTML5 crece junto con el segmento mobile y la necesidad de unificar un standard de codificación independiente de la plataforma y que por supuesto no este basada en mágicos generadores de código. Los frameworks que aprovechan todas las facilidades de…" rel="nofollow" data-origin="251" data-position="1">R.I.P. Silverlight y Flash</a></span><span class="jp-relatedposts-post-context">En "CSS3"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="278" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://apirola.wordpress.com/2012/11/07/minimosd-rev-0-1-running-arducam-osd/" title="MinimOSD rev.0.1 running arducam-osd 2.0
+
+Firmware: MinimOSD_20.hex from  http://code.google.com/p/arducam-osd/ Hardware: MinimOSD rev.0.1 board from http://www.goodluckbuy.com/on-screen-display-osd-board-minimosd-apm-telemetry-to-apm-1-and-apm-2.html Total cost: u$s 21 Connected to CRIUS AIO PRO running MegapirateNG 2.7 R6 I have to say that the idea of an OSD MAVlink 1.0 sounds great, but I only have a couple of MinimOSDv0.1 and DIYdrones offers MinimOSD rev1.1.…" rel="nofollow" data-origin="251" data-position="2">MinimOSD rev.0.1 running arducam-osd 2.0</a></span><span class="jp-relatedposts-post-context">En "Quadcopter"</span></p></div></div></div>
+			<!-- Show Quote Attribution for Quote Post Format -->
+			
+					</div><!-- .entry-content -->
+	
+	<footer class="entry-meta">
+								<span class="cat-links">
+				Publicado en <a href="https://apirola.wordpress.com/category/uncategorized/" rel="category tag">Uncategorized</a>			</span>
+			<span class="sep"> | </span>
+			
+					
+					<span class="comments-link"><a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comments">12 comentarios</a></span>
+			<span class="sep"> | </span>
+		
+			</footer><!-- #entry-meta -->
+</article><!-- #post-251 -->
+				<nav role="navigation" id="nav-below" class="site-navigation post-navigation">
+		<h1 class="assistive-text">Navegador de artículos</h1>
+
+	
+					<div class="nav-previous"><a href="https://apirola.wordpress.com/2012/09/05/configurando-jy-mcu-bt-board-v1-2/" rel="prev"><span class="meta-nav">←</span> Configurando JY-MCU BT BOARD&nbsp;v1.2</a></div>		
+		<div class="nav-next"><a href="https://apirola.wordpress.com/2012/11/07/minimosd-rev-0-1-running-arducam-osd/" rel="next">MinimOSD rev.0.1 running arducam-osd&nbsp;2.0 <span class="meta-nav">→</span></a></div>
+	
+	</nav><!-- #nav-below -->
+	
+			
+
+	<div id="comments" class="comments-area">
+
+	
+			<h2 id="comments-title">
+			12 pensamientos en “<span>Setup JY-MCU BT BOARD&nbsp;v1.2</span>”		</h2>
+
+		
+		<ol class="commentlist">
+				<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-31">
+		<article id="comment-31" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/34d7ff83168ebf223357c0298b7d5e7b" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-34d7ff83168ebf223357c0298b7d5e7b-0">					<cite class="fn">Alex</cite> <span class="says">dijo:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-31"><time pubdate="" datetime="2012-10-30T18:58:51+00:00">
+					octubre 30, 2012 en 6:58 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content">
+				<p>Hi,<br>
+I have been trying to change the baudrate on my JY-MCU INEX BT_BOARD V1.2 and have linked it up to my pc using and FDTI adaptor (arduino uno with chip removed) and also with a CP2102 USB to serial adaptor.<br>
+In both cases I have installed the drivers for the adapters and they show up in device manager where I check the COM port.<br>
+However the device manager does not say anything about it being a bluetooth device, just a “Communications port” or “USB to UART Bridge”.</p>
+<p>I start up Putty set the baud rate to 9600, set flow control to none and open a putty terminal.<br>
+The terminal opens, but then nothing else. I have tried entering “AT” but nothing appears in the terminal.<br>
+With every keystroke I do, the RX light flashes on my FDTI adapter but there is nothing on TX or on screen.<br>
+I have tried reversing RX and TX with no effect.</p>
+<p>I can pair a device with the bluetooth module, and I know I have successfully used this before as a connection between my phone and an Arduino.<br>
+I do not recall ever changing the baud rate. (I have tried 115200 in putty just in case but it makes no difference).</p>
+<p>Is there anything special one has to do to be able to type in the Putty terminal? Am I missing something here?</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/?replytocom=31#respond" onclick="return addComment.moveForm( &quot;comment-31&quot;, &quot;31&quot;, &quot;respond&quot;, &quot;251&quot; )" aria-label="Responder a Alex">Responder</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+	<li class="comment odd alt depth-2 highlander-comment" id="li-comment-32">
+		<article id="comment-32" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/34d7ff83168ebf223357c0298b7d5e7b" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-34d7ff83168ebf223357c0298b7d5e7b-1">					<cite class="fn">Alex</cite> <span class="says">dijo:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-32"><time pubdate="" datetime="2012-10-30T19:00:37+00:00">
+					octubre 30, 2012 en 7:00 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content">
+				<p>Also, I have successfully used that FDTI adapter to change the baudrate for a GPS module through serial. Just not using Putty.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/?replytocom=32#respond" onclick="return addComment.moveForm( &quot;comment-32&quot;, &quot;32&quot;, &quot;respond&quot;, &quot;251&quot; )" aria-label="Responder a Alex">Responder</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even depth-2 highlander-comment" id="li-comment-297">
+		<article id="comment-297" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/0066317141a7f66079b8c61a38bdd522" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-0066317141a7f66079b8c61a38bdd522-0">					<cite class="fn">Mark Petersen</cite> <span class="says">dijo:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-297"><time pubdate="" datetime="2015-07-18T20:23:13+00:00">
+					julio 18, 2015 en 8:23 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content">
+				<p>I have the same problem. I can see my FTDI board, all drivers look good, and I can pair with the HC-06, but when I issue AT commands to the board I get no response. And I too have used my FTDI board to configure a Minnim OSD, so I know it works.</p>
+<p>Question: Does my FTDI board need to be set to 3.3volt on the back of the board? Alejamp, can you look and see how yours is set since you’ve been successful with this combination?<br>
+Thanks.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/?replytocom=297#respond" onclick="return addComment.moveForm( &quot;comment-297&quot;, &quot;297&quot;, &quot;respond&quot;, &quot;251&quot; )" aria-label="Responder a Mark Petersen">Responder</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-35">
+		<article id="comment-35" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/169b0078e474b79681d23df571e71586" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-169b0078e474b79681d23df571e71586-0">					<cite class="fn"><a href="http://gravatar.com/kdmcmullan" rel="external nofollow" class="url">KDM</a></cite> <span class="says">dijo:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-35"><time pubdate="" datetime="2012-11-11T09:49:16+00:00">
+					noviembre 11, 2012 en 9:49 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content">
+				<p>I’ve been able to communicate with my BT adapter successfully with the advice given here. I issue the AT commands and get good response. If I change the baud rate, I must also change the baud rate of my terminal, so I know it works.</p>
+<p>The problem is that when I remove power the BT adapter seems to forget the settings I gave it, reverting back to linvor, 1234, 9600 baud, etc.</p>
+<p>Is there a command to tell it to retain the settings, or are they lost on power down?</p>
+<p>Many thanks.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/?replytocom=35#respond" onclick="return addComment.moveForm( &quot;comment-35&quot;, &quot;35&quot;, &quot;respond&quot;, &quot;251&quot; )" aria-label="Responder a KDM">Responder</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-alejamp bypostauthor even depth-2 highlander-comment" id="li-comment-36">
+		<article id="comment-36" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/1b00c5591200fc85743b34dbdaf792b2" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-1b00c5591200fc85743b34dbdaf792b2-0">					<cite class="fn">alejamp</cite> <span class="says">dijo:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-36"><time pubdate="" datetime="2012-11-12T14:24:36+00:00">
+					noviembre 12, 2012 en 2:24 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content">
+				<p>KDM, I don’t know why your BT module seems to forget the settings. Settings should be persistent. Make sure your power supply is 5V.<br>
+I have changed the settings once and them install it in my quadcopter. I have used it several times without need of re setup the BT module.<br>
+I have the HCxx module manual, which is the small board attached to JY-MCU, here is the link:</p>
+<p><a href="https://apirola.files.wordpress.com/2012/11/hc-serial-bluetooth-products-201104.pdf" rel="nofollow">https://apirola.files.wordpress.com/2012/11/hc-serial-bluetooth-products-201104.pdf</a></p>
+<p>Sorry I can’t help you.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/?replytocom=36#respond" onclick="return addComment.moveForm( &quot;comment-36&quot;, &quot;36&quot;, &quot;respond&quot;, &quot;251&quot; )" aria-label="Responder a alejamp">Responder</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-57">
+		<article id="comment-57" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/c9a97b1c0bde64dc2ef2b2c2cb128f48" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-c9a97b1c0bde64dc2ef2b2c2cb128f48-0">					<cite class="fn">Gaia</cite> <span class="says">dijo:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-57"><time pubdate="" datetime="2013-01-12T22:50:02+00:00">
+					enero 12, 2013 en 10:50 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content">
+				<p>How many phones would you say this device can pair with at a time?</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/?replytocom=57#respond" onclick="return addComment.moveForm( &quot;comment-57&quot;, &quot;57&quot;, &quot;respond&quot;, &quot;251&quot; )" aria-label="Responder a Gaia">Responder</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-alejamp bypostauthor even depth-2 highlander-comment" id="li-comment-58">
+		<article id="comment-58" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/1b00c5591200fc85743b34dbdaf792b2" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-1b00c5591200fc85743b34dbdaf792b2-1">					<cite class="fn">alejamp</cite> <span class="says">dijo:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-58"><time pubdate="" datetime="2013-01-13T01:29:45+00:00">
+					enero 13, 2013 en 1:29 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content">
+				<p>1</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/?replytocom=58#respond" onclick="return addComment.moveForm( &quot;comment-58&quot;, &quot;58&quot;, &quot;respond&quot;, &quot;251&quot; )" aria-label="Responder a alejamp">Responder</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-60">
+		<article id="comment-60" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/picture" class="avatar avatar-40" height="40" width="40">					<cite class="fn"><a href="http://www.facebook.com/abirenboim" rel="external nofollow" class="url">Aaron Birenboim</a></cite> <span class="says">dijo:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-60"><time pubdate="" datetime="2013-01-18T17:35:00+00:00">
+					enero 18, 2013 en 5:35 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content">
+				<p>Alex:  Same problem.  I seem to be able to change name, but not baud rate or PIN</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/?replytocom=60#respond" onclick="return addComment.moveForm( &quot;comment-60&quot;, &quot;60&quot;, &quot;respond&quot;, &quot;251&quot; )" aria-label="Responder a Aaron Birenboim">Responder</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-63">
+		<article id="comment-63" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/308e7c5e1fdc61dd8dcd80519b06d6b5" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-308e7c5e1fdc61dd8dcd80519b06d6b5-0">					<cite class="fn">123</cite> <span class="says">dijo:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-63"><time pubdate="" datetime="2013-05-20T04:36:16+00:00">
+					mayo 20, 2013 en 4:36 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content">
+				<p>Hello, how to translate bt-rs232 jy-mcu v1.3 mode AT commands?</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/?replytocom=63#respond" onclick="return addComment.moveForm( &quot;comment-63&quot;, &quot;63&quot;, &quot;respond&quot;, &quot;251&quot; )" aria-label="Responder a 123">Responder</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-65">
+		<article id="comment-65" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/a7094759524a8548965690c605d490e6" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-a7094759524a8548965690c605d490e6-0">					<cite class="fn">Nic</cite> <span class="says">dijo:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-65"><time pubdate="" datetime="2013-05-26T15:22:53+00:00">
+					mayo 26, 2013 en 3:22 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content">
+				<p>Most helpful. I’d got a loopback test working fine, but resetting the default settings was causing me grief. This page has saved me lots of time! Thanks, Nic</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/?replytocom=65#respond" onclick="return addComment.moveForm( &quot;comment-65&quot;, &quot;65&quot;, &quot;respond&quot;, &quot;251&quot; )" aria-label="Responder a Nic">Responder</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-66">
+		<article id="comment-66" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/016ae7f06008777ac828bf154b061930" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-016ae7f06008777ac828bf154b061930-0">					<cite class="fn"><a href="http://www.universalschluessel.de/" rel="external nofollow" class="url">buy levitra</a></cite> <span class="says">dijo:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-66"><time pubdate="" datetime="2013-06-14T04:59:31+00:00">
+					junio 14, 2013 en 4:59 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content">
+				<p>My partner and I stumbled over here coming from a different web<br>
+address and thought I may as well check things out.<br>
+I like what I see so now i’m following you. Look forward to going over your web page for a second time.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/?replytocom=66#respond" onclick="return addComment.moveForm( &quot;comment-66&quot;, &quot;66&quot;, &quot;respond&quot;, &quot;251&quot; )" aria-label="Responder a buy levitra">Responder</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-67">
+		<article id="comment-67" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/3c27c84c141984d0b754a8fee8c1c8f6" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-3c27c84c141984d0b754a8fee8c1c8f6-0">					<cite class="fn"><a href="http://jau.cz/index.php?do=basic" rel="external nofollow" class="url">buy Xanax</a></cite> <span class="says">dijo:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-67"><time pubdate="" datetime="2013-06-18T00:19:16+00:00">
+					junio 18, 2013 en 12:19 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content">
+				<p>I loved as much as you will receive carried out right here.<br>
+The sketch is tasteful, your authored subject matter<br>
+stylish. nonetheless, you command get got an nervousness over that<br>
+you wish be delivering the following. unwell unquestionably come<br>
+more formerly again since exactly the same nearly a lot often inside case you shield<br>
+this hike.</p>
+			</div><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/?replytocom=67#respond" onclick="return addComment.moveForm( &quot;comment-67&quot;, &quot;67&quot;, &quot;respond&quot;, &quot;251&quot; )" aria-label="Responder a buy Xanax">Responder</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+		</ol>
+
+		
+	
+	
+					<div id="respond" class="comment-respond js">
+			<h3 id="reply-title" class="comment-reply-title">Deja un comentario <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#respond" style="display:none;">Cancelar respuesta</a></small></h3>				<form action="https://apirola.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+					<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="9a497f71ce"><input type="hidden" name="_wp_http_referer" value="/2012/09/05/setup-jy-mcu-bt-board-v1-2/">
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; transition: none; height: 0px !important; min-height: 0px !important; font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; text-decoration: none; word-spacing: 0px; text-indent: 0px; line-height: normal; width: 615px;" class="autosizejs "></textarea><textarea id="comment" name="comment" title="Introduce aquí tu comentario..." placeholder="Introduce aquí tu comentario..." style="height: 36px; overflow: hidden; word-wrap: break-word; resize: none;"></textarea></div>
+</div>
+
+<div id="comment-form-identity" style="display: none;">
+
+	<div id="comment-form-nascar">
+		<p>Introduce tus datos o haz clic en un icono para iniciar sesión:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-form-guest" id="postas-guest" title="Invitado">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/saved_resource(8).html" width="24" height="24" scrolling="no" allowtransparency="true" seamless="seamless" frameborder="0"></iframe>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/ad516503a11cd5ca435acc9bb6523536" alt="Gravatar" width="25" class="no-grav">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Correo electrónico <span class="required">(necesario)</span> <span class="nopublish">(La dirección no se hará pública)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Nombre <span class="required">(necesario)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Web</label>
+					<div class="comment-form-input"><input id="url" name="url" type="text" value=""></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/ad516503a11cd5ca435acc9bb6523536" alt="Logo de WordPress.com" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="">
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> Estás comentando usando tu cuenta de <span class="skimlinks-unlinked">WordPress.com</span>. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;wordpress&#39; );">Cerrar&nbsp;sesión</a>&nbsp;/&nbsp;<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Cambiar</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/ad516503a11cd5ca435acc9bb6523536" alt="Imagen de Twitter" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> Estás comentando usando tu cuenta de Twitter. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;twitter&#39; );">Cerrar&nbsp;sesión</a>&nbsp;/&nbsp;<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Cambiar</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/ad516503a11cd5ca435acc9bb6523536" alt="Foto de Facebook" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> Estás comentando usando tu cuenta de Facebook. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;facebook&#39; );">Cerrar&nbsp;sesión</a>&nbsp;/&nbsp;<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Cambiar</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/ad516503a11cd5ca435acc9bb6523536" alt="Google+ photo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="">
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> Estás comentando usando tu cuenta de Google+. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;googleplus&#39; );">Cerrar&nbsp;sesión</a>&nbsp;/&nbsp;<a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Cambiar</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancelar</a></div>
+		<p>Conectando a %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe" style="display: none;">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notificarme los nuevos comentarios por correo electrónico.</label></p></div>
+
+
+
+
+<p class="form-submit" style="display: none;"><input name="submit" type="submit" id="comment-submit" class="submit" value="Publicar comentario"> <input type="hidden" name="comment_post_ID" value="251" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="2bf280acda"></p>
+<input type="hidden" name="genseq" value="1476946168">
+<p style="display: none;"></p>				<input type="hidden" id="ak_js" name="ak_js" value="1476946498338"></form>
+					</div><!-- #respond -->
+		<div style="clear: both"></div>
+</div><!-- #comments .comments-area -->
+		
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+<div id="secondary" class="widget-area" role="complementary">
+	<aside id="pages-2" class="widget widget_pages"><h1 class="widget-title">Páginas</h1>		<ul>
+			<li class="page_item page-item-2"><a href="https://apirola.wordpress.com/about/">About</a></li>
+		</ul>
+		</aside><aside id="meta-2" class="widget widget_meta"><h1 class="widget-title">Tags</h1>			<ul>
+			<li><a href="https://wordpress.com/start/es?ref=wplogin">Registrarse</a></li>			<li><a href="https://apirola.wordpress.com/wp-login.php">Acceder</a></li>
+			<li><a href="https://apirola.wordpress.com/feed/"><abbr title="Really Simple Syndication">RSS</abbr> de las entradas</a></li>
+			<li><a href="https://apirola.wordpress.com/comments/feed/"><abbr title="Really Simple Syndication">RSS</abbr> de los comentarios</a></li>
+			<li><a href="https://wordpress.com/" title="Gestionado con WordPress, una avanzada plataforma semántica de publicación personal.">WordPress.com</a></li>			</ul>
+			</aside><aside id="categories-245447841" class="widget widget_categories"><h1 class="widget-title">Categorías</h1>		<ul>
+	<li class="cat-item cat-item-5389798"><a href="https://apirola.wordpress.com/category/appcelerator/">AppCelerator</a>
+</li>
+	<li class="cat-item cat-item-281988"><a href="https://apirola.wordpress.com/category/aptana/">Aptana</a>
+</li>
+	<li class="cat-item cat-item-134289"><a href="https://apirola.wordpress.com/category/arduino/">Arduino</a>
+</li>
+	<li class="cat-item cat-item-2426"><a href="https://apirola.wordpress.com/category/c/">C#</a>
+</li>
+	<li class="cat-item cat-item-324281"><a href="https://apirola.wordpress.com/category/ios/">iOS</a>
+</li>
+	<li class="cat-item cat-item-2210435"><a href="https://apirola.wordpress.com/category/iphone-sdk/">iPhone SDK</a>
+</li>
+	<li class="cat-item cat-item-457"><a href="https://apirola.wordpress.com/category/javascript/">Javascript</a>
+</li>
+	<li class="cat-item cat-item-52007953"><a href="https://apirola.wordpress.com/category/multicopter/">Multicopter</a>
+</li>
+	<li class="cat-item cat-item-22319505"><a href="https://apirola.wordpress.com/category/nosql/">NoSQL</a>
+</li>
+	<li class="cat-item cat-item-101584"><a href="https://apirola.wordpress.com/category/ocr/">OCR</a>
+</li>
+	<li class="cat-item cat-item-832"><a href="https://apirola.wordpress.com/category/python/">Python</a>
+</li>
+	<li class="cat-item cat-item-10970481"><a href="https://apirola.wordpress.com/category/quadcopter/">Quadcopter</a>
+</li>
+	<li class="cat-item cat-item-67189685"><a href="https://apirola.wordpress.com/category/nosql/ravendb-nosql/">RavenDB</a>
+</li>
+	<li class="cat-item cat-item-5307557"><a href="https://apirola.wordpress.com/category/nosql/redis/">Redis</a>
+</li>
+	<li class="cat-item cat-item-398770"><a href="https://apirola.wordpress.com/category/nosql/riak/">Riak</a>
+</li>
+	<li class="cat-item cat-item-178048"><a href="https://apirola.wordpress.com/category/titanium/">Titanium</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://apirola.wordpress.com/category/uncategorized/">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-176525"><a href="https://apirola.wordpress.com/category/xcode/">XCode</a>
+</li>
+		</ul>
+</aside><aside id="wp_tag_cloud-2" class="widget wp_widget_tag_cloud"><h1 class="widget-title"></h1><div style="overflow:hidden"><a href="https://apirola.wordpress.com/tag/net/" class="tag-link-2427 tag-link-position-1" title="1 tema" style="font-size: 13px;">.NET</a>
+<a href="https://apirola.wordpress.com/tag/ankhsvn/" class="tag-link-284407 tag-link-position-2" title="1 tema" style="font-size: 13px;">AnkhSVN</a>
+<a href="https://apirola.wordpress.com/tag/appcelerator-2/" class="tag-link-46384266 tag-link-position-3" title="3 temas" style="font-size: 21px;">appcelerator</a>
+<a href="https://apirola.wordpress.com/tag/aptana-2/" class="tag-link-46384262 tag-link-position-4" title="2 temas" style="font-size: 17.8px;">aptana</a>
+<a href="https://apirola.wordpress.com/tag/arducam-osd/" class="tag-link-123242338 tag-link-position-5" title="1 tema" style="font-size: 13px;">arducam-osd</a>
+<a href="https://apirola.wordpress.com/tag/arducopter/" class="tag-link-37500757 tag-link-position-6" title="1 tema" style="font-size: 13px;">Arducopter</a>
+<a href="https://apirola.wordpress.com/tag/arduino/" class="tag-link-134289 tag-link-position-7" title="1 tema" style="font-size: 13px;">Arduino</a>
+<a href="https://apirola.wordpress.com/tag/arquitectura/" class="tag-link-3705 tag-link-position-8" title="1 tema" style="font-size: 13px;">arquitectura</a>
+<a href="https://apirola.wordpress.com/tag/autocomplete/" class="tag-link-336308 tag-link-position-9" title="1 tema" style="font-size: 13px;">autocomplete</a>
+<a href="https://apirola.wordpress.com/tag/base-de-datos/" class="tag-link-63239 tag-link-position-10" title="1 tema" style="font-size: 13px;">base de datos</a>
+<a href="https://apirola.wordpress.com/tag/bluetooth/" class="tag-link-31280 tag-link-position-11" title="1 tema" style="font-size: 13px;">Bluetooth</a>
+<a href="https://apirola.wordpress.com/tag/c/" class="tag-link-2426 tag-link-position-12" title="1 tema" style="font-size: 13px;">C#</a>
+<a href="https://apirola.wordpress.com/tag/cassandra/" class="tag-link-566348 tag-link-position-13" title="1 tema" style="font-size: 13px;">Cassandra</a>
+<a href="https://apirola.wordpress.com/tag/computer-vision/" class="tag-link-76379 tag-link-position-14" title="1 tema" style="font-size: 13px;">Computer Vision</a>
+<a href="https://apirola.wordpress.com/tag/crius/" class="tag-link-46782114 tag-link-position-15" title="1 tema" style="font-size: 13px;">CRIUS</a>
+<a href="https://apirola.wordpress.com/tag/css3/" class="tag-link-66426 tag-link-position-16" title="1 tema" style="font-size: 13px;">CSS3</a>
+<a href="https://apirola.wordpress.com/tag/cultureinfo/" class="tag-link-10290979 tag-link-position-17" title="1 tema" style="font-size: 13px;">CultureInfo</a>
+<a href="https://apirola.wordpress.com/tag/deskew/" class="tag-link-10311818 tag-link-position-18" title="1 tema" style="font-size: 13px;">Deskew</a>
+<a href="https://apirola.wordpress.com/tag/editor/" class="tag-link-32974 tag-link-position-19" title="1 tema" style="font-size: 13px;">editor</a>
+<a href="https://apirola.wordpress.com/tag/escalabilidad/" class="tag-link-2976008 tag-link-position-20" title="1 tema" style="font-size: 13px;">escalabilidad</a>
+<a href="https://apirola.wordpress.com/tag/flash/" class="tag-link-456 tag-link-position-21" title="1 tema" style="font-size: 13px;">Flash</a>
+<a href="https://apirola.wordpress.com/tag/hosting/" class="tag-link-149 tag-link-position-22" title="1 tema" style="font-size: 13px;">Hosting</a>
+<a href="https://apirola.wordpress.com/tag/hough/" class="tag-link-866510 tag-link-position-23" title="1 tema" style="font-size: 13px;">Hough</a>
+<a href="https://apirola.wordpress.com/tag/html5/" class="tag-link-53242 tag-link-position-24" title="1 tema" style="font-size: 13px;">HTML5</a>
+<a href="https://apirola.wordpress.com/tag/ide/" class="tag-link-7746 tag-link-position-25" title="1 tema" style="font-size: 13px;">IDE</a>
+<a href="https://apirola.wordpress.com/tag/images/" class="tag-link-914 tag-link-position-26" title="1 tema" style="font-size: 13px;">Images</a>
+<a href="https://apirola.wordpress.com/tag/intelisense/" class="tag-link-32588218 tag-link-position-27" title="1 tema" style="font-size: 13px;">intelisense</a>
+<a href="https://apirola.wordpress.com/tag/introduccion/" class="tag-link-71684 tag-link-position-28" title="1 tema" style="font-size: 13px;">introduccion</a>
+<a href="https://apirola.wordpress.com/tag/ios/" class="tag-link-324281 tag-link-position-29" title="1 tema" style="font-size: 13px;">iOS</a>
+<a href="https://apirola.wordpress.com/tag/iphone-sdk/" class="tag-link-2210435 tag-link-position-30" title="1 tema" style="font-size: 13px;">iPhone SDK</a>
+<a href="https://apirola.wordpress.com/tag/javascript/" class="tag-link-457 tag-link-position-31" title="1 tema" style="font-size: 13px;">Javascript</a>
+<a href="https://apirola.wordpress.com/tag/lenguages/" class="tag-link-6253756 tag-link-position-32" title="1 tema" style="font-size: 13px;">Lenguages</a>
+<a href="https://apirola.wordpress.com/tag/megapirateng/" class="tag-link-123242341 tag-link-position-33" title="1 tema" style="font-size: 13px;">MegapirateNG</a>
+<a href="https://apirola.wordpress.com/tag/mobile/" class="tag-link-120 tag-link-position-34" title="1 tema" style="font-size: 13px;">mobile</a>
+<a href="https://apirola.wordpress.com/tag/multicopter/" class="tag-link-52007953 tag-link-position-35" title="2 temas" style="font-size: 17.8px;">Multicopter</a>
+<a href="https://apirola.wordpress.com/tag/multiples/" class="tag-link-123039 tag-link-position-36" title="1 tema" style="font-size: 13px;">Multiples</a>
+<a href="https://apirola.wordpress.com/tag/nodejs/" class="tag-link-31896918 tag-link-position-37" title="1 tema" style="font-size: 13px;">NodeJS</a>
+<a href="https://apirola.wordpress.com/tag/nosql/" class="tag-link-22319505 tag-link-position-38" title="1 tema" style="font-size: 13px;">NoSQL</a>
+<a href="https://apirola.wordpress.com/tag/notepad/" class="tag-link-41697 tag-link-position-39" title="1 tema" style="font-size: 13px;">notepad++</a>
+<a href="https://apirola.wordpress.com/tag/osd/" class="tag-link-368123 tag-link-position-40" title="1 tema" style="font-size: 13px;">OSD</a>
+<a href="https://apirola.wordpress.com/tag/pydev/" class="tag-link-1234361 tag-link-position-41" title="1 tema" style="font-size: 13px;">PyDEV</a>
+<a href="https://apirola.wordpress.com/tag/python/" class="tag-link-832 tag-link-position-42" title="1 tema" style="font-size: 13px;">Python</a>
+<a href="https://apirola.wordpress.com/tag/quadcopter/" class="tag-link-10970481 tag-link-position-43" title="1 tema" style="font-size: 13px;">Quadcopter</a>
+<a href="https://apirola.wordpress.com/tag/ravendb-2/" class="tag-link-35914517 tag-link-position-44" title="1 tema" style="font-size: 13px;">ravendb</a>
+<a href="https://apirola.wordpress.com/tag/redis/" class="tag-link-5307557 tag-link-position-45" title="1 tema" style="font-size: 13px;">Redis</a>
+<a href="https://apirola.wordpress.com/tag/resource/" class="tag-link-10724 tag-link-position-46" title="1 tema" style="font-size: 13px;">Resource</a>
+<a href="https://apirola.wordpress.com/tag/resourcemanager/" class="tag-link-6243766 tag-link-position-47" title="1 tema" style="font-size: 13px;">ResourceManager</a>
+<a href="https://apirola.wordpress.com/tag/riak/" class="tag-link-398770 tag-link-position-48" title="1 tema" style="font-size: 13px;">Riak</a>
+<a href="https://apirola.wordpress.com/tag/rs232/" class="tag-link-1801435 tag-link-position-49" title="1 tema" style="font-size: 13px;">RS232</a>
+<a href="https://apirola.wordpress.com/tag/scite/" class="tag-link-1136238 tag-link-position-50" title="1 tema" style="font-size: 13px;">scite</a>
+<a href="https://apirola.wordpress.com/tag/silverlight/" class="tag-link-984139 tag-link-position-51" title="1 tema" style="font-size: 13px;">Silverlight</a>
+<a href="https://apirola.wordpress.com/tag/sql/" class="tag-link-10346 tag-link-position-52" title="1 tema" style="font-size: 13px;">SQL</a>
+<a href="https://apirola.wordpress.com/tag/subversion/" class="tag-link-42964 tag-link-position-53" title="1 tema" style="font-size: 13px;">Subversion</a>
+<a href="https://apirola.wordpress.com/tag/svn/" class="tag-link-164684 tag-link-position-54" title="2 temas" style="font-size: 17.8px;">SVN</a>
+<a href="https://apirola.wordpress.com/tag/titanium-2/" class="tag-link-36367149 tag-link-position-55" title="3 temas" style="font-size: 21px;">titanium</a>
+<a href="https://apirola.wordpress.com/tag/ubuntu/" class="tag-link-255 tag-link-position-56" title="1 tema" style="font-size: 13px;">Ubuntu</a>
+<a href="https://apirola.wordpress.com/tag/uninstall/" class="tag-link-237412 tag-link-position-57" title="1 tema" style="font-size: 13px;">uninstall</a>
+<a href="https://apirola.wordpress.com/tag/visual-studio-2005/" class="tag-link-20060 tag-link-position-58" title="1 tema" style="font-size: 13px;">Visual Studio 2005</a>
+<a href="https://apirola.wordpress.com/tag/visualsvn/" class="tag-link-2905990 tag-link-position-59" title="1 tema" style="font-size: 13px;">VisualSVN</a>
+<a href="https://apirola.wordpress.com/tag/xcode-2/" class="tag-link-34987968 tag-link-position-60" title="1 tema" style="font-size: 13px;">Xcode</a></div></aside><aside id="archives-2" class="widget widget_archive"><h1 class="widget-title">Archivos</h1>		<label class="screen-reader-text" for="archives-dropdown-2">Archivos</label>
+		<select id="archives-dropdown-2" name="archive-dropdown" onchange="document.location.href=this.options[this.selectedIndex].value;">
+			
+			<option value="">Elegir mes</option>
+				<option value="https://apirola.wordpress.com/2014/07/"> julio 2014 &nbsp;(1)</option>
+	<option value="https://apirola.wordpress.com/2014/04/"> abril 2014 &nbsp;(1)</option>
+	<option value="https://apirola.wordpress.com/2013/12/"> diciembre 2013 &nbsp;(2)</option>
+	<option value="https://apirola.wordpress.com/2012/11/"> noviembre 2012 &nbsp;(1)</option>
+	<option value="https://apirola.wordpress.com/2012/09/"> septiembre 2012 &nbsp;(2)</option>
+	<option value="https://apirola.wordpress.com/2011/10/"> octubre 2011 &nbsp;(2)</option>
+	<option value="https://apirola.wordpress.com/2010/11/"> noviembre 2010 &nbsp;(4)</option>
+	<option value="https://apirola.wordpress.com/2008/10/"> octubre 2008 &nbsp;(1)</option>
+	<option value="https://apirola.wordpress.com/2008/09/"> septiembre 2008 &nbsp;(1)</option>
+	<option value="https://apirola.wordpress.com/2008/08/"> agosto 2008 &nbsp;(3)</option>
+
+		</select>
+		</aside></div><!-- #secondary .widget-area -->
+				</div><!-- .twelve -->
+			</div><!-- #main -->
+		</div><!-- .main-outer -->
+
+		<footer id="colophon" class="row" role="contentinfo">
+			<div id="site-generator" class="twelve columns">
+				<a href="https://wordpress.com/?ref=footer_website">Crea un blog o un sitio web gratuitos con WordPress.com.</a>
+				<span class="right">
+									</span><!-- .right -->
+			</div><!-- #site-generator -->
+		</footer><!-- #colophon -->
+	</div><!-- #page -->
+
+	
+<!--  -->
+<script type="text/javascript" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/gprofiles.js.Без названия"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/wpgroho.js.Без названия"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-34d7ff83168ebf223357c0298b7d5e7b">
+	</div>
+	<div class="grofile-hash-map-0066317141a7f66079b8c61a38bdd522">
+	</div>
+	<div class="grofile-hash-map-169b0078e474b79681d23df571e71586">
+	</div>
+	<div class="grofile-hash-map-1b00c5591200fc85743b34dbdaf792b2">
+	</div>
+	<div class="grofile-hash-map-c9a97b1c0bde64dc2ef2b2c2cb128f48">
+	</div>
+	<div class="grofile-hash-map-da7a4a6898d265f0db046aa517bac2aa">
+	</div>
+	<div class="grofile-hash-map-308e7c5e1fdc61dd8dcd80519b06d6b5">
+	</div>
+	<div class="grofile-hash-map-a7094759524a8548965690c605d490e6">
+	</div>
+	<div class="grofile-hash-map-016ae7f06008777ac828bf154b061930">
+	</div>
+	<div class="grofile-hash-map-3c27c84c141984d0b754a8fee8c1c8f6">
+	</div>
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Iniciando sesi\u00f3n\u2026","submittingText":"Publicando comentario\u2026","postCommentText":"Publicar comentario","connectingToText":"Conectando a %s","commentingAsText":"%1$s: Est\u00e1s comentando usando tu cuenta de %2$s.","logoutText":"Cerrar sesi\u00f3n","loginText":"Acceder","connectURL":"https:\/\/apirola.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/apirola.wordpress.com\/wp-login.php?action=logout&_wpnonce=92c8aa619b","homeURL":"https:\/\/apirola.wordpress.com\/","postID":"251","gravDefault":"identicon","enterACommentError":"Por favor, introduce un comentario","enterEmailError":"Por favor introduce tu direcci\u00f3n de correo electr\u00f3nico aqu\u00ed","invalidEmailError":"Direcci\u00f3n de correo electr\u00f3nico no v\u00e1lida","enterAuthorError":"Por favor, introduce tu nombre aqu\u00ed","gravatarFromEmail":"Esta imagen se mostrar\u00e1 cuando dejes un comentario. Haz clic para cambiarla.","logInToExternalAccount":"Inicia sesi\u00f3n para usar los datos de una de estas cuentas.","change":"Cambiar","changeAccount":"Cambiar cuenta","comment_registration":"","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/saved_resource(4)"></script>
+<script type="text/javascript" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/form.js.Без названия"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var actionbardata = {"siteID":"4535158","siteName":"Alejandro Pirola","siteURL":"http:\/\/apirola.wordpress.com","icon":"<img alt='' src='https:\/\/s1.wp.com\/i\/void.gif' class='avatar avatar-36' height='36' width='36' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/mixfolio","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/apirola.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fapirola.wordpress.com%2F2012%2F09%2F05%2Fsetup-jy-mcu-bt-board-v1-2%2F","themeURL":"https:\/\/wordpress.com\/themes\/mixfolio\/","xhrURL":"https:\/\/apirola.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"1551ecca33","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"0c57091cad\" \/>","referer":"https:\/\/apirola.wordpress.com\/2012\/09\/05\/setup-jy-mcu-bt-board-v1-2\/","canFollow":"1","statusMessage":"","customizeLink":"https:\/\/apirola.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fapirola.wordpress.com%2F2012%2F09%2F05%2Fsetup-jy-mcu-bt-board-v1-2%2F","postID":"251","shortlink":"http:\/\/wp.me\/pj1NI-43","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/apirola.wordpress.com\/251","i18n":{"view":"Ver sitio","follow":"Seguir","following":"Siguiendo","edit":"Editar","login":"Acceder","signup":"Registrarse","customize":"Personalizar","report":"Denunciar este contenido","themeInfo":"Obtener el tema: Mixfolio","shortlink":"Copiar enlace corto","copied":"Copiado","followedText":"Las nuevas publicaciones de este sitio aparecer\u00e1n ahora en tu <a href=\"https:\/\/wordpress.com\/\">Lector<\/a>","foldBar":"Contraer esta barra","unfoldBar":"Expandir esta barra","editFollows":"Administrar los sitios que sigo","editSubs":"Gestionar suscripciones","viewReader":"Ver sitio en el Lector","subscribe":"Suscr\u00edbeme","enterEmail":"Introduce tu direcci\u00f3n de correo electr\u00f3nico","followers":"","alreadyUser":"\u00bfYa tienes una cuenta de WordPress.com? <a href=\"https:\/\/apirola.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fapirola.wordpress.com%2F2012%2F09%2F05%2Fsetup-jy-mcu-bt-board-v1-2%2F\">Accede ahora<\/a>."}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/saved_resource(5)"></script><div id="actionbar" class="actnbr-pub-mixfolio actnbr-has-follow actnbr-hidden"><ul><li class="actnbr-btn actnbr-hidden"> 			    	<a class="actnbr-action actnbr-actn-follow" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Seguir</span></a> 			    	<div class="actnbr-popover tip tip-top-left actnbr-notice"> 			    		<div class="tip-arrow"></div> 			    		<div class="tip-inner actnbr-follow-bubble"></div> 			    	</div> 			    </li><li class="actnbr-ellipsis actnbr-hidden"> 			  <svg class="gridicon gridicon__ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle></g></svg> 			  <div class="actnbr-popover tip tip-top-left actnbr-more"> 			  	<div class="tip-arrow"></div> 			  	<div class="tip-inner"> 				  <ul> 				    <li class="actnbr-sitename actnbr-hidden"><a href="http://apirola.wordpress.com/"><img alt="" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/void.gif" class="avatar avatar-36" height="36" width="36"> Alejandro Pirola</a></li> 				   	<li class="actnbr-folded-customize actnbr-hidden"><a href="https://apirola.wordpress.com/wp-admin/customize.php?url=https%3A%2F%2Fapirola.wordpress.com%2F2012%2F09%2F05%2Fsetup-jy-mcu-bt-board-v1-2%2F"><svg class="gridicon gridicon__customize" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M2 6c0-1.505.78-3.08 2-4 0 .845.69 2 2 2 1.657 0 3 1.343 3 3 0 .386-.08.752-.212 1.09.74.594 1.476 1.19 2.19 1.81L8.9 11.98c-.62-.716-1.214-1.454-1.807-2.192C6.753 9.92 6.387 10 6 10c-2.21 0-4-1.79-4-4zm12.152 6.848l1.34-1.34c.607.304 1.283.492 2.008.492 2.485 0 4.5-2.015 4.5-4.5 0-.725-.188-1.4-.493-2.007L18 9l-2-2 3.507-3.507C18.9 3.188 18.225 3 17.5 3 15.015 3 13 5.015 13 7.5c0 .725.188 1.4.493 2.007L3 20l2 2 6.848-6.848c1.885 1.928 3.874 3.753 5.977 5.45l1.425 1.148 1.5-1.5-1.15-1.425c-1.695-2.103-3.52-4.092-5.448-5.977z" data-reactid=".2.1.1:0.1b.0"></path></g></svg><span>Personalizar<span></span></span></a></li> 				    <li class="actnbr-folded-follow actnbr-hidden"><a class="actnbr-action actnbr-actn-follow" href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Seguir</span></a></li> 						<li class="actnbr-signup actnbr-hidden"><a href="https://wordpress.com/start/">Registrarse</a></li> 				    <li class="actnbr-login actnbr-hidden"><a href="https://apirola.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fapirola.wordpress.com%2F2012%2F09%2F05%2Fsetup-jy-mcu-bt-board-v1-2%2F">Acceder</a></li> 				     				    <li class="actnbr-shortlink actnbr-hidden"><a href="http://wp.me/pj1NI-43">Copiar enlace corto</a></li> 				     				     				     				    <li class="actnbr-subs actnbr-hidden"><a href="https://subscribe.wordpress.com/">Gestionar suscripciones</a></li> 				    <li class="actnbr-fold actnbr-hidden"><a href="https://apirola.wordpress.com/2012/09/05/setup-jy-mcu-bt-board-v1-2/">Contraer esta barra</a></li> 			      </ul> 			    </div> 		      </div> 		    </li> 	      </ul></div>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "apirola.wordpress.com";
+	</script>
+	<script type="text/javascript" src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/725X1342.skimlinks.js.Без названия"></script>		<iframe src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/master.html" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text">A <span>%d</span> blogueros les gusta esto:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script>
+			var _comscore = _comscore || [];
+			_comscore.push({
+				c1: "2",
+				c2: "7518284"
+			});
+			(function() {
+				var s = document.createElement("script"),
+					el = document.getElementsByTagName("script")[0];
+				s.async = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			})();
+		</script>
+		<noscript>
+			&lt;p class="robots-nocontent"&gt;&lt;img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=7518284&amp;c3=&amp;c4=&amp;c5=&amp;c6=&amp;c15=&amp;cv=2.0&amp;cj=1" alt="" style="display:none;" width="1" height="1" /&gt;&lt;/p&gt;
+		</noscript><script src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/w.js.Без названия" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'4535158','blog_tz':'0','user_lang':'es','blog_lang':'es','user_id':'0'}]);
+_stq.push(['view', {'blog':'4535158','v':'wpcom','tz':'0','user_id':'0','post':'251','subd':'apirola'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRYT9DRjN0dSZwJjdPM05wRlRneFJ4WHxqLTIrYzEmR2tZcVJzdjlkYWd5LEQ/Z2xDLlV1Tkk9aV9Hem9YUS1+Y3RPWUpDSVgvQVpxLy5qYWwvZElSMzR3ZGNrMWFzWHBrTz18JSVPSV8xbEdzUk4lQ2o2SFljckotS2ctbDAtWDNKZGhCTkxNdUFtcnBDP0MmOVJJWjg1OFQ5WXMxU2N5L1g5VkFZM3I3eSw3ZVtmR2omaEM4SENIQitPbnZQcHgzN2lCOHJkYWpUQXNxVW5+TG1sQVstSg=='}]);
+_stq.push([ 'clickTrackerInit', '4535158', '251' ]);
+	</script>
+<noscript>&lt;img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /&gt;</noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+<img src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/g.gif" alt=":)" id="wpstats"><img src="./Setup JY-MCU BT BOARD v1.2 _ Alejandro Pirola_files/saved_resource(6)" width="1" height="1" style="display: none;"></body></html>
