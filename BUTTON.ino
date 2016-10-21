@@ -13,7 +13,7 @@ void BUTTON_check() {
     //BUTTON_DEC_INVERT_DIR PD4
     state = bitRead(PIND, 4);
     if (state == 0) {
-      delay(300); //before change motor DIR
+      delay(100); //before change motor DIR
       DEC_IS_INVERT_DIR = (DEC_IS_INVERT_DIR) ? false : true; //switch
       BUTTON_DEC_INVERT_DIR_LED_onoff(DEC_IS_INVERT_DIR);
     }
@@ -85,7 +85,7 @@ void BUTTON_DEC_INVERT_DIR_LED_onoff(bool isOn) {
   if (isOn) {
     PORTD |= _BV(PD2); //LED ON
   } else {
-    PORTB &= ~_BV(PD2); //off
+    PORTD &= ~_BV(PD2); //off
   }
 }
 
@@ -93,8 +93,7 @@ void BUTTON_GOTO_SYNC_LED_onoff(bool isOn) {
   if (isOn) {
     PORTD |= _BV(PD3); //LED ON
   } else {
-    PORTB &= ~_BV(PD3); //off
+    PORTD &= ~_BV(PD3); //off
   }
 }
-
 

@@ -312,7 +312,7 @@ void GOTO_check_goto_is_completed() {
 //press btn GOTO_SYNC => coordinates set synced
 void GOTO_BUTTON_coordinates_sync_ok() {
   GOTO_set_normal_mode();
-  PORTD &= ~_BV(PD3); //LED goto_sync OFF
+  BUTTON_GOTO_SYNC_LED_onoff(false);
 }
 
 //пусть вращается за звездами, наводка окончена
