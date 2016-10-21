@@ -70,7 +70,7 @@ int8_t DEC_dDEC_sign = 1;
 #define SYS_STATE_GOTO_PROCESS 2  //телескоп исполняет приказ GOTO в процессе наведения
 
 //TIMEMACHINE
-uint32_t TIMEMACHINE_prevMicros_331ms = 1L;
+uint32_t TIMEMACHINE_prevMicros_173ms = 1L;
 uint32_t TIMEMACHINE_prevMicros_873ms = 1L;
 
 char SYS_chars_from_stellarium[19]; //r00000000,00000000\0  19 chars with terminator \0

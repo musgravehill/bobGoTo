@@ -34,12 +34,12 @@ void BUTTON_check() {
     state = bitRead(PIND, 6);
     if (state == 0) {
       SYS_IS_RC_PROCESS = true;
+      delay(50);
       MOTOR_set_RA_dir(false);
       for (uint8_t i = 0; i < 63; i++) {
         MOTOR_RA_TICK();
         delay(1);
-      }
-      delay(50);
+      }      
       MOTOR_set_RA_dir(true); //return normal direction for sky-correction
       delay(50);
       SYS_IS_RC_PROCESS = false;
