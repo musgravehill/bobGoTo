@@ -25,7 +25,7 @@ void BUTTON_check() {
       MOTOR_set_RA_dir(true);
       for (uint8_t i = 0; i < 63; i++) {
         MOTOR_RA_TICK();
-        delay(4);
+        delay(1);
       }
       SYS_IS_RC_PROCESS = false;
     }
@@ -37,7 +37,7 @@ void BUTTON_check() {
       MOTOR_set_RA_dir(false);
       for (uint8_t i = 0; i < 63; i++) {
         MOTOR_RA_TICK();
-        delay(4);
+        delay(1);
       }
       delay(50);
       MOTOR_set_RA_dir(true); //return normal direction for sky-correction
@@ -51,7 +51,7 @@ void BUTTON_check() {
       MOTOR_set_DEC_dir(true);
       for (uint8_t i = 0; i < 63; i++) {
         MOTOR_DEC_TICK();
-        delay(4);
+        delay(1);
       }
     }
 
@@ -61,7 +61,7 @@ void BUTTON_check() {
       MOTOR_set_DEC_dir(false);
       for (uint8_t i = 0; i < 63; i++) {
         MOTOR_DEC_TICK();
-        delay(4);
+        delay(1);
       }
     }
 
