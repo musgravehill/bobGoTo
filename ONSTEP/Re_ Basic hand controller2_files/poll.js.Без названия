@@ -1,0 +1,48 @@
+// Poll functions
+function showResults(mid, groupurl) {
+  $.getJSON( groupurl + "/pollresults?pollid="+mid, function( data ) {
+    var html = ""
+    $.each( data, function( key, val ) {
+      html += val.Index + ". "
+      html += val.Answer
+      var count = ""
+      if (val.Count == 1) {
+        count = " vote"
+      } else {
+        count = " votes"
+      }
+      html += '<span class="hidden-sm hidden-md hidden-lg"> - ' + val.Count + ' ' + count + '</span>'
+      html += '<div class="row"><div class="col-sm-10"><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="' + val.Percentage + '" aria-valuemin="0" aria-valuemax="100" style="width: '+ val.Percentage+ '%;">'+val.Percentage+'%</div></div></div><div class="col-sm-2 hidden-xs"><strong>' + val.Count + count + '</strong></div></div>'
+    });
+    $("#barchart"+mid).html(html)
+  }).done(function(data) {
+    $("#vote"+mid).hide();
+    $("#results"+mid).show()
+  });
+}
+
+function showVote(mid) {
+   $("#vote"+mid).show();
+   $("#results"+mid).hide()
+   $("#thanks"+mid).hide()
+}
+
+function vote(pollid, groupurl, csrf) {
+  // get value of all check/radio boxes in form
+  var results = []
+  $('#pollform' + pollid + ' input:checkbox:checked').each(function() {
+    mid = $(this).attr("name").split(".")[2]
+    results.push(mid)
+  });
+  $('#pollform' + pollid + ' input:radio:checked').each(function() {
+    mid = $(this).attr("value")
+    results.push(mid)
+  });
+  $.ajax({
+    url: groupurl + "/toggleanswer?noredir=1&pollid="+pollid+"&csrf="+csrf+"&answerid="+results,
+    cache: false
+  }).done(function(data) {    
+    $("#thanks"+pollid).show()
+    showResults(pollid, groupurl);
+  });
+}

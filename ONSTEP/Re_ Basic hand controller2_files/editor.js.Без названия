@@ -1,0 +1,1325 @@
+hasHTMLEditor = false;
+
+function InitEditor(
+  id,
+  editorType,
+  draftid,
+  groupurl,
+  csrf,
+  handleAttachments,
+  noFontChanges,
+  isReply,
+  isWiki,
+  sig
+) {
+  $('#preview' + id).hide();
+  $('#addattachments' + id).hide();
+  $('#return' + id).hide();
+  $('#markdownlink' + id).hide();
+  if (editorType == 'html') {
+    if (sig != '') {
+      $('#editor' + id).val(sig);
+      //tinyMCE.get('editor'+id).setContent(sig);
+    }
+    initHTMLEditor(
+      id,
+      draftid,
+      groupurl,
+      csrf,
+      handleAttachments,
+      noFontChanges,
+      isReply,
+      isWiki,
+      sig
+    );
+  } else {
+    if (sig != '') {
+      $('#editor' + id).val(sig);
+    }
+    initPlainEditor(id, editorType);
+  }
+}
+
+function initHTMLEditor(
+  id,
+  draftid,
+  groupurl,
+  csrf,
+  handleAttachments,
+  noFontChanges,
+  isReply,
+  isWiki,
+  sig
+) {
+  // extras: print, emoticons, image, insert, media, print
+  /* All plugins:
+          'advlist autolink lists link image print preview hr anchor pagebreak',
+      'searchreplace wordcount visualblocks visualchars code fullscreen',
+      'insertdatetime media nonbreaking save table contextmenu directionality',
+      'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'
+  */
+  var attachments = '';
+  if (handleAttachments == 0 || handleAttachments == 3) {
+    attachments = ' addPictures addAttachments';
+  }
+  var fontchanges = '';
+  if (noFontChanges == false) {
+    fontchanges = ' fontselect fontsizeselect forecolor backcolor';
+  }
+  var fontawesome = ' charmap';
+  var forceRootBlock = false;
+  if (isWiki == true) {
+    attachments += ' addWikiImage addWikiLink addWikiTOC';
+    fontawesome = ' fontawesome';
+    // BORK
+    fontawesome = '';
+    forceRootBlock = 'p';
+  }
+  var toolbar1 =
+    'styleselect bold italic bullist numlist link blockquote alignleft aligncenter alignright' +
+    attachments +
+    ' advancedToolbar';
+  var toolbar2 =
+    'strikethrough underline hr alignjustify' +
+    fontchanges +
+    ' removeformat' +
+    fontawesome +
+    ' outdent indent undo redo preview code';
+
+  var small_toolbar1 =
+    'bold italic link blockquote' + attachments + ' advancedToolbar';
+  var small_toolbar2 =
+    'strikethrough underline hr alignjustify removeformat outdent indent';
+
+  var tm_fonts =
+    'Arial=arial,helvetica,sans-serif;' +
+    'Arial Black=arial black,avant garde;' +
+    'Comic Sans MS=comic sans ms;' +
+    'Courier Neue=courier_newregular,courier;' +
+    'Helvetica Neue=helvetica neue;' +
+    'Helvetica=helvetica;' +
+    'Impact=impactregular,chicago;' +
+    'Lucida Grande=lucida grande;' +
+    'Tahoma=tahoma,arial,helvetica,sans-serif;' +
+    'Times New Roman=times new roman,times;' +
+    'Verdana=verdana,geneva';
+  var plugins = [
+    'SplitBlockquote',
+    'advlist autolink lists link image preview hr anchor',
+    'code fullscreen',
+    'nonbreaking table charmap',
+    'textcolor colorpicker imagetools noneditable'
+  ];
+  var css =
+    '/bootstrap/3.3.6/css/bootstrap.min.css,/bootstrap/3.3.6/css/bootstrap-theme.min.css,/css/groupsio.css,/css/tinymce.css,/fontawesome/5.0.10/fontawesome-all.css';
+  var fontsizes = '8pt 10pt 11pt 12pt 14pt 18pt 24pt 36pt';
+
+  var codesample_languages = [
+    { text: 'C', value: 'c' },
+    { text: 'C#', value: 'csharp' },
+    { text: 'C++', value: 'cpp' },
+    { text: 'CSS', value: 'css' },
+    { text: 'Go', value: 'go' },
+    { text: 'HTML/XML', value: 'markup' },
+    { text: 'Java', value: 'java' },
+    { text: 'JavaScript', value: 'javascript' },
+    { text: 'PHP', value: 'php' },
+    { text: 'Python', value: 'python' },
+    { text: 'Ruby', value: 'ruby' }
+  ];
+
+  var style_formats = [
+    { title: 'Paragraph', block: 'p' },
+    { title: 'Header 1', block: 'h1' },
+    { title: 'Header 2', block: 'h2' },
+    { title: 'Header 3', block: 'h3' },
+    { title: 'Header 4', block: 'h4' },
+    { title: 'Header 5', block: 'h5' },
+    { title: 'Header 6', block: 'h6' }
+  ];
+
+  if (isReply == true) {
+    toolbar1 = 'quoteMessage ' + toolbar1;
+    small_toolbar1 = 'quoteMessage ' + small_toolbar1;
+  }
+  if (document.documentElement.clientWidth > 1000) {
+    tinymce.init({
+      noneditable_noneditable_class: 'fa',
+      extended_valid_elements: 'span[*]',
+      branding: false,
+      link_context_toolbar: true,
+      default_link_target: '_blank',
+      link_assume_external_targets: true,
+      elementpath: false,
+      forced_root_block: forceRootBlock,
+      content_css: css,
+      relative_urls: false,
+      remove_script_host: false,
+      menubar: false,
+      statusbar: true,
+      plugins: plugins,
+      toolbar1: toolbar1,
+      toolbar2: toolbar2,
+      font_formats: tm_fonts,
+      browser_spellcheck: true,
+      contextmenu: false,
+      selector: '#editor' + id,
+      resize: true,
+      fontsize_formats: fontsizes,
+      style_formats: style_formats,
+      setup: function(editor) {
+        editor.on('BeforeRenderUI', function(e) {
+          editor.theme.panel
+            .find('toolbar')
+            .slice(1)
+            .hide();
+        });
+        editor.addButton('advancedToolbar', {
+          tooltip: 'Show Advanced Toolbar',
+          icon: 'fa fa-bars',
+          onclick: function() {
+            if (!this.active()) {
+              this.active(true);
+              editor.theme.panel
+                .find('toolbar')
+                .slice(1)
+                .show();
+            } else {
+              this.active(false);
+              editor.theme.panel
+                .find('toolbar')
+                .slice(1)
+                .hide();
+            }
+          }
+        });
+        editor.addButton('addPictures', {
+          tooltip: 'Add Pictures',
+          icon: 'fa fa-image',
+          onclick: function() {
+            $('#addPicturesModal' + id).modal({});
+          }
+        });
+        editor.addButton('addAttachments', {
+          tooltip: 'Add Attachments',
+          icon: 'fa fa-paperclip',
+          onclick: function() {
+            $('#addAttachmentsModal' + id).modal({});
+          }
+        });
+        if (groupurl != '') {
+          editor.addButton('quoteMessage', {
+            tooltip: 'Quote Whole Post',
+            icon: 'fa fa-comment',
+            onclick: function() {
+              showMessageHistory(id, groupurl, 'html', '', sig, false);
+            }
+          });
+        }
+        if (draftid != '' && draftid != '0' && draftid != 0) {
+          editor.on('NodeChange', function() {
+            //tinymce.triggerSave();
+            var markupStr = tinymce.activeEditor.getContent();
+            $('#editor' + id).val(markupStr);
+            onFormChange(id, draftid, groupurl, csrf);
+          });
+          editor.on('keyup', function() {
+            //tinymce.triggerSave();
+            var markupStr = tinymce.activeEditor.getContent();
+            $('#editor' + id).val(markupStr);
+            onFormChange(id, draftid, groupurl, csrf);
+          });
+        }
+        if (isWiki == true) {
+          // special wiki buttons
+          editor.addButton('addWikiImage', {
+            tooltip: 'Add Image',
+            icon: 'fa fa-image',
+            onclick: function() {
+              $('#ImageModal').modal({});
+            }
+          });
+          editor.addButton('addWikiLink', {
+            tooltip: 'Add Link',
+            icon: 'fa fa-book',
+            onclick: function() {
+              $('#LinkModal').modal({});
+            }
+          });
+          editor.addButton('addWikiTOC', {
+            tooltip: 'Table of Contents',
+            icon: 'fa fa-list-alt',
+            onclick: function() {
+              $('#TOCModal').modal({});
+            }
+          });
+        }
+      }
+    });
+  } else {
+    tinymce.init({
+      branding: false,
+      link_context_toolbar: true,
+      default_link_target: '_blank',
+      link_assume_external_targets: true,
+      elementpath: false,
+      forced_root_block: forceRootBlock,
+      content_css: css,
+      relative_urls: false,
+      remove_script_host: false,
+      menubar: false,
+      statusbar: true,
+      plugins: plugins,
+      toolbar1: small_toolbar1,
+      toolbar2: small_toolbar2,
+      font_formats: tm_fonts,
+      browser_spellcheck: true,
+      contextmenu: false,
+      selector: '#editor' + id,
+      resize: true,
+      fontsize_formats: fontsizes,
+      style_formats: style_formats,
+      setup: function(editor) {
+        editor.on('BeforeRenderUI', function(e) {
+          editor.theme.panel
+            .find('toolbar')
+            .slice(1)
+            .hide();
+        });
+        editor.addButton('advancedToolbar', {
+          tooltip: 'Show Advanced Toolbar',
+          icon: 'fa fa-bars',
+          onclick: function() {
+            if (!this.active()) {
+              this.active(true);
+              editor.theme.panel
+                .find('toolbar')
+                .slice(1)
+                .show();
+            } else {
+              this.active(false);
+              editor.theme.panel
+                .find('toolbar')
+                .slice(1)
+                .hide();
+            }
+          }
+        });
+        editor.addButton('addPictures', {
+          tooltip: 'Add Pictures',
+          icon: 'fa fa-image',
+          onclick: function() {
+            $('#addPicturesModal' + id).modal({});
+          }
+        });
+        editor.addButton('addAttachments', {
+          tooltip: 'Add Attachments',
+          icon: 'fa fa-paperclip',
+          onclick: function() {
+            $('#addAttachmentsModal' + id).modal({});
+          }
+        });
+        if (groupurl != '') {
+          editor.addButton('quoteMessage', {
+            tooltip: 'Quote Whole Post',
+            icon: 'fa fa-comment',
+            onclick: function() {
+              showMessageHistory(id, groupurl, 'html', '', sig, false);
+            }
+          });
+        }
+        if (draftid != '' && draftid != '0' && draftid != 0) {
+          editor.on('NodeChange', function() {
+            //tinymce.triggerSave();
+            var markupStr = tinymce.activeEditor.getContent();
+            $('#editor' + id).val(markupStr);
+            onFormChange(id, draftid, groupurl, csrf);
+          });
+          editor.on('keyup', function() {
+            //tinymce.triggerSave();
+            var markupStr = tinymce.activeEditor.getContent();
+            $('#editor' + id).val(markupStr);
+            onFormChange(id, draftid, groupurl, csrf);
+          });
+        }
+        // special wiki buttons
+        editor.addButton('addWikiImage', {
+          tooltip: 'Add Image',
+          icon: 'fa fa-image',
+          onclick: function() {
+            $('#ImageModal').modal({});
+          }
+        });
+        editor.addButton('addWikiLink', {
+          tooltip: 'Add Link',
+          icon: 'fa fa-book',
+          onclick: function() {
+            $('#LinkModal').modal({});
+          }
+        });
+        editor.addButton('addWikiTOC', {
+          tooltip: 'Table of Contents',
+          icon: 'fa fa-list-alt',
+          onclick: function() {
+            $('#TOCModal').modal({});
+          }
+        });
+      }
+    });
+
+    // disable tooltips because they require double taps on mobile
+    $('.note-editor *').tooltip('disable');
+  }
+  hasHTMLEditor = true;
+}
+
+// AfterHTMLInit will call function f(editor) after the TinyMCE editor is initialized
+function AfterHTMLInit(f) {
+  // Loop already initialised editors
+  for (var i = 0; i < tinymce.editors.length; i++) {
+    id = tinymce.editors[i].id;
+    f(id);
+  }
+  // Wait for non-initialised editors to initialise
+  tinymce.on('AddEditor', function(e) {
+    f(e.editor.id);
+  });
+}
+
+function initPlainEditor(id, editorType, handleAttachments) {
+  $('#addattachments').show();
+  if (editorType == 'plain') {
+    $('#bodytype' + id).val('plain');
+    $('#preview' + id).hide();
+    $('#return' + id).hide();
+    $('#preview' + id).hide();
+    $('#markdownlink' + id).hide();
+  } else {
+    $('#bodytype' + id).val('markdown');
+    $('#markdownbuttons' + id).show();
+    $('#preview' + id).show();
+    $('#return' + id).hide();
+    $('#previewWindow' + id).hide();
+    $('#markdownlink' + id).show();
+  }
+}
+
+function uploadData(draftid, csrf, inline) {
+  var obj = {};
+  obj['csrf'] = csrf;
+  obj['draftid'] = draftid;
+  obj['ajaxupload'] = '1';
+  obj['upload'] = '1';
+  if (inline == true) {
+    obj['inline'] = '1';
+  }
+  return obj;
+}
+
+function InitPostDraft(id, draftid, csrf, groupurl) {
+  if (document.documentElement.clientWidth > 767) {
+    $('#attachmentupload' + id).fileinput({
+      uploadUrl: groupurl + '/draftop',
+      uploadExtraData: uploadData(draftid, csrf, false),
+      showClose: false,
+      showUpload: false,
+      previewFileType: 'any',
+      uploadAsync: false,
+      fileActionSettings: {
+        indicatorNew: ''
+      },
+      slugCallback: function(text) {
+        return isEmpty(text)
+          ? ''
+          : String(text).replace(
+              /[\[\]\/\{}:;#%=\(\)\*\+\?\\\^\$\|<>&"']/g,
+              '_'
+            );
+      },
+      maxFileSize: 1073741824
+    });
+    $('#pictureupload' + id).fileinput({
+      uploadUrl: groupurl + '/draftop',
+      uploadExtraData: uploadData(draftid, csrf, true),
+      showClose: false,
+      showUpload: false,
+      previewFileType: 'any',
+      uploadAsync: false,
+      fileActionSettings: {
+        indicatorNew: ''
+      },
+      slugCallback: function(text) {
+        return isEmpty(text)
+          ? ''
+          : String(text).replace(
+              /[\[\]\/\{}:;#%=\(\)\*\+\?\\\^\$\|<>&"']/g,
+              '_'
+            );
+      },
+      maxFileSize: 1073741824
+    });
+  } else {
+    $('#attachmentupload' + id).fileinput({
+      uploadUrl: groupurl + '/draftop',
+      uploadExtraData: uploadData(draftid, csrf, false),
+      previewFileType: 'any',
+      uploadAsync: false,
+      showClose: false,
+      showUpload: false,
+      dropZoneTitle: 'Click folder icon to select files ...',
+      fileActionSettings: {
+        indicatorNew: ''
+      },
+      slugCallback: function(text) {
+        return isEmpty(text)
+          ? ''
+          : String(text).replace(
+              /[\[\]\/\{}:;#%=\(\)\*\+\?\\\^\$\|<>&"']/g,
+              '_'
+            );
+      },
+      maxFileSize: 1073741824
+    });
+    $('#pictureupload' + id).fileinput({
+      uploadUrl: groupurl + '/draftop',
+      uploadExtraData: uploadData(draftid, csrf, true),
+      previewFileType: 'any',
+      uploadAsync: false,
+      showClose: false,
+      showUpload: false,
+      dropZoneTitle: 'Click folder icon to select files ...',
+      fileActionSettings: {
+        indicatorNew: ''
+      },
+      slugCallback: function(text) {
+        return isEmpty(text)
+          ? ''
+          : String(text).replace(
+              /[\[\]\/\{}:;#%=\(\)\*\+\?\\\^\$\|<>&"']/g,
+              '_'
+            );
+      },
+      maxFileSize: 1073741824
+    });
+  }
+  $('#attachmentupload' + id).on('filebatchuploadcomplete', function(
+    event,
+    files,
+    extra
+  ) {
+    console.log('File batch upload complete');
+    updateAttachments(id, draftid, csrf, groupurl);
+    $('#addAttachmentsModal' + id).modal('hide');
+    $('#attachmentupload' + id).fileinput('clear');
+  });
+  $('#pictureupload' + id).on('filebatchuploadsuccess', function(
+    event,
+    data,
+    previewId,
+    index
+  ) {
+    var files = data.response;
+    console.log('Picture file batch upload complete');
+    for (var i = files.length - 1; i >= 0; i--) {
+      fileurl = files[i];
+      console.log('FILE: ' + files[i]);
+      console.log('URL: ' + fileurl);
+      imghtml = '<img src="' + fileurl + '"/>';
+      console.log('imghtml: ' + imghtml);
+      tinymce.activeEditor.insertContent(imghtml);
+    }
+    $('#addPicturesModal' + id).modal('hide');
+    $('#pictureupload' + id).fileinput('clear');
+  });
+
+  // save the draft when leaving the page.
+  $(window).on('beforeunload', function() {
+    saveDraft(id, draftid, groupurl, csrf, true);
+  });
+
+  // save the draft 1 second after a change
+  $('form input, form textarea').on('input propertychange change', function() {
+    onFormChange(id, draftid, groupurl, csrf);
+  });
+  updateAttachments(id, draftid, csrf, groupurl);
+}
+
+// InitReplyDraft creates a new draft, assumes a hidden form input called #draftidmid, and then calls initWindow().
+function InitReplyDraft(
+  id,
+  bodytype,
+  draftid,
+  groupurl,
+  csrf,
+  handleAttachments,
+  noFontChanges,
+  sig
+) {
+  console.log('in InitReplyDraft draftid=' + draftid);
+  if (draftid == 0) {
+    // create a new draft
+    console.log('generating new draft' + groupurl);
+    console.log('id=' + id);
+    upload = { mid: id, csrf: csrf, body: sig };
+    $.post(
+      groupurl + '/reply',
+      upload,
+      function(response) {
+        console.log('reply draft created');
+        console.log('draftid:' + response.DraftID);
+        draftid = response.DraftID;
+        toquote = GetSelection(id);
+        if (toquote != '') {
+          console.log('id=' + id);
+          showMessageHistory(id, groupurl, bodytype, toquote, sig, true);
+        }
+        $('#draftid' + id).val(response.DraftID);
+        InitEditor(
+          id,
+          bodytype,
+          draftid,
+          groupurl,
+          csrf,
+          handleAttachments,
+          noFontChanges,
+          true,
+          false,
+          sig
+        );
+        InitPostDraft(id, draftid, csrf, groupurl);
+        console.log('id=' + id);
+        $('#bodytype' + id).val(bodytype);
+        $('#cancel-' + id).attr(
+          'onclick',
+          'discardReplyDraft("' +
+            id +
+            '", "' +
+            draftid +
+            '","' +
+            bodytype +
+            '","' +
+            csrf +
+            '","' +
+            groupurl +
+            '");'
+        );
+        return;
+      },
+      'json'
+    );
+    return;
+  }
+  InitEditor(
+    id,
+    bodytype,
+    draftid,
+    groupurl,
+    csrf,
+    handleAttachments,
+    noFontChanges,
+    true,
+    false,
+    sig
+  );
+  InitPostDraft(id, draftid, csrf, groupurl);
+  $('#bodytype' + id).val(bodytype);
+  $('#cancel-' + id).attr(
+    'onclick',
+    'discardReplyDraft("' +
+      id +
+      '", "' +
+      draftid +
+      '","' +
+      bodytype +
+      '","' +
+      csrf +
+      '","' +
+      groupurl +
+      '");'
+  );
+  console.log('DONE');
+}
+
+// called by add pictures modal
+function uploadPictures(id) {
+  $('#pictureupload' + id).fileinput('upload');
+}
+
+function previewMarkdown(id, groupurl) {
+  var markdown = $('#editor' + id).val();
+  upload = { md: markdown };
+  $.post(
+    groupurl + '/previewmd',
+    upload,
+    function(response) {
+      // Do something with the request
+      console.log(response.markdown);
+      wrap =
+        '<div id="previewWindow' +
+        id +
+        '"><div class="well well-sm">' +
+        response.markdown +
+        '</div></div>';
+      $('#editwindow' + id).hide();
+      $('#previewWindow' + id).replaceWith(wrap);
+      $('#previewWindow' + id).show();
+    },
+    'json'
+  );
+
+  $('#preview' + id).hide();
+  $('#return' + id).show();
+}
+
+function returnMarkdown(id) {
+  $('#preview' + id).show();
+  $('#return' + id).hide();
+  $('#previewWindow' + id).hide();
+  $('#editwindow' + id).show();
+}
+
+// updateAttachments fetches a list of attachments and displays them on the page.
+function updateAttachments(id, draftid, csrf, groupurl) {
+  console.log('in updateAttachments');
+  upload = { draftid: draftid, csrf: csrf, list: '1' };
+  $.post(
+    groupurl + '/draftop',
+    upload,
+    function(response) {
+      // Do something with the request
+      console.log('update attachments');
+      // reload the page now
+      if (response == null) {
+        $('#attachments' + id).replaceWith(
+          "<div id='attachments" + id + "'></div>"
+        );
+      } else {
+        wrap = '<div id="attachments' + id + '">Attachments:<ul>';
+        count = 0;
+        for (i = 0; i < response.length; i++) {
+          if (response[i].Inline == false) {
+            wrap +=
+              '<li>' +
+              response[i].Name +
+              ' (' +
+              response[i].Size +
+              ') <a href=\'javascript:deleteAttachment("' +
+              id +
+              '","' +
+              draftid +
+              '","' +
+              csrf +
+              '","' +
+              groupurl +
+              '","' +
+              response[i].Num +
+              "\")'><i class='fa fa-times'></i></a></li>";
+            count++;
+          }
+        }
+        wrap += '</ul><br /></div>';
+        if (count > 0) {
+          $('#attachments' + id).replaceWith(wrap);
+        } else {
+          $('#attachments' + id).replaceWith(
+            "<div id='attachments" + id + "'></div>"
+          );
+        }
+      }
+    },
+    'json'
+  );
+}
+
+// deleteAttachment deletes the attachment num.
+function deleteAttachment(id, draftid, csrf, groupurl, num) {
+  upload = { num: num, draftid: draftid, csrf: csrf, deleteattachment: '1' };
+  $.post(
+    groupurl + '/draftop',
+    upload,
+    function(response) {
+      // Do something with the request
+      console.log('deleted');
+      updateAttachments(id, draftid, csrf, groupurl);
+    },
+    'json'
+  );
+}
+
+var timeoutId;
+function onFormChange(id, draftid, groupurl, csrf) {
+  clearTimeout(timeoutId);
+  if (saving == true) {
+    timeoutId = setTimeout(function() {
+      // Runs 1 second (1000 ms) after the last change
+      onFormChange(id, draftid, groupurl, csrf);
+    }, 1000);
+    return;
+  }
+  timeoutId = setTimeout(function() {
+    // Runs 1 second (1000 ms) after the last change
+    saveDraft(id, draftid, groupurl, csrf, false);
+  }, 1000);
+}
+
+// deleted indicates the draft has been deleted, so we shouldn't try to save to it.
+var deleted = false;
+
+var saving = false;
+
+// saveDraft saves the current form state in the draft.
+function saveDraft(id, draftid, groupurl, csrf, onLeave) {
+  if (deleted == true) {
+    console.log('NOT SAVING BECAUSE OF DELETED');
+    return;
+  }
+  saving = true;
+  console.log('saving');
+  var fromval = $('#from' + id).val();
+  var subject = $('#subject' + id).val();
+  var body = $('#editor' + id).val();
+  var bodytype = $('#bodytype' + id).val();
+  var special = '0';
+  if ($('#special').prop('checked') == true) {
+    special = '1';
+  }
+  var bccme = '0';
+  if ($('#bccme').prop('checked') == true) {
+    bccme = '1';
+  }
+  var bccall = '0';
+  if ($('#bccall').prop('checked') == true) {
+    bccall = '1';
+  }
+  var saveval = '1';
+  if (onLeave == true) {
+    saveval = '2';
+  }
+  var hashtags = $('#hashtags').val();
+  upload = {
+    draftid: draftid,
+    csrf: csrf,
+    from: fromval,
+    subject: subject,
+    body: body,
+    bodytype: bodytype,
+    special: special,
+    bccme: bccme,
+    bccall: bccall,
+    hashtags: JSON.stringify(hashtags),
+    mid: id,
+    save: saveval
+  };
+  postVar = $.post(
+    groupurl + '/draftop',
+    upload,
+    function(response) {
+      // Do something with the request
+      console.log('saved');
+      saving = false;
+    },
+    'json'
+  );
+}
+
+// stop saving drafts when we do a submit
+var postVar = null;
+$('form').submit(function(e) {
+  clearTimeout(timeoutId);
+  if (postVar != null) {
+    postVar.abort();
+  }
+  deleted = true;
+  if ($(this).hasClass('form-submitted')) {
+    e.preventDefault();
+    return;
+  }
+  $(this).addClass('form-submitted');
+});
+
+// discardDraft deletes the draft and any attachments and returns the user to the previous page.
+function discardDraft(draftid, csrf, groupurl) {
+  upload = { draftid: draftid, csrf: csrf, delete: '1' };
+  $.post(
+    groupurl + '/draftop',
+    upload,
+    function(response) {
+      // Do something with the request
+      console.log('delete draft');
+      deleted = true;
+      history.go(-1);
+    },
+    'json'
+  );
+}
+
+// discardReplyDraft deletes the draft and any attachments and returns the user to the previous page.
+function discardReplyDraft(id, draftid, bodytype, csrf, groupurl) {
+  console.log('delete reply draft');
+  upload = { draftid: draftid, csrf: csrf, delete: '1' };
+  $.post(
+    groupurl + '/draftop',
+    upload,
+    function(response) {
+      // Do something with the request
+      $('#draftid' + id).val('');
+      if (bodytype == 'html') {
+        tinymce.get('editor' + id).remove();
+      }
+      $('#subject' + id).val($('#origsubject' + id).val());
+      $('#editor' + id).val('');
+      deleted = false;
+    },
+    'json'
+  );
+}
+
+function showMessageHistory(
+  id,
+  groupurl,
+  bodytype,
+  selectedText,
+  sig,
+  firstTime
+) {
+  console.log('URL ' + groupurl);
+  console.log('ID ' + id);
+  if (bodytype == 'html' && firstTime == false) {
+    existingmsg = tinyMCE.get('editor' + id).getContent();
+  } else {
+    existingmsg = $('#editor' + id).val();
+  }
+  if (selectedText == '') {
+    upload = { preview: bodytype, id: id };
+  } else {
+    upload = { preview: bodytype, id: id, text: selectedText };
+    if (firstTime == true) {
+      existingmsg = sig;
+    }
+  }
+  $.post(
+    groupurl + '/previewmd',
+    upload,
+    function(response) {
+      $('#editor' + id).val(response.reply + existingmsg);
+      if (bodytype == 'html') {
+        console.log('SETTING ' + response.reply + existingmsg);
+        tinyMCE.get('editor' + id).setContent(response.reply + existingmsg);
+        console.log('DONE');
+      }
+    },
+    'json'
+  );
+  $('#editor' + id).focus();
+}
+
+function togglePrivate(id, groupReplyto, toggle) {
+  if (groupReplyto == 2) {
+    if (toggle == 1) {
+      $('#replytype' + id).val('sender');
+      $('#replybutton' + id).html('<i class="fa fa-user"></i> Reply to Sender');
+      $('#replybutton' + id)
+        .removeClass('btn-success')
+        .removeClass('btn-info')
+        .addClass('btn-primary');
+      $('#private' + id)
+        .removeClass('btn-default')
+        .addClass('btn-primary');
+      $('#private' + id).attr(
+        'onclick',
+        "togglePrivate('" + id + "','" + groupReplyto + "', 2);return false;"
+      );
+      $('#grouptoggle' + id)
+        .removeClass('btn-success')
+        .addClass('btn-default');
+      $('#grouptoggle' + id).attr(
+        'onclick',
+        "togglePrivate('" + id + "','" + groupReplyto + "', 1);return false;"
+      );
+      subj = $('#subject' + id).val();
+      $('#subject' + id).val('Private: ' + subj);
+      $('#bccme' + id).show();
+    } else if (toggle == 2) {
+      $('#replytype' + id).val('mods');
+      $('#replybutton' + id).html(
+        '<i class="fa fa-reply"></i> Reply to Mods</a>'
+      );
+      $('#replybutton' + id)
+        .removeClass('btn-success')
+        .removeClass('btn-primary')
+        .addClass('btn-info');
+      $('#grouptoggle' + id)
+        .removeClass('btn-success')
+        .addClass('btn-default');
+      $('#grouptoggle' + id).attr(
+        'onclick',
+        "togglePrivate('" + id + "','" + groupReplyto + "', 0);return false;"
+      );
+      $('#private' + id)
+        .removeClass('btn-primary')
+        .addClass('btn-default');
+      $('#private' + id).attr(
+        'onclick',
+        "togglePrivate('" + id + "','" + groupReplyto + "', 1);return false;"
+      );
+      subj = $('#subject' + id).val();
+      $('#subject' + id).val(subj.replace('Private: ', ''));
+      $('#bccme' + id).show();
+    } else {
+      $('#replytype' + id).val('group');
+      $('#replybutton' + id).html('<i class="fa fa-reply"></i> Reply to Group');
+      $('#replybutton' + id)
+        .removeClass('btn-primary')
+        .removeClass('btn-info')
+        .addClass('btn-success');
+      $('#private' + id)
+        .removeClass('btn-primary')
+        .addClass('btn-default');
+      $('#private' + id).attr(
+        'onclick',
+        "togglePrivate('" + id + "','" + groupReplyto + "', 2);return false;"
+      );
+      $('#grouptoggle' + id)
+        .removeClass('btn-default')
+        .addClass('btn-success');
+      $('#grouptoggle' + id).attr(
+        'onclick',
+        "togglePrivate('" + id + "','" + groupReplyto + "', 2);return false;"
+      );
+      subj = $('#subject' + id).val();
+      $('#subject' + id).val(subj.replace('Private: ', ''));
+      $('#bccme' + id).hide();
+    }
+  } else if (groupReplyto == 1) {
+    if (toggle == 1) {
+      $('#replytype' + id).val('sender');
+      $('#replybutton' + id).html('<i class="fa fa-user"></i> Reply to Sender');
+      $('#replybutton' + id)
+        .removeClass('btn-success')
+        .addClass('btn-primary');
+      $('#private' + id)
+        .removeClass('btn-success')
+        .addClass('btn-default');
+      $('#private' + id).attr(
+        'onclick',
+        "togglePrivate('" + id + "','" + groupReplyto + "', 0);return false;"
+      );
+      subj = $('#subject' + id).val();
+      $('#subject' + id).val('Private: ' + subj);
+      $('#bccme' + id).show();
+    } else {
+      $('#replytype' + id).val('group');
+      $('#replybutton' + id).html('<i class="fa fa-reply"></i> Reply to Group');
+      $('#replybutton' + id)
+        .removeClass('btn-primary')
+        .addClass('btn-success');
+      $('#private' + id)
+        .removeClass('btn-default')
+        .addClass('btn-success');
+      $('#private' + id).attr(
+        'onclick',
+        "togglePrivate('" + id + "','" + groupReplyto + "', 1);return false;"
+      );
+      subj = $('#subject' + id).val();
+      $('#subject' + id).val(subj.replace('Private: ', ''));
+      $('#bccme' + id).hide();
+    }
+  } else if (groupReplyto == 3) {
+    if (toggle == 1) {
+      $('#replytype' + id).val('sender');
+      $('#replybutton' + id).html('<i class="fa fa-user"></i> Reply to Sender');
+      $('#replybutton' + id)
+        .removeClass('btn-success')
+        .addClass('btn-primary');
+      $('#private' + id)
+        .removeClass('btn-default')
+        .addClass('btn-primary');
+      $('#private' + id).attr(
+        'onclick',
+        "togglePrivate('" + id + "','" + groupReplyto + "', 0);return false;"
+      );
+      subj = $('#subject' + id).val();
+      $('#subject' + id).val('Private: ' + subj);
+      $('#bccme' + id).show();
+    } else {
+      $('#replytype' + id).val('group');
+      $('#replybutton' + id).html(
+        '<i class="fa fa-reply"></i> Reply to Group & Sender'
+      );
+      $('#replybutton' + id)
+        .removeClass('btn-primary')
+        .addClass('btn-success');
+      $('#private' + id)
+        .removeClass('btn-primary')
+        .addClass('btn-default');
+      $('#private' + id).attr(
+        'onclick',
+        "togglePrivate('" + id + "','" + groupReplyto + "', 1);return false;"
+      );
+      subj = $('#subject' + id).val();
+      $('#subject' + id).val(subj.replace('Private: ', ''));
+      $('#bccme' + id).hide();
+    }
+  } else {
+    if (toggle == 1) {
+      $('#replytype' + id).val('sender');
+      $('#replybutton' + id).html('<i class="fa fa-user"></i> Reply to Sender');
+      $('#replybutton' + id)
+        .removeClass('btn-success')
+        .addClass('btn-primary');
+      $('#private' + id)
+        .removeClass('btn-default')
+        .addClass('btn-primary');
+      $('#private' + id).attr(
+        'onclick',
+        "togglePrivate('" + id + "','" + groupReplyto + "', 0);return false;"
+      );
+      subj = $('#subject' + id).val();
+      $('#subject' + id).val('Private: ' + subj);
+      $('#bccme' + id).show();
+    } else {
+      $('#replytype' + id).val('group');
+      $('#replybutton' + id).html('<i class="fa fa-reply"></i> Reply to Group');
+      $('#replybutton' + id)
+        .removeClass('btn-primary')
+        .addClass('btn-success');
+      $('#private' + id)
+        .removeClass('btn-primary')
+        .addClass('btn-default');
+      $('#private' + id).attr(
+        'onclick',
+        "togglePrivate('" + id + "','" + groupReplyto + "', 1);return false;"
+      );
+      subj = $('#subject' + id).val();
+      $('#subject' + id).val(subj.replace('Private: ', ''));
+      $('#bccme' + id).hide();
+    }
+  }
+}
+
+// Code to find and return a selected piece of HTML.
+function GetSelection(id) {
+  var flag = 0;
+  var sel = document.getSelection();
+  var selText = '';
+  id = 'msgbody' + id;
+  var forkfork = document.getElementById(id);
+  if (sel.rangeCount > 0) {
+    var range = sel.getRangeAt(0);
+    var test = range.cloneContents();
+    var clonedSelection = '';
+    if (typeof test.getElementByID != 'undefined') {
+      clonedSelection = range.cloneContents().getElementById(id);
+    }
+    if (clonedSelection) {
+      selText = clonedSelection.innerHTML;
+    } else {
+      clonedSelection = range.cloneContents();
+      var startNode = sel.getRangeAt(0).startContainer.parentNode;
+      //console.log(isChild(startNode, forkfork));
+      if (isChild(startNode, forkfork)) {
+        var div = document.createElement('div');
+        div.appendChild(clonedSelection);
+        selText = div.innerHTML;
+      }
+    }
+  }
+
+  return selText.toString();
+}
+function isChild(child, parent) {
+  if (child === parent) return true;
+  var current = child;
+  while (current) {
+    if (current === parent) return true;
+    current = current.parentNode;
+  }
+  return false;
+}
+
+tinymce.PluginManager.add('SplitBlockquote', function(ed, url) {
+  ed.on('keyup', function(e) {
+    var parts, i, node, bq_node, openTags, closeTags, splitToken;
+
+    if (e.keyCode != 13) {
+      return; /* do nothing */
+    }
+
+    // get the top-most blockquote parent node
+    function getMostTopBlockquote(n, r) {
+      var last_bq = null;
+      while (n) {
+        if (n == r) break;
+        if (n.nodeName === 'BLOCKQUOTE') last_bq = n;
+        n = n.parentNode;
+      }
+      return last_bq;
+    }
+
+    function getClose(n, r) {
+      // get the htnk "close-tag" of a node
+      function getCloseTag(n) {
+        if (n.nodeName === 'FONT' && ed.settings.convert_fonts_to_spans) {
+          return '</span>';
+        } else {
+          return '</' + n.nodeName.toLowerCase() + '>';
+        }
+      }
+
+      var result = '';
+      while (n) {
+        if (n == r) break;
+        result += getCloseTag(n);
+        n = n.parentNode;
+      }
+      return result;
+    }
+
+    function getOpen(n, r) {
+      // get the html "open-tag" of a node
+      function getOpenTag(n) {
+        var attr, copy;
+        copy = n.cloneNode(false);
+        copy.innerHTML = '';
+        attr = ed.dom
+          .getOuterHTML(copy)
+          .replace(new RegExp('<' + copy.nodeName, 'i'), '')
+          .replace(new RegExp('</' + copy.nodeName + '>', 'i'), '');
+        return '<' + copy.nodeName.toLowerCase() + attr;
+      }
+
+      var result = '';
+      while (n) {
+        if (n == r) break;
+        result = getOpenTag(n) + result;
+        n = n.parentNode;
+      }
+      return result;
+    }
+
+    node = ed.selection.getNode();
+    bq_node = getMostTopBlockquote(node, ed.getBody());
+    if (!bq_node)
+      // we aren't in a blockquote
+      return;
+
+    /* Create an unique splitToken */
+    splitToken = '_$' + new Date().getTime() + '$_';
+    ed.selection.setContent(splitToken, { formar: 'raw' });
+    parts = ed.getContent().split(splitToken);
+
+    /* blockquote can handle DOM tree. So we have to close
+     * and open DOM element correctly, and not wildly split
+     * the editor content. Plus, openTags has to keep all
+     * attributes to keep makeup of DOM elements, we split.
+     */
+    openTags = getOpen(node, bq_node);
+    closeTags = getClose(node, bq_node);
+
+    if (ed.settings.convert_fonts_to_spans && openTags != '') {
+      /* just convert </span> to </font>
+       * if <font> are converted to <span>
+       * as n.nodeName returns "FONT" for <span> node :/
+       * @see tinymce.Editor.-_convertFonts() for more information
+       */
+      (function() {
+        var font_count = (openTags.match(/<font/gi) || []).length;
+        for (i = 0; i < font_count; ++i) {
+          start_idx = parts[1].indexOf('</span>');
+          if (start_idx != -1) {
+            parts[1] =
+              parts[1].substring(0, start_idx) +
+              '</font>' +
+              parts[1].substring(start_idx + 7);
+          }
+        }
+      })();
+    }
+
+    /* Update the editor content :
+     *  - part[0] : content before the selection, before split
+     *  - closeTags : </tag> to close correctly html tags
+     *  - </blockquote> : close the blockquote
+     *  - <br id='__' /> : <br /> are converted to "<p> </p>". The id
+     *                     is used to change the location of the selection (cursor)
+     *  - <blockquote> : open the new blockquote
+     *  - openTags : re-open splited DOM nodes correctly
+     *  - part[1] : content after the selection, before split
+     */
+    ed.setContent(
+      parts[0] +
+        closeTags +
+        '</blockquote><br id="__"><blockquote>' +
+        openTags +
+        parts[1]
+    );
+
+    /* delete empty <p>aragraph at the end of the first blockquote
+     * and at the beginning at the second blockquote.
+     * Delete id attributes to */
+    function clean_node(node) {
+      var node_html;
+      if (node == null || (node.nodeName != 'P' && node.nodeName != 'BR')) {
+        return;
+      }
+      node_html = node.innerHTML.trim();
+      if (
+        node_html == '' ||
+        node_html == '<br mce_bogus="1">' ||
+        node_html == '<br>'
+      ) {
+        ed.dom.remove(node);
+      }
+    }
+
+    bq_node = ed.getBody().getElementsByTagName('blockquote');
+    for (i = 0; i < bq_node.length; ++i) {
+      if (bq_node[i] == null) {
+        continue;
+      } /* paranoiac mode */
+      clean_node(bq_node[i].firstChild);
+      clean_node(bq_node[i].lastChild);
+      if (bq_node[i].innerHTML.trim() === '') {
+        ed.dom.remove(bq_node[i]);
+      }
+    }
+
+    /* get the <br id="__"> element and put cursor on it */
+    node = ed.dom.get('__');
+    node.removeAttribute('id');
+    ed.selection.select(node);
+    ed.selection.collapse(true);
+
+    /* Don't interpret <ENTER> again, to prevent a new "<p> </p>" to be added */
+    return tinymce.dom.Event.cancel(e);
+  });
+});
+
+/**
+ * Checks if value is empty. Deep-checks arrays and objects
+ * Note: isEmpty([]) == true, isEmpty({}) == true, isEmpty([{0:false},"",0]) == true, isEmpty({0:1}) == false
+ * @param value
+ * @returns {boolean}
+ */
+function isEmpty(value) {
+  var isEmptyObject = function(a) {
+    if (typeof a.length === 'undefined') {
+      // it's an Object, not an Array
+      var hasNonempty = Object.keys(a).some(function nonEmpty(element) {
+        return !isEmpty(a[element]);
+      });
+      return hasNonempty ? false : isEmptyObject(Object.keys(a));
+    }
+
+    return !a.some(function nonEmpty(element) {
+      // check if array is really not empty as JS thinks
+      return !isEmpty(element); // at least one element should be non-empty
+    });
+  };
+  return (
+    value == false ||
+    typeof value === 'undefined' ||
+    value == null ||
+    (typeof value === 'object' && isEmptyObject(value))
+  );
+}
